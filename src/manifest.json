@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
-  "name": "Fallen London Tiered Items Filter",
-  "description": "Filter items by tier",
+  "name": "Fallen London Conversion Helper",
+  "description": "This extension adds a category of side-convertible items to your inventory.",
   "permissions": [
     "storage"
   ],
