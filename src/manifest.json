@@ -2,6 +2,9 @@
   "manifest_version": 2,
   "name": "Fallen London Tiered Items Filter",
   "description": "Filter items by tier",
+  "permissions": [
+    "storage"
+  ],
   "version": VERSION,
   "content_scripts": [
     {
