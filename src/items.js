@@ -1,3 +1,5 @@
+// These are the item IDs of the tier-3 items in each category
+// (Mysteries, being weird, has two)
 const academic = '825'; 
 const cartography = '831'; 
 const elder = '587'; 
