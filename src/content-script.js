@@ -5,6 +5,10 @@ import ids from './items';
 import './styles.scss';
 
 const id = 'js-flch-container';
+
+// Storage
+const storage = chrome.storage.sync || chrome.storage.local;
+
 const observer = registerObserver();
 
 function registerObserver() {
@@ -23,7 +27,6 @@ function registerObserver() {
       $(`#${id}`).length || insertCategory();
     }
   }
-
 }
 
 function insertCategory() {
@@ -34,7 +37,7 @@ function insertCategory() {
         <span class="expand flch-toggle">+</span>
         <span class="contract flch-toggle">-</span>
         &nbsp;
-        <a href="#" class="flch-link--unstyled">
+        <a href="#" class="flch-link">
           Side Conversion
         </a>
       </h3>
@@ -50,13 +53,28 @@ function insertCategory() {
   const list = $('<ul />').addClass('you_icon cf');
   container.append(list);
 
-  // Start contracted
+  // Start contracted by default
   $(`#${id}`).find('.contract, ul').css({display: 'none'});
 
   // Add clickable expand/contract behaviour
   $(`#${id} h3`).on('click', function() {
+    // Toggle
     $(this).parent().find('.expand, .contract, ul').toggle();
+
+    // Store the preference
+    const expanded = $(this).parent().find('.contract').css('display') === 'block';
+    storage.set({ expanded });
+
+    // Kill the event
     return false;
+  });
+
+  // Retrieve stored expand/contract preference
+  storage.get('expanded', ({ expanded }) => {
+    if (expanded) {
+      $(`#${id}`).find('.contract, ul').css({display: 'block'});
+      $(`#${id}`).find('.expand').css({display: 'none'});
+    }
   });
 
   // Inspect the player's inventory for items with matching IDs
@@ -66,12 +84,11 @@ function insertCategory() {
 
     // If we have a match, then add something to the list
     if (itemDiv) {
-      // Find the grandparent <li> containing this
+      // Find the grandparent <li> containing this div
       const li = itemDiv.parent().parent();
 
       // Get the quantity of items (default to 0 if there's a problem)
       const quantity = parseInt(li.find('.qq').text(), 10) || 0;
-
       if (quantity >= 50) {
         // If we have at least 50, then just show the usual clickable item
         list.append(cloned(li));
