@@ -6,15 +6,12 @@ import './styles.scss';
 
 const id = 'js-flch-container';
 
-// Storage
-const storage = chrome.storage.sync || chrome.storage.local;
-
 const observer = registerObserver();
 
 function registerObserver() {
-
   const rootNode = document.querySelector('.you_bottom_rhs');
   const queries = [{ element: '*' }];
+
   return new MutationSummary({
     rootNode,
     callback,
@@ -56,18 +53,8 @@ function insertCategory() {
   // Start contracted by default
   $(`#${id}`).find('.contract, ul').css({display: 'none'});
 
-  // Add clickable expand/contract behaviour
-  $(`#${id} h3`).on('click', function() {
-    // Toggle
-    $(this).parent().find('.expand, .contract, ul').toggle();
-
-    // Store the preference
-    const expanded = $(this).parent().find('.contract').css('display') === 'block';
-    storage.set({ expanded });
-
-    // Kill the event
-    return false;
-  });
+  // Use whichever storage we have access to
+  const storage = chrome.storage.sync || chrome.storage.local;
 
   // Retrieve stored expand/contract preference
   storage.get('expanded', ({ expanded }) => {
@@ -76,6 +63,9 @@ function insertCategory() {
       $(`#${id}`).find('.expand').css({display: 'none'});
     }
   });
+
+  // Add clickable expand/contract behaviour
+  $(`#${id} h3`).on('click', toggleExpansion);
 
   // Inspect the player's inventory for items with matching IDs
   ids.forEach((id) => {
@@ -121,5 +111,18 @@ function insertCategory() {
       .append(li.find('img').clone()) // image
       .append(li.find('.tt').clone()); // tooltip
     return $('<li />').append(link);
+  }
+
+  /* Expand/contract the category, and store the user's preference */
+  function toggleExpansion() {
+    // Toggle visibilities
+    $(this).parent().find('.expand, .contract, ul').toggle();
+
+    // Store the preference
+    const expanded = $(this).parent().find('.contract').css('display') === 'block';
+    storage.set({ expanded });
+
+    // Kill the event
+    return false;
   }
 }
