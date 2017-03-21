@@ -73,7 +73,7 @@ function insertCategory() {
     const itemDiv = $(`#infoBarQImage${id}`);
 
     // If we have a match, then add something to the list
-    if (itemDiv) {
+    if (itemDiv.length) {
       // Find the grandparent <li> containing this div
       const li = itemDiv.parent().parent();
 
