@@ -1,0 +1,28 @@
+{
+  "name": "fl-conversion-helper",
+  "version": "0.0.1",
+  "description": "Add a new category of side-convertible items",
+  "author": "sdobuadhachain@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.1",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "copy-webpack-plugin": "^4.0.1",
+    "css-loader": "^0.27.3",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "jquery": "3.1.1",
+    "mutation-summary": "^0.1.1",
+    "node-sass": "^4.5.0",
+    "rimraf": "^2.6.1",
+    "sass-loader": "^6.0.3",
+    "webpack": "2.2",
+    "zip-webpack-plugin": "^1.0.0"
+  },
+  "scripts": {
+    "cleanup": "rimraf dist/ && rimraf build/",
+    "build": "yarn cleanup && webpack",
+    "start": "yarn cleanup && webpack --progress --watch"
+  }
+}

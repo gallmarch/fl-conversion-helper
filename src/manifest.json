@@ -1,0 +1,18 @@
+{
+  "manifest_version": 2,
+  "name": "Fallen London Tiered Items Filter",
+  "description": "Filter items by tier",
+  "version": VERSION,
+  "content_scripts": [
+    {
+      "matches": ["http://fallenlondon.storynexus.com/Gap/Load*"],
+      "css": [
+        "styles.css"
+      ],
+      "js": [
+        "content-script.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}
