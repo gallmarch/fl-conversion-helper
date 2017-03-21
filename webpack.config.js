@@ -10,8 +10,9 @@ const version = require(path.join(__dirname, 'package.json')).version;
 // Copy the manifest.json, inserting the current version as we go
 const copy = new CopyWebpackPlugin([
   {
-    from: './src/manifest.json',
-    to: './build/manifest.json',
+    context: './src/',
+    from: 'manifest.json',
+    to: 'manifest.json',
     transform: (content) => {
       return content.toString().replace('VERSION', `"${version}"`);
     },
@@ -21,15 +22,14 @@ const copy = new CopyWebpackPlugin([
 const zip = new ZipPlugin({
   path: path.join(__dirname, 'dist'),
   filename: `fl-tiered-items-${version}.zip`,
-  // pathPrefix: '.',
 });
 
 module.exports = {
   entry: {
-    './build/content-script.js': './src/content-script.js',
+    'content-script.js': './src/content-script.js',
   },
   output: {
-    path: './',
+    path: './build/',
     filename: '[name]',
   },
   module: {
@@ -51,6 +51,6 @@ module.exports = {
   plugins: [
     copy,
     zip,
-    new ExtractTextWebpackPlugin('./build/styles.css'),
+    new ExtractTextWebpackPlugin('styles.css'),
   ],
 };
