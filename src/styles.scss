@@ -13,9 +13,11 @@
   ul.you_icon > &-empty-icon.empty-icon {
     margin: 3px 8px 10px 2px;
   }
-  &-link--unstyled {
+  &-link {
     color: black;
     cursor: pointer;
+    position: absolute;
+    left: 0;
     &:hover, &:active, &:visited {
       color: black;
     }
