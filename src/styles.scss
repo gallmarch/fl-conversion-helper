@@ -1,4 +1,8 @@
+@import 'popup/popup.scss';
 .flch {
+  &-hidden {
+    display: none !important;
+  }
   &-toggle {
     cursor: pointer;
   }

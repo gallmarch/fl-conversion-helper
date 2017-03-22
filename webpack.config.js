@@ -11,6 +11,11 @@ const version = require(path.join(__dirname, 'package.json')).version;
 const copy = new CopyWebpackPlugin([
   {
     context: './src/',
+    from: 'popup/popup.html',
+    to: 'popup/popup.html',
+  },
+  {
+    context: './src/',
     from: 'manifest.json',
     to: 'manifest.json',
     transform: (content) => {
@@ -27,6 +32,7 @@ const zip = new ZipPlugin({
 module.exports = {
   entry: {
     'content-script.js': './src/content-script.js',
+    'popup/popup.js': './src/popup/popup.js',
   },
   output: {
     path: './build/',

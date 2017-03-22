@@ -1,0 +1,21 @@
+.flch-popup {
+  color: #2d2d2d;
+  font-family: sans-serif;
+  font-size: 75%;
+  margin: 8px;
+  min-width: 200px;
+
+  &__header {
+    border-bottom: solid 1px #1d1d1d;
+    font-size: 125%;
+    padding-bottom: 0.1em;
+    text-align: center;
+  }
+
+  &__option {
+    display: flex;
+    align-items: center;
+    font-size: 110%;
+    margin-bottom: 0.5em;
+  }
+}

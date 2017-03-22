@@ -4,7 +4,8 @@ import MutationSummary from 'mutation-summary';
 import { conversionCost, tier1, tier2, tier3 } from './items';
 import './styles.scss';
 
-const observer = registerSideConversionObserver();
+registerSideConversionObserver();
+listenForStorageChanges();
 
 function registerSideConversionObserver() {
   const rootNode = document.querySelector('.you_bottom_rhs');
@@ -51,6 +52,38 @@ function registerSideConversionObserver() {
   }
 }
 
+/* 
+ * Listen for storage changes (specifically as a result of the user's
+ * interaction with the popup) and update categories' visibility
+ * accordingly.
+ */
+function listenForStorageChanges() {
+  chrome.storage.onChanged.addListener(({ options }) => {
+    // We're only interested in changes to visibility arising
+    // from interactions with the popup
+    if (!options) {
+      return;
+    }
+
+    const { newValue } = options;
+    Object.keys(newValue).forEach((k) => {
+      if ((newValue[k])) {
+        // If newValue[k] is truthy, then we want to display the category
+        $(`#${k}`)
+          .removeClass('flch-hidden')
+          .next()
+          .removeClass('flch-hidden');
+      } else {
+        // Otherwise,we want to hide it
+        $(`#${k}`)
+          .addClass('flch-hidden')
+          .next()
+          .addClass('flch-hidden');
+      }
+    });
+  });
+}
+
 function insertCategory({
   id,
   items,
@@ -72,7 +105,7 @@ function insertCategory({
   // Insert before the first FL category
   firstCategory.before(header);
 
-  // Create our list of convertible items
+  // Create our list of convertible items and insert it after the header
   const list = $('<ul />').addClass('you_icon cf');
   header.after(list);
 
@@ -83,15 +116,8 @@ function insertCategory({
   // Use whichever storage we have access to
   const storage = chrome.storage.sync || chrome.storage.local;
 
-  // Retrieve stored expand/contract preference
-  storage.get(null, (options) => {
-    // If the key for this category is truthy, then expand it
-    if (options[id]) {
-      $(`#${id}`).find('.contract').css({display: 'inline'});
-      $(`#${id}`).find('.expand').css({display: 'none'});
-      $(`#${id}`).next().css({ display: 'block' });
-    }
-  });
+  // Retrieve stored visibility and expand/contract preferences
+  storage.get(null, (options) => { setCategoryVisibility({ options, id }) });
 
   // Add clickable expand/contract behaviour
   $(`#${id}`).on('click', { id }, toggleExpansion);
@@ -154,5 +180,30 @@ function insertCategory({
 
     // Kill the event
     return false;
+  }
+}
+
+function setCategoryVisibility({ options, id }) {
+  // Check whether the user wants this displayed at all
+  if (options.options[id]) {
+    $(`#${id}`)
+      .removeClass('flch-hidden')
+      .next()
+      .removeClass('flch-hidden');
+  } else {
+    $(`#${id}`)
+      .addClass('flch-hidden')
+      .next()
+      .addClass('flch-hidden');
+  }
+
+  // If the key for this category is truthy, then expand it
+  if (options[id]) {
+    // Show the 'contract' button
+    $(`#${id}`).find('.contract').css({display: 'inline'});
+    // Hide the 'expand' button
+    $(`#${id}`).find('.expand').css({display: 'none'});
+    // Show the item list
+    $(`#${id}`).next().css({ display: 'block' });
   }
 }
