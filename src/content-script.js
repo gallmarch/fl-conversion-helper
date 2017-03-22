@@ -1,14 +1,12 @@
 import $ from 'jquery';
 import MutationSummary from 'mutation-summary';
 
-import ids from './items';
+import { conversionCost, tier1, tier2, tier3 } from './items';
 import './styles.scss';
 
-const id = 'js-flch-container';
+const observer = registerSideConversionObserver();
 
-const observer = registerObserver();
-
-function registerObserver() {
+function registerSideConversionObserver() {
   const rootNode = document.querySelector('.you_bottom_rhs');
   const queries = [{ element: '*' }];
 
@@ -21,54 +19,79 @@ function registerObserver() {
   function callback() {
     // Add the new category if we don't have it already
     if ($('.you_bottom_rhs .explanation').length) {
-      $(`#${id}`).length || insertCategory();
+
+      const firstCategory = $($('.you_bottom_rhs h3').get(0));
+
+      $(`#js-flch-header-tier1`).length || insertCategory({
+        id: 'js-flch-header-tier1',
+        title: 'Tier 1',
+        items: tier1,
+        firstCategory,
+      });
+      $(`#js-flch-header-tier2`).length || insertCategory({
+        id: 'js-flch-header-tier2',
+        title: 'Tier 2',
+        items: tier2,
+        firstCategory,
+      });
+      $(`#js-flch-header-tier3`).length || insertCategory({
+        id: 'js-flch-header-tier3',
+        title: 'Tier 3',
+        items: tier3,
+        firstCategory,
+      });
     }
   }
 }
 
-function insertCategory() {
+function insertCategory({
+  id,
+  items,
+  title,
+  firstCategory,
+}) {
   // Outline the skeleton of our category
-  const container= $(`
-    <div id="${id}" class="flch-container">
-      <h3>
-        <span class="expand flch-toggle">+</span>
-        <span class="contract flch-toggle">-</span>
-        &nbsp;
-        <a href="#" class="flch-link">
-          Side Conversion
-        </a>
-      </h3>
-    </div>
+  const header = $(`
+    <h3 id="${id}" class="flch-header">
+      <span class="expand flch-toggle">+</span>
+      <span class="contract flch-toggle">-</span>
+      &nbsp;
+      <a href="#" class="flch-link">
+        ${title}
+      </a>
+    </h3>
   `);
 
-  // Find the first visible category and put our new category
-  // in front of it
-  const firstCategory = $('.you_bottom_rhs h3:first');
-  firstCategory.before(container);
+  // Put our categories at the top
+  //$('.you_bottom_rhs p.explanation').after(header);
+  firstCategory.before(header);
+
 
   // Create our list of convertible items
   const list = $('<ul />').addClass('you_icon cf');
-  container.append(list);
+  header.after(list);
 
   // Start contracted by default
-  $(`#${id}`).find('.contract, ul').css({display: 'none'});
+  $(`#${id}`).find('.contract').css({display: 'none'});
+  $(`#${id}`).next().css({ display: 'none' });
 
   // Use whichever storage we have access to
   const storage = chrome.storage.sync || chrome.storage.local;
 
   // Retrieve stored expand/contract preference
-  storage.get('expanded', ({ expanded }) => {
-    if (expanded) {
-      $(`#${id}`).find('.contract, ul').css({display: 'block'});
+  storage.get(null, (options) => {
+    if (options[id]) {
+      $(`#${id}`).find('.contract').css({display: 'inline'});
       $(`#${id}`).find('.expand').css({display: 'none'});
+      $(`#${id}`).next().css({ display: 'block' });
     }
   });
 
   // Add clickable expand/contract behaviour
-  $(`#${id} h3`).on('click', toggleExpansion);
+  $(`#${id}`).on('click', { id }, toggleExpansion);
 
   // Inspect the player's inventory for items with matching IDs
-  ids.forEach((id) => {
+  items.forEach((id) => {
     // Look for a matching ID
     const itemDiv = $(`#infoBarQImage${id}`);
 
@@ -79,8 +102,8 @@ function insertCategory() {
 
       // Get the quantity of items (default to 0 if there's a problem)
       const quantity = parseInt(li.find('.qq').text(), 10) || 0;
-      if (quantity >= 50) {
-        // If we have at least 50, then just show the usual clickable item
+      if (quantity >= conversionCost(id)) {
+        // If we have enough for a mass conversion, then just show the usual clickable item
         list.append(cloned(li));
       } else {
         // Otherwise, show a dummied-out version
@@ -114,13 +137,14 @@ function insertCategory() {
   }
 
   /* Expand/contract the category, and store the user's preference */
-  function toggleExpansion() {
+  function toggleExpansion({ data: { id } }) {
     // Toggle visibilities
-    $(this).parent().find('.expand, .contract, ul').toggle();
+    $(this).find('.expand, .contract').toggle();
+    $(this).next().toggle();
 
     // Store the preference
-    const expanded = $(this).parent().find('.contract').css('display') === 'block';
-    storage.set({ expanded });
+    const expanded = $(this).find('.contract').css('display') === 'block';
+    storage.set({ [id]: expanded });
 
     // Kill the event
     return false;

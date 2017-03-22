@@ -1,22 +1,23 @@
 .flch {
-  &-container {
-    position: relative;
+  &-header {
+    // position: relative;
   }
   &-toggle {
     cursor: pointer;
-    position: absolute;
-    left: -20px;
+    // position: absolute;
+    // left: -20px;
   }
   &-unlock {
-    opacity: 0.5;
+    opacity: 0.4;
   }
   ul.you_icon > &-empty-icon.empty-icon {
-    margin: 3px 8px 10px 2px;
+    margin: 2px 10px 8px 0;
+
   }
   &-link {
     color: black;
     cursor: pointer;
-    position: absolute;
+    // position: absolute;
     left: 0;
     &:hover, &:active, &:visited {
       color: black;
