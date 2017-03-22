@@ -5,10 +5,10 @@ import insertCategory from './insert-category';
 import { tier1, tier2, tier3 } from './items';
 import './styles.scss';
 
-registerSideConversionObserver();
+registerObserver();
 listenForStorageChanges();
 
-function registerSideConversionObserver() {
+function registerObserver() {
   const rootNode = document.querySelector('.you_bottom_rhs');
   const queries = [{ element: '*' }];
 

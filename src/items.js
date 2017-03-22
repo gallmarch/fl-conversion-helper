@@ -120,8 +120,6 @@ function conversionCost(id) {
   return undefined;
 }
 
-// Export the IDs in order of the side-conversion chain, starting
-// with the 'Academic' category
 export {
   conversionCost,
   tier1,

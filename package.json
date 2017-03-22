@@ -1,7 +1,7 @@
 {
   "name": "fl-conversion-helper",
   "version": "0.0.3",
-  "description": "Add a new category of side-convertible items",
+  "description": "Add new categories of convertible items to the inventory",
   "author": "sdobuadhachain@gmail.com",
   "license": "MIT",
   "dependencies": {
