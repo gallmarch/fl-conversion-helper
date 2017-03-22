@@ -17,23 +17,30 @@ function registerSideConversionObserver() {
   });
 
   function callback() {
-    // Add the new category if we don't have it already
+    // Add each tier's category if we don't have it already
     if ($('.you_bottom_rhs .explanation').length) {
 
+      // Get a reference to the 'Academic' category (the
+      // first category in the list)
       const firstCategory = $($('.you_bottom_rhs h3').get(0));
 
+      // Insert Tier 1
       $(`#js-flch-header-tier1`).length || insertCategory({
         id: 'js-flch-header-tier1',
         title: 'Tier 1',
         items: tier1,
         firstCategory,
       });
+
+      // Insert Tier 2
       $(`#js-flch-header-tier2`).length || insertCategory({
         id: 'js-flch-header-tier2',
         title: 'Tier 2',
         items: tier2,
         firstCategory,
       });
+
+      // Insert Tier 3
       $(`#js-flch-header-tier3`).length || insertCategory({
         id: 'js-flch-header-tier3',
         title: 'Tier 3',
@@ -50,7 +57,7 @@ function insertCategory({
   title,
   firstCategory,
 }) {
-  // Outline the skeleton of our category
+  // Outline the skeleton of our category header
   const header = $(`
     <h3 id="${id}" class="flch-header">
       <span class="expand flch-toggle">+</span>
@@ -62,8 +69,7 @@ function insertCategory({
     </h3>
   `);
 
-  // Put our categories at the top
-  //$('.you_bottom_rhs p.explanation').after(header);
+  // Insert before the first FL category
   firstCategory.before(header);
 
 
@@ -80,6 +86,7 @@ function insertCategory({
 
   // Retrieve stored expand/contract preference
   storage.get(null, (options) => {
+    // If the key for this category is truthy, then expand it
     if (options[id]) {
       $(`#${id}`).find('.contract').css({display: 'inline'});
       $(`#${id}`).find('.expand').css({display: 'none'});
@@ -143,7 +150,7 @@ function insertCategory({
     $(this).next().toggle();
 
     // Store the preference
-    const expanded = $(this).find('.contract').css('display') === 'block';
+    const expanded = $(this).find('.contract').css('display') === 'inline';
     storage.set({ [id]: expanded });
 
     // Kill the event
