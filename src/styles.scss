@@ -1,13 +1,9 @@
 .flch {
-  &-header {
-    // position: relative;
-  }
   &-toggle {
     cursor: pointer;
-    // position: absolute;
-    // left: -20px;
   }
   &-unlock {
+    filter: grayscale(50%);
     opacity: 0.4;
   }
   ul.you_icon > &-empty-icon.empty-icon {
@@ -17,8 +13,6 @@
   &-link {
     color: black;
     cursor: pointer;
-    // position: absolute;
-    left: 0;
     &:hover, &:active, &:visited {
       color: black;
     }

@@ -72,7 +72,6 @@ function insertCategory({
   // Insert before the first FL category
   firstCategory.before(header);
 
-
   // Create our list of convertible items
   const list = $('<ul />').addClass('you_icon cf');
   header.after(list);
