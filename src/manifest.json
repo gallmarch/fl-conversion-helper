@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Fallen London Conversion Helper",
-  "description": "This extension adds categories of convertible items to your inventory.",
+  "description": "This extension for Fallen London adds categories of convertible items to your inventory.",
   "browser_action": {
     "default_popup": "popup/popup.html"
   },
