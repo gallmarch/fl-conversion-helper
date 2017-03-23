@@ -26,7 +26,7 @@ const copy = new CopyWebpackPlugin([
 
 const zip = new ZipPlugin({
   path: path.join(__dirname, 'dist'),
-  filename: `fl-tiered-items-${version}.zip`,
+  filename: `fl-conversion-helper-${version}.zip`,
 });
 
 module.exports = {
