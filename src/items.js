@@ -1,77 +1,89 @@
 // These items have special conversion amounts
+const ABOMINABLE_SALT = '476';
+const AMANITA_SHERRY = '928';
 const APPALLING_SECRET = '390';
+const BRILLIANT_SOUL = '668';
+const CORRESPONDENCE_PLAQUE = '932';
+const COMPROMISING_DOCUMENT = '830';
+const CRYPTIC_CLUE = '389';
 const FOXFIRE_CANDLE = '374';
+const GREYFIELDS_1882 = '383';
+const INCENDIARY_GOSSIP = '659';
+const INKLING_OF_IDENTITY = '656';
 const INTRIGUING_SNIPPET = '588';
 const JADE_FRAGMENT = '377';
+const JOURNAL_OF_INFAMY = '525';
 const LAMPLIGHTER_BEESWAX = '384';
+const MANIACS_PRAYER = '935';
+const MAP_SCRAP = '920';
+const MEMORY_OF_DISTANT_SHORES = '825';
+const MEMORY_OF_LIGHT = '589';
+const MORELWAYS_1872 = '815';
+const MYSTERY_OF_THE_ELDER_CONTINENT = '587';
+const PHOSPHORESCENT_SCARAB = '652';
+const PRIMORDIAL_SHRIEK = '388';
+const PRISONERS_HONEY = '391';
 const PROSCRIBED_MATERIAL = '420';
+const RELIC_OF_THE_THIRD_CITY = '424';
+const ROMANTIC_NOTION = '531';
 const SHARD_OF_GLIM = '378';
 const SILK_SCRAP = '381';
+const SOUL = '386';
 const STOLEN_CORRESPONDENCE = '422';
+const STRANGLING_WILLOW_ABSINTHE = '822';
+const TALE_OF_TERROR = '828';
+const SURFACE_SILK_SCRAP = '907';
+const VISION_OF_THE_SURFACE = '827';
+const WHISPER_SATIN_SCRAP = '915';
+const WHISPERED_HINT = '380';
+const ZEE_ZTORY = '831';
 
 const tier1 = [
   FOXFIRE_CANDLE,
-  '386', // Souls
-  '380', // Whispered Hints
-  '389', // Cryptic Clues
+  SOUL,
+  WHISPERED_HINT,
+  CRYPTIC_CLUE,
   STOLEN_CORRESPONDENCE,
   LAMPLIGHTER_BEESWAX,
   SHARD_OF_GLIM,
-  '383', // Greyfields 1882
+  GREYFIELDS_1882,
   SILK_SCRAP,
-  '388', // Primordial Shrieks
-  '391', // Prisoner's Honey
+  PRIMORDIAL_SHRIEK,
+  PRISONERS_HONEY,
   JADE_FRAGMENT,
   PROSCRIBED_MATERIAL,
 ];
 
 const tier2 = [
-  '476', // Abominable Salts
-  '928', // Amanita Sherry
+  ABOMINABLE_SALT,
+  AMANITA_SHERRY,
   APPALLING_SECRET,
   INTRIGUING_SNIPPET,
-  '652', // Phosphorescent Scarabs
-  '920', // Map Scraps
-  '815', // Morelways 1872
-  '907', // Surface-Silk Scrap
-  '935', // Maniac's Prayers
-  '531', // Romantic Notions
-  '424', // Relics of the Third City
-  '656', // Inklings of Identity
+  PHOSPHORESCENT_SCARAB,
+  MAP_SCRAP,
+  MORELWAYS_1872,
+  SURFACE_SILK_SCRAP,
+  MANIACS_PRAYER,
+  ROMANTIC_NOTION,
+  RELIC_OF_THE_THIRD_CITY,
+  INKLING_OF_IDENTITY,
 ];
 
-const tier3 = (() => {
-  // These are the item IDs of the tier-3 items in each category
-  // (Mysteries, being weird, has two)
-  const academic = '825'; 
-  const cartography = '831'; 
-  const elder = '587'; 
-  const infernal = '668'; 
-  const influence = '830';
-  const luminosity = '589';
-  const mysteriesJOI = '525';
-  const mysteriesTOT = '828';
-  const nostalgia = '827';
-  const ragTrade = '915';
-  const rumour = '659';
-  const wildWords = '932';
-  const wines = '822';
-  return [
-    academic,
-    infernal,
-    mysteriesTOT,
-    influence,
-    luminosity,
-    cartography,
-    wines,
-    ragTrade,
-    mysteriesJOI,
-    wildWords,
-    nostalgia,
-    elder,
-    rumour,
-  ];
-})();
+const tier3 = [
+  MEMORY_OF_DISTANT_SHORES,
+  BRILLIANT_SOUL,
+  TALE_OF_TERROR,
+  COMPROMISING_DOCUMENT,
+  MEMORY_OF_LIGHT,
+  ZEE_ZTORY,
+  STRANGLING_WILLOW_ABSINTHE,
+  WHISPER_SATIN_SCRAP,
+  JOURNAL_OF_INFAMY,
+  CORRESPONDENCE_PLAQUE,
+  VISION_OF_THE_SURFACE,
+  MYSTERY_OF_THE_ELDER_CONTINENT,
+  INCENDIARY_GOSSIP,
+];
 
 /* Look up the amount of an item necessary to mass-convert it */
 function conversionCost(id) {
@@ -114,6 +126,7 @@ function conversionCost(id) {
     if (id === STOLEN_CORRESPONDENCE) {
       return 200;
     }
+    // The rest of the Tier 2 items up-convert @ 500
     return 500;
   }
 
