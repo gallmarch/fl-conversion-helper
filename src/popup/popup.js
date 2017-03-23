@@ -27,6 +27,8 @@ function loadOptions() {
       });
     }
 
+    const ids = [1, 2, 3].map(i => `js-flch-header-tier${i}`);
+
     // Store preferences immediately (this puts defaults into storage)
     storage.set({
       options: ids.reduce((acc, id) => ({ ...acc, [id]: $(`input[data-target="${id}"]`).get(0).checked }), {}),
