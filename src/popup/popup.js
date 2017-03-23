@@ -20,8 +20,16 @@ $(document).ready(() => {
 
 function loadOptions() {
   storage.get(null, ({ options }) => {
-    Object.keys(options).forEach((key) => {
-      $(`input[data-target="${key}"]`).attr('checked', options[key]);
+    // If we have something stored, set our checkboxes
+    if (options) {
+      Object.keys(options).forEach((key) => {
+        $(`input[data-target="${key}"]`).attr('checked', options[key]);
+      });
+    }
+
+    // Store preferences immediately (this puts defaults into storage)
+    storage.set({
+      options: ids.reduce((acc, id) => ({ ...acc, [id]: $(`input[data-target="${id}"]`).get(0).checked }), {}),
     });
   });
 }

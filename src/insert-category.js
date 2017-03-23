@@ -109,7 +109,7 @@ function toggleExpansion({ data: { id } }) {
 
 function setCategoryVisibility({ options, id }) {
   // Check whether the user wants this displayed at all
-  if (options.options[id]) {
+  if (options && options.options && options.options[id]) {
     $(`#${id}`)
       .removeClass('flch-hidden')
       .next()
