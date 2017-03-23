@@ -104,6 +104,7 @@ function conversionCost(id) {
     if ([
       FOXFIRE_CANDLE,
       JADE_FRAGMENT,
+      LAMPLIGHTER_BEESWAX,
       SHARD_OF_GLIM,
       SILK_SCRAP,
     ].includes(id)) {
