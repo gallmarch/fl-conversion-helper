@@ -108,8 +108,6 @@ function toggleExpansion({ data: { id } }) {
 }
 
 function setCategoryVisibility({ options, id }) {
-  console.info('setting category visibility');
-  console.info(options);
   // Check whether the user wants this displayed at all
   if (options.options && options.options[id] !== undefined) {
     if (options.options[id]) {
