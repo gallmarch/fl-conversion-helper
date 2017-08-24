@@ -1,11 +1,16 @@
 // These items have special conversion amounts
 const ABOMINABLE_SALT = '476';
+const AEOLIAN_SCREAM = '773';
 const AMANITA_SHERRY = '928';
+const AN_IDENTITY_UNCOVERED = '657';
 const APPALLING_SECRET = '390';
+const BROKEN_GIANT_1844 = '823';
 const BRILLIANT_SOUL = '668';
+const COLLATED_RESEARCH = '745';
 const CORRESPONDENCE_PLAQUE = '932';
 const COMPROMISING_DOCUMENT = '830';
 const CRYPTIC_CLUE = '389';
+const EXTRAORDINARY_IMPLICATION = '809';
 const FOXFIRE_CANDLE = '374';
 const GREYFIELDS_1882 = '383';
 const INCENDIARY_GOSSIP = '659';
@@ -19,8 +24,12 @@ const MAP_SCRAP = '920';
 const MEMORY_OF_DISTANT_SHORES = '825';
 const MEMORY_OF_LIGHT = '589';
 const MORELWAYS_1872 = '815';
+const MOURNING_CANDLE = '951';
+const MUSCARIA_BRANDY = '927';
 const MYSTERY_OF_THE_ELDER_CONTINENT = '587';
+const PARTIAL_MAP = '956';
 const PHOSPHORESCENT_SCARAB = '652';
+const PRESBYTERATE_PASSPHRASE = '852';
 const PRIMORDIAL_SHRIEK = '388';
 const PRISONERS_HONEY = '391';
 const PROSCRIBED_MATERIAL = '420';
@@ -30,8 +39,11 @@ const SHARD_OF_GLIM = '378';
 const SILK_SCRAP = '381';
 const SOUL = '386';
 const STOLEN_CORRESPONDENCE = '422';
+const STOLEN_KISS = '944';
 const STRANGLING_WILLOW_ABSINTHE = '822';
 const TALE_OF_TERROR = '828';
+const THIRSTY_BOMBAZINE_SCRAP = '922';
+const TOUCHING_LOVE_STORY = '945';
 const SURFACE_SILK_SCRAP = '907';
 const VISION_OF_THE_SURFACE = '827';
 const WHISPER_SATIN_SCRAP = '915';
@@ -85,8 +97,32 @@ const tier3 = [
   INCENDIARY_GOSSIP,
 ];
 
+const tier4 = [
+  COLLATED_RESEARCH,
+  MUSCARIA_BRANDY,
+  EXTRAORDINARY_IMPLICATION,
+  STOLEN_KISS,
+  MOURNING_CANDLE,
+  PARTIAL_MAP,
+  BROKEN_GIANT_1844,
+  THIRSTY_BOMBAZINE_SCRAP,
+  AEOLIAN_SCREAM,
+  TOUCHING_LOVE_STORY,
+  PRESBYTERATE_PASSPHRASE,
+  AN_IDENTITY_UNCOVERED,
+];
+
 /* Look up the amount of an item necessary to mass-convert it */
 function conversionCost(id) {
+
+  if (tier4.includes(id)) {
+    // Collated Research can't be converted
+    if (id === COLLATED_RESEARCH) {
+      return Number.POSITIVE_INFINITY;
+    }
+    return 25;
+  }
+
   // Tier 3 items
   if (tier3.includes(id)) {
     // All Tier 3 items convert 50->51
@@ -139,4 +175,5 @@ export {
   tier1,
   tier2,
   tier3,
+  tier4,
 };

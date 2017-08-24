@@ -2,7 +2,7 @@ import $ from 'jquery';
 import MutationSummary from 'mutation-summary';
 
 import insertCategory from './insert-category';
-import { tier1, tier2, tier3 } from './items';
+import { tier1, tier2, tier3, tier4 } from './items';
 import './styles.scss';
 
 registerObserver();
@@ -47,6 +47,14 @@ function registerObserver() {
         id: 'js-flch-header-tier3',
         title: 'Tier 3',
         items: tier3,
+        firstCategory,
+      });
+
+      // Insert Tier 4
+      $(`#js-flch-header-tier4`).length || insertCategory({
+        id: 'js-flch-header-tier4',
+        title: 'Tier 4',
+        items: tier4,
         firstCategory,
       });
     }
