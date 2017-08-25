@@ -3,13 +3,18 @@ const ABOMINABLE_SALT = '476';
 const AEOLIAN_SCREAM = '773';
 const AMANITA_SHERRY = '928';
 const AN_IDENTITY_UNCOVERED = '657';
+const ANTIQUE_CONSTABLES_BADGE = '748';
 const APPALLING_SECRET = '390';
 const BROKEN_GIANT_1844 = '823';
 const BRILLIANT_SOUL = '668';
 const COLLATED_RESEARCH = '745';
 const CORRESPONDENCE_PLAQUE = '932';
 const COMPROMISING_DOCUMENT = '830';
+const COPPER_CIPHER_RING = '758';
 const CRYPTIC_CLUE = '389';
+const DIARY_OF_THE_DEAD = '762';
+const ENGRAVED_PEWTER_TANKARD = '757';
+const ENTRY_IN_SLOWCAKES_EXCEPTIONALS = '752';
 const EXTRAORDINARY_IMPLICATION = '809';
 const FOXFIRE_CANDLE = '374';
 const GREYFIELDS_1882 = '383';
@@ -27,14 +32,19 @@ const MORELWAYS_1872 = '815';
 const MOURNING_CANDLE = '951';
 const MUSCARIA_BRANDY = '927';
 const MYSTERY_OF_THE_ELDER_CONTINENT = '587';
+const NODULE_OF_PULSATING_AMBER = '754';
+const OLD_BONE_SKELETON_KEY = '753';
+const ORNATE_TYPEWRITER = '755';
 const PARTIAL_MAP = '956';
 const PHOSPHORESCENT_SCARAB = '652';
 const PRESBYTERATE_PASSPHRASE = '852';
 const PRIMORDIAL_SHRIEK = '388';
 const PRISONERS_HONEY = '391';
 const PROSCRIBED_MATERIAL = '420';
+const RED_FEATHERED_PIN = '761';
 const RELIC_OF_THE_THIRD_CITY = '424';
 const ROMANTIC_NOTION = '531';
+const ROOKERY_PASSWORD = '751';
 const SHARD_OF_GLIM = '378';
 const SILK_SCRAP = '381';
 const SOUL = '386';
@@ -43,6 +53,7 @@ const STOLEN_KISS = '944';
 const STRANGLING_WILLOW_ABSINTHE = '822';
 const TALE_OF_TERROR = '828';
 const THIRSTY_BOMBAZINE_SCRAP = '922';
+const TINY_JEWELLED_RELIQUARY = '750';
 const TOUCHING_LOVE_STORY = '945';
 const SURFACE_SILK_SCRAP = '907';
 const VISION_OF_THE_SURFACE = '827';
@@ -112,8 +123,28 @@ const tier4 = [
   AN_IDENTITY_UNCOVERED,
 ];
 
+// Faction renown items
+const renown = [
+  OLD_BONE_SKELETON_KEY, // Criminals
+  ENGRAVED_PEWTER_TANKARD, // Docks
+  DIARY_OF_THE_DEAD, // Tomb-Colonies
+  NODULE_OF_PULSATING_AMBER, // Rubberies
+  ROOKERY_PASSWORD, // Urchins
+  ANTIQUE_CONSTABLES_BADGE, // Constables
+  COPPER_CIPHER_RING, // Great Game
+  TINY_JEWELLED_RELIQUARY, // Church
+  ORNATE_TYPEWRITER, // Bohemians
+  RED_FEATHERED_PIN, // Revolutionaries
+  ENTRY_IN_SLOWCAKES_EXCEPTIONALS,
+];
+
 /* Look up the amount of an item necessary to mass-convert it */
 function conversionCost(id) {
+
+  // Renown items can be used if we have at least one of them
+  if (renown.includes(id)) {
+    return 1;
+  }
 
   if (tier4.includes(id)) {
     // Collated Research can't be converted
@@ -172,6 +203,7 @@ function conversionCost(id) {
 
 export {
   conversionCost,
+  renown,
   tier1,
   tier2,
   tier3,
