@@ -2,7 +2,7 @@ import $ from 'jquery';
 import MutationSummary from 'mutation-summary';
 
 import insertCategory from './insert-category';
-import { tier1, tier2, tier3, tier4 } from './items';
+import { tier1, tier2, tier3, tier4, renown } from './items';
 import './styles.scss';
 
 registerObserver();
@@ -27,34 +27,41 @@ function registerObserver() {
       const firstCategory = $($('.you_bottom_rhs h3').get(0));
 
       // Insert Tier 1
-      $(`#js-flch-header-tier1`).length || insertCategory({
-        id: 'js-flch-header-tier1',
+      $(`#js-flch-header-tier-1`).length || insertCategory({
+        id: 'js-flch-header-tier-1',
         title: 'Tier 1',
         items: tier1,
         firstCategory,
       });
 
       // Insert Tier 2
-      $(`#js-flch-header-tier2`).length || insertCategory({
-        id: 'js-flch-header-tier2',
+      $(`#js-flch-header-tier-2`).length || insertCategory({
+        id: 'js-flch-header-tier-2',
         title: 'Tier 2',
         items: tier2,
         firstCategory,
       });
 
       // Insert Tier 3
-      $(`#js-flch-header-tier3`).length || insertCategory({
-        id: 'js-flch-header-tier3',
+      $(`#js-flch-header-tier-3`).length || insertCategory({
+        id: 'js-flch-header-tier-3',
         title: 'Tier 3',
         items: tier3,
         firstCategory,
       });
 
       // Insert Tier 4
-      $(`#js-flch-header-tier4`).length || insertCategory({
-        id: 'js-flch-header-tier4',
+      $(`#js-flch-header-tier-4`).length || insertCategory({
+        id: 'js-flch-header-tier-4',
         title: 'Tier 4',
         items: tier4,
+        firstCategory,
+      });
+
+      $('#js-flch-header-tier-renown').length || insertCategory({
+        id: 'js-flch-header-tier-renown',
+        title: 'Renown',
+        items: renown,
         firstCategory,
       });
     }
