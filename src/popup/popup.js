@@ -29,7 +29,7 @@ function loadOptions() {
       });
     }
 
-    const ids = [1, 2, 3, 4, 'renown'].map(i => `js-flch-header-tier-${i}`);
+    const ids = [1, 2, 3, 4, 'faction-items'].map(i => `js-flch-header-tier-${i}`);
 
     // Store preferences immediately (this puts defaults into storage)
     storage.set({

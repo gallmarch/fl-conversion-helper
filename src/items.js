@@ -125,8 +125,8 @@ const tier4 = [
   AN_IDENTITY_UNCOVERED,
 ];
 
-// Faction renown items
-const renown = [
+// Faction items
+const factionItems = [
   OLD_BONE_SKELETON_KEY, // Criminals
   ENGRAVED_PEWTER_TANKARD, // Docks
   DIARY_OF_THE_DEAD, // Tomb-Colonies
@@ -145,8 +145,8 @@ const renown = [
 /* Look up the amount of an item necessary to mass-convert it */
 function conversionCost(id) {
 
-  // Renown items can be used if we have at least one of them
-  if (renown.includes(id)) {
+  // Faction items can be used if we have at least one of them
+  if (factionItems.includes(id)) {
     return 1;
   }
 
@@ -207,7 +207,7 @@ function conversionCost(id) {
 
 export {
   conversionCost,
-  renown,
+  factionItems,
   tier1,
   tier2,
   tier3,

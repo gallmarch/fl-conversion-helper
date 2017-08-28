@@ -2,7 +2,7 @@ import $ from 'jquery';
 import MutationSummary from 'mutation-summary';
 
 import insertCategory from './insert-category';
-import { tier1, tier2, tier3, tier4, renown } from './items';
+import { tier1, tier2, tier3, tier4, factionItems } from './items';
 import './styles.scss';
 
 registerObserver();
@@ -58,10 +58,10 @@ function registerObserver() {
         firstCategory,
       });
 
-      $('#js-flch-header-tier-renown').length || insertCategory({
-        id: 'js-flch-header-tier-renown',
-        title: 'Renown',
-        items: renown,
+      $('#js-flch-header-tier-faction-items').length || insertCategory({
+        id: 'js-flch-header-tier-faction-items',
+        title: 'Faction items',
+        items: factionItems,
         firstCategory,
       });
     }
