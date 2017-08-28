@@ -5,12 +5,14 @@ const storage = chrome.storage.sync || chrome.storage.local;
 $(document).ready(() => {
   loadOptions();
 
+  // Set onchange events for each checkbox
   $('.flch-popup__option input').each(function() {
     $(this).on('change', (evt) => {
       // Get target and checked value
       const target = $(this).attr('data-target');
       const value = $(this).is(':checked');
-      // Retrieve all options, then overwrite the value for this
+
+      // Save updated options, including newly-changed preference
       storage.get(null, ({ options }) => {
         storage.set({ options: Object.assign(options, { [target]: value }) });
       });
