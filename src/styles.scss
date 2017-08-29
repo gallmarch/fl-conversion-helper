@@ -1,10 +1,11 @@
-@import 'popup/popup.scss';
 .flch {
-  &-hidden {
-    display: none !important;
-  }
-  &-toggle {
+  &-category-header {
     cursor: pointer;
+  }
+  &-category-header__text {
+    &:hover {
+      text-decoration: underline;
+    }
   }
   &-unlock {
     filter: grayscale(50%);
@@ -12,13 +13,5 @@
   }
   ul.you_icon > &-empty-icon.empty-icon {
     margin: 2px 10px 8px 0;
-
-  }
-  &-link {
-    color: black;
-    cursor: pointer;
-    &:hover, &:active, &:visited {
-      color: black;
-    }
   }
 }

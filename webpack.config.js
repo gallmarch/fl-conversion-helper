@@ -31,7 +31,7 @@ const zip = new ZipPlugin({
 
 module.exports = {
   entry: {
-    'content-script.js': './src/content-script.js',
+    'content-script.js': './src/content-script.jsx',
     'popup/popup.js': './src/popup/popup.js',
   },
   output: {
@@ -47,11 +47,11 @@ module.exports = {
         }),
       },
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
         query: {
-          presets: ['es2015', 'stage-0']
+          presets: ['es2015', 'stage-0', 'react']
         },
       },
     ],
@@ -61,4 +61,7 @@ module.exports = {
     zip,
     new ExtractTextWebpackPlugin('styles.css'),
   ],
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
 };
