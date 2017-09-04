@@ -15,7 +15,12 @@ function mainReducer(state = {}, action) {
 }
 
 function attributesReducer(state = {}, action) {
-  return state;
+  switch(action.type) {
+    case 'ATTRIBUTES':
+      return { ...state, ...action.payload };
+    default:
+      return state;
+  }
 }
 
 function factionReducer(state = { favours: {}, renown: {} }, action ) {
@@ -40,7 +45,7 @@ function preferencesReducer(state = DEFAULT_PREFERENCES, action) {
 }
 
 export default combineReducers({
-  attributesReducer,
+  attributes: attributesReducer,
   factions: factionReducer,
   mainReducer,
   preferences: preferencesReducer,
