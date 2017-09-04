@@ -10,6 +10,8 @@ import styles from './styles.scss';
 import reducer from './reducer';
 import Extension from './Extension';
 
+import { WATCHFUL, SHADOWY, DANGEROUS, PERSUASIVE } from './attributes';
+
 // Create the store
 const store = applyMiddleware(reduxThunk)(createStore)(reducer);
 
@@ -32,7 +34,21 @@ function watchForAttributeChanges() {
   function callback(summaries) {
     const summary = summaries[0];
     console.info('you_icon p change');
-    console.info(summary);
+    // Retrieve modified stats from the LHS col attribute's tooltip
+    const attributes = [WATCHFUL, SHADOWY, DANGEROUS, PERSUASIVE].reduce((acc, attributeID) => {
+      const tooltipText = document.querySelector(`div#infoBarQImage${attributeID}`)
+      .nextSibling
+      .firstChild
+      .innerText;
+      const match = /[0-9]+/.exec(tooltipText);
+      if (match) {
+        console.info(match[0]);
+        return { ...acc, [attributeID]: Number(match[0]) };
+      }
+    }, {});
+    console.info('attributes');
+    // console.info(attributes);
+    store.dispatch({ type: 'ATTRIBUTES', payload: attributes });
   }
 }
 
