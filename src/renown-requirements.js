@@ -1,20 +1,5 @@
 import { DANGEROUS, PERSUASIVE, WATCHFUL, SHADOWY } from './attributes';
-/*
-import {
-  BOHEMIANS,
-  CHURCH,
-  CONSTABLES,
-  CRIMINALS,
-  DOCKS,
-  GREAT_GAME,
-  HELL,
-  REVOLUTIONARIES,
-  RUBBERIES,
-  SOCIETY,
-  TOMB_COLONIES,
-  URCHINS,
-} from './factions';
-*/
+
 import * as factions from './factions';
 
 export const factionAttributes = {
@@ -47,12 +32,14 @@ function favoursRequired(renown) {
 
 function attributeRequired(faction, renown) {
   // If your Renown is less than 15, there's no attribute requirement
-  // for conversion
+  // for conversion (even if you're equipping a Talkative Rattus Faber)
   if (renown < 15) {
-    return Number.POSITIVE_INFINITY;
+    return Number.NEGATIVE_INFINITY;
   }
-  attribute = factionAttributes[faction];
+  // Otherwise, you need [your current Renown] * 6 in the faction-relevant
+  // attribute in order to convert
   const level = renown * 6;
+  const attribute = factionAttributes[faction];
   return { attribute, level };
 }
 
