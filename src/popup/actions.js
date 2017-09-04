@@ -7,8 +7,8 @@ function setCategory({ category, visible }) {
       storage.set({
         preferences: {
           ...preferences,
-          categories: {
-            ...preferences.categories,
+          visibilities: {
+            ...preferences.visibilities,
             [category]: visible,
           },
         },

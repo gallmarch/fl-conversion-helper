@@ -19,7 +19,7 @@ class CategoryOption extends Component {
     const { category: { key, title }, preferences } = this.props;
     return (
       <label className="flch-popup__option">
-        <input type="checkbox" checked={preferences.categories[key]} onChange={this.handleCheckboxChange} />
+        <input type="checkbox" checked={preferences.visibilities[key]} onChange={this.handleCheckboxChange} />
         {title}
       </label>
     );

@@ -34,17 +34,13 @@ function listenForStorageChanges() {
 
 function loadPreferences() {
   storage.get(null, ({ preferences }) => {
-    // If we have something stored, set our checkboxes
-    // if (options) {
-      // store.dispatch({ type: 'PREFERENCES_CHANGE', payload: options });
-    // }
 
     console.info('I have loaded');
     console.info(preferences);
-    const categories = (preferences && preferences.categories) || {};
+    const visibilities = (preferences && preferences.visibilities) || {};
 
     const defaults = {
-      categories: {
+      visibilities: {
         tier1: true,
         tier2: true,
         tier3: true,
@@ -56,7 +52,7 @@ function loadPreferences() {
     const preferencesWithDefaults = {
       ...defaults,
       ...preferences,
-      categories: { ...defaults.categories, ...categories },
+      visibilities: { ...defaults.visibilities, ...visibilities },
     };
 
     store.dispatch({ type: 'PREFERENCES_CHANGE', payload: preferencesWithDefaults });
