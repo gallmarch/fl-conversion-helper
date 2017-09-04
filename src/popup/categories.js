@@ -1,17 +1,22 @@
 export default {
-  'tier-1': {
+  tier1: {
+    key: 'tier1',
     title: 'Tier 1',
   },
-  'tier-2': {
+  tier2: {
+    key: 'tier2',
     title: 'Tier 2',
   },
-  'tier-3': {
+  tier3: {
+    key: 'tier3',
     title: 'Tier 3',
   },
-  'tier-4': {
+  tier4: {
+    key: 'tier4',
     title: 'Tier 4',
   },
-  'renown': {
-    title: 'Renown',
+  faction: {
+    key: 'faction',
+    title: 'Faction items',
   },
 }

@@ -4,24 +4,28 @@ import CategoryOption from './CategoryOption';
 import categories from './categories';
 
 function Popup(props) {
-  const categoryKeys = ['tier-1', 'tier-2', 'tier-3', 'tier-4', 'renown'];
-  console.info('categories!');
-  console.info(categories);
-  // const { preferences } = props;
-  // console.info ('preferences');
-  // console.info(preferences);
+  const categoryKeys = ['tier1', 'tier2', 'tier3', 'tier4', 'faction'];
+  const { preferences } = props;
+
+  // Wait for preferences to be loaded
+  if (!preferences) {
+    return null;
+  }
+
   return (
     <div>
       <h1 className="flch-popup__header">Show categories</h1>
-      {categoryKeys.map(key => <CategoryOption key={key} category={categories[key]} />)}
+      {categoryKeys.map(key => (
+        <CategoryOption key={key} category={categories[key]} preferences={preferences} />
+      ))}
     </div>
   );
 }
 
 function mapStateToProps(state) {
-  return { preferences: state.preferences };
+  console.info('mapping state to props');
+  console.info(state);
+  return { ...state.preferences };
 }
 
-export default Popup;
-
-// export default connect(mapStateToProps)(Popup);
+export default connect(mapStateToProps)(Popup);
