@@ -19,8 +19,20 @@ const store = applyMiddleware(reduxThunk)(createStore)(reducer);
 watchForAttributeChanges();
 watchForInventorySectionAddition();
 
-// TODO: Load preferences from storage
-// loadPreferences();
+// Listen for storage changes
+listenForStorageChanges();
+
+function listenForStorageChanges() {
+  chrome.storage.onChanged.addListener(({ options }) => {
+    console.info('detected change');
+    if (!options) {
+      return;
+    }
+    const { newValue } = options;
+    console.info('preference change');
+    console.info(newValue);
+  });
+}
 
 function watchForAttributeChanges() {
   const rootNode = document.querySelector('div#lhs_col');
