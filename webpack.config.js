@@ -32,7 +32,7 @@ const zip = new ZipPlugin({
 module.exports = {
   entry: {
     'content-script.js': './src/content-script.jsx',
-    'popup/popup.js': './src/popup/popup.js',
+    'popup/popup.js': './src/popup/main.jsx',
   },
   output: {
     path: './build/',
