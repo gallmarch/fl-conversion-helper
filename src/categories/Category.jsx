@@ -1,15 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import CategoryToggle from './CategoryToggle';
-import { setExpanded } from './actions';
+import { setCategoryExpansion } from '../preferences/actions';
 
 function Category(props) {
-  const { preferences, category } = props;
-  const expanded = preferences[category];
+  const { preferences: { expansions }, category } = props;
+  const expanded = expansions[category];
   return (
     <div>
       <h3 onClick={() => toggleState(props)} className="flch-category-header">
-        <CategoryToggle state={preferences[category]} />
+        <CategoryToggle state={expanded} />
         {' '}
         <span className="flch-category-header__text">{props.categoryName}</span>
       </h3>
@@ -24,9 +24,9 @@ function Category(props) {
 }
 
 function toggleState(props) {
-  const { category, preferences, setExpanded } = props;
-  const expanded = preferences[category];
-  setExpanded({ category, expanded: !expanded });
+  const { category, preferences: { expansions }, setCategoryExpansion } = props;
+  const expanded = expansions[category];
+  setCategoryExpansion({ category, expanded: !expanded });
 }
 
 
@@ -34,4 +34,4 @@ function mapStateToProps(state) {
   return { preferences: state.preferences };
 }
 
-export default connect(mapStateToProps, { setExpanded })(Category);
+export default connect(mapStateToProps, { setCategoryExpansion })(Category);

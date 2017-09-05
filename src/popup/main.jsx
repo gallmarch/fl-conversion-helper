@@ -7,6 +7,7 @@ import reduxThunk from 'redux-thunk';
 import reducer from './reducer';
 import Popup from './Popup';
 
+// Get a reference to whatever local storage is available
 const storage = chrome.storage.sync || chrome.storage.local;
 
 // Create the Redux store
@@ -32,9 +33,17 @@ function listenForStorageChanges() {
 
 function loadPreferences() {
   storage.get(null, ({ preferences }) => {
+    const expansions = (preferences && preferences.expansions) || {};
     const visibilities = (preferences && preferences.visibilities) || {};
 
     const defaults = {
+      expansions: {
+        tier1: false,
+        tier2: false,
+        tier3: false,
+        tier4: false,
+        faction: false,
+      },
       visibilities: {
         tier1: true,
         tier2: true,
@@ -47,6 +56,7 @@ function loadPreferences() {
     const preferencesWithDefaults = {
       ...defaults,
       ...preferences,
+      expansions: { ...defaults.expansions, ...expansions },
       visibilities: { ...defaults.visibilities, ...visibilities },
     };
 

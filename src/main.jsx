@@ -12,6 +12,8 @@ import Extension from './Extension';
 
 import { WATCHFUL, SHADOWY, DANGEROUS, PERSUASIVE } from './attributes';
 
+const storage = chrome.storage.sync || chrome.storage.local;
+
 // Create the store
 const store = applyMiddleware(reduxThunk)(createStore)(reducer);
 
@@ -19,18 +21,22 @@ const store = applyMiddleware(reduxThunk)(createStore)(reducer);
 watchForAttributeChanges();
 watchForInventorySectionAddition();
 
+// Load expansion preferences
+loadPreferences();
 // Listen for storage changes
 listenForStorageChanges();
 
 function listenForStorageChanges() {
-  chrome.storage.onChanged.addListener(({ options }) => {
-    console.info('detected change');
-    if (!options) {
-      return;
-    }
-    const { newValue } = options;
-    console.info('preference change');
-    console.info(newValue);
+  chrome.storage.onChanged.addListener(({ preferences }) => {
+    const { newValue } = preferences;
+    store.dispatch({ type: 'PREFERENCES_CHANGED', payload: newValue });
+  });
+}
+
+function loadPreferences() {
+  // TODO
+  storage.get(null, ({ preferences }) => {
+    store.dispatch({ type: 'PREFERENCES_CHANGED', payload: preferences });
   });
 }
 
@@ -88,10 +94,10 @@ function watchForInventorySectionAddition() {
       );
     }
   }
-}
 
-function createContainerElement() {
-  const parent = document.querySelector('div.you_bottom_rhs');
-  const referenceNode = parent.querySelector('h3:first-of-type');
-  return parent.insertBefore(document.createElement('div'), referenceNode);
+  function createContainerElement() {
+    const parent = document.querySelector('div.you_bottom_rhs');
+    const referenceNode = parent.querySelector('h3:first-of-type');
+    return parent.insertBefore(document.createElement('div'), referenceNode);
+  }
 }
