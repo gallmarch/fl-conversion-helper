@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Category from './Category';
-import Item from './Item';
-import FactionItem from './FactionItem';
+import Item from './items/Item';
+import FactionItem from './items/FactionItem';
 import { tier1, tier2, tier3, tier4, factionItems } from './items';
 import { setExpanded, fetchConnectedQualities } from './actions';
 

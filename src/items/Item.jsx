@@ -1,5 +1,5 @@
 import React from 'react';
-import { conversionCost } from './items';
+import { conversionCost } from '.';
 import BlankItem from './BlankItem';
 import UsableItem from './UsableItem';
 import DummiedItem from './DummiedItem';

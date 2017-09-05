@@ -1,4 +1,4 @@
-import * as factions from './factions';
+import * as factions from '../factions';
 // These items have special conversion amounts
 const ABOMINABLE_SALT = '476';
 const AEOLIAN_SCREAM = '773';

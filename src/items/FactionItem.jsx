@@ -1,13 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { items } from './factions';
-import { attributeRequired, favoursRequired } from './renown-requirements';
+import { items } from '../factions';
+import { attributeRequired, favoursRequired } from '../renown-requirements';
 import { getInventoryMatch } from './Item';
 import BlankItem from './BlankItem';
 import UsableItem from './UsableItem';
 import DummiedItem from './DummiedItem';
-
-import factionAttributes from './faction-attributes';
+import factionAttributes from '../faction-attributes';
 
 function meetsAttributeRequirement({ attributes, faction, renown }) {
   const { attribute, level } = attributeRequired(faction, renown[faction]);

@@ -11,7 +11,7 @@ import {
   ORNATE_TYPEWRITER,
   RED_FEATHERED_PIN,
   ENTRY_IN_SLOWCAKES_EXCEPTIONALS,
-} from './items';
+} from '../items';
 
 // IDs for faction qualities
 export const BOHEMIANS = 'Bohemians';
