@@ -1,4 +1,4 @@
-import * as factions from './factions';
+import * as factions from './index';
 // Quality IDs for faction Favours
 
 export default {
