@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Category from './Category';
+import Category from './categories/Category';
 import Item from './items/Item';
 import FactionItem from './items/FactionItem';
 import { tier1, tier2, tier3, tier4, factionItems } from './items';
