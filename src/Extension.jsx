@@ -33,7 +33,6 @@ class Extension extends Component {
 }
 
 function mapStateToProps(state) {
-  console.info(state);
   return {};
 }
 

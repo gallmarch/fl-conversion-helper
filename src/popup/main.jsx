@@ -26,17 +26,12 @@ ReactDOM.render((
 
 function listenForStorageChanges() {
   chrome.storage.onChanged.addListener(({ preferences: { newValue } }) => {
-    console.info('popup: storage changes detected');
-    console.info(newValue);
     store.dispatch({ type: 'PREFERENCES_CHANGE', payload: newValue });
   });
 }
 
 function loadPreferences() {
   storage.get(null, ({ preferences }) => {
-
-    console.info('I have loaded');
-    console.info(preferences);
     const visibilities = (preferences && preferences.visibilities) || {};
 
     const defaults = {

@@ -26,14 +26,11 @@ function Category(props) {
 function toggleState(props) {
   const { category, preferences, setExpanded } = props;
   const expanded = preferences[category];
-  console.info(`Toggling state to ${!expanded}`);
   setExpanded({ category, expanded: !expanded });
 }
 
 
 function mapStateToProps(state) {
-  //console.info('state');
-  //console.info(state);
   return { preferences: state.preferences };
 }
 
