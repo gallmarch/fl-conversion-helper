@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { setCategoryVisibility } from './actions';
+import { setCategoryVisibility } from '../preferences/actions';
 
 class CategoryOption extends Component {
   constructor() {
