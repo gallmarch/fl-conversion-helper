@@ -1,4 +1,4 @@
-import * as factions from './factions';
+import * as factions from './index';
 import { WATCHFUL, SHADOWY, DANGEROUS, PERSUASIVE } from './attributes';
 
 export default {

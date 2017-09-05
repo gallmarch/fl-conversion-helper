@@ -6,7 +6,7 @@ import { getInventoryMatch } from './Item';
 import BlankItem from './BlankItem';
 import UsableItem from './UsableItem';
 import DummiedItem from './DummiedItem';
-import factionAttributes from '../faction-attributes';
+import factionAttributes from '../factions/attributes';
 
 function meetsAttributeRequirement({ attributes, faction, renown }) {
   const { attribute, level } = attributeRequired(faction, renown[faction]);
