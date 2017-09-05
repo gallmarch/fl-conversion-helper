@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import { preferences } from './actions';
+import { CATEGORY_EXPANSION } from './categories/actions';
 
 const INITIAL_FACTION_STATE = { favours: {}, renown: {} };
 
@@ -37,7 +37,7 @@ function factionReducer(state = INITIAL_FACTION_STATE, action ) {
 
 function preferencesReducer(state = DEFAULT_PREFERENCES, action) {
   switch (action.type) {
-    case preferences.CATEGORY_EXPANSION:
+    case CATEGORY_EXPANSION:
       const { category, expanded } = action.payload;
       return { ...state, [category]: expanded };
     default:

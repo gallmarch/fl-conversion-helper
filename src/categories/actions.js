@@ -8,4 +8,5 @@ function setExpanded({ category, expanded }) {
 
 export {
   setExpanded,
+  CATEGORY_EXPANSION,
 };
