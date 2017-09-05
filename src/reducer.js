@@ -2,6 +2,8 @@ import { combineReducers } from 'redux';
 
 import { preferences } from './actions';
 
+const INITIAL_FACTION_STATE = { favours: {}, renown: {} };
+
 const DEFAULT_PREFERENCES = {
   tier1: true,
   tier2: true,
@@ -23,7 +25,7 @@ function attributesReducer(state = {}, action) {
   }
 }
 
-function factionReducer(state = { favours: {}, renown: {} }, action ) {
+function factionReducer(state = INITIAL_FACTION_STATE, action ) {
   switch (action.type) {
     case 'FAVOURS_AND_RENOWN':
       const { favours, renown } = action.payload;
