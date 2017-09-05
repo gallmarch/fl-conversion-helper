@@ -15,6 +15,5 @@ function fetchConnectedQualities() {
 }
 
 export {
-  preferences,
   fetchConnectedQualities,
 };

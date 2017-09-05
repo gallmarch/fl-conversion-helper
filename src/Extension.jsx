@@ -4,7 +4,8 @@ import Category from './categories/Category';
 import Item from './items/Item';
 import FactionItem from './items/FactionItem';
 import { tier1, tier2, tier3, tier4, factionItems } from './items';
-import { setExpanded, fetchConnectedQualities } from './actions';
+import { setExpanded } from './categories/actions';
+import { fetchConnectedQualities } from './factions/actions';
 
 class Extension extends Component {
   componentDidMount() {
