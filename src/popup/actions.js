@@ -1,4 +1,4 @@
-function setCategory({ category, visible }) {
+function setCategoryVisibility({ category, visible }) {
   return (dispatch) => {
     console.info('Setting preferences...');
     console.info(category, visible);
@@ -18,5 +18,5 @@ function setCategory({ category, visible }) {
 }
 
 export {
-  setCategory,
+  setCategoryVisibility,
 };

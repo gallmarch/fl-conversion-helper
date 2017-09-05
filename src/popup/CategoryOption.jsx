@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { setCategory } from './actions';
+import { setCategoryVisibility } from './actions';
 
 class CategoryOption extends Component {
   constructor() {
@@ -12,7 +12,7 @@ class CategoryOption extends Component {
     console.info('checkbox change detected');
     const { category: { key }, setCategory } = this.props;
     const visible = evt.target.checked;
-    setCategory({ visible, category: key });
+    setCategoryVisibility({ visible, category: key });
   }
 
   render() {
@@ -26,4 +26,4 @@ class CategoryOption extends Component {
   }
 }
 
-export default connect(null, { setCategory })(CategoryOption);
+export default connect(null, { setCategoryVisibility })(CategoryOption);
