@@ -1,5 +1,5 @@
 import * as factions from './index';
-import { WATCHFUL, SHADOWY, DANGEROUS, PERSUASIVE } from './attributes';
+import { WATCHFUL, SHADOWY, DANGEROUS, PERSUASIVE } from '../attributes';
 
 export default {
   [factions.BOHEMIANS]: PERSUASIVE,
