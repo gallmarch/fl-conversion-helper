@@ -1,4 +1,4 @@
-import * as factions from './factions';
+import * as factions from './index';
 // IDs for faction qualities
 export default {
   [factions.BOHEMIANS]: '133830',

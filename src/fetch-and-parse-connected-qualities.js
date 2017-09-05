@@ -1,7 +1,7 @@
 import $ from 'jquery';
 
 import * as factions from './factions';
-import factionRenowns from './faction-renowns';
+import renownIDs from './factions/renown';
 import favourIDs from './factions/favours';
 
 function fetchConnectedQualities() {
@@ -16,7 +16,7 @@ function fetchConnectedQualities() {
 function parseConnectedQualities(response) {
   const $el = $(response);
 
-  const renown = findMatches(factionRenowns);
+  const renown = findMatches(renownIDs);
   const favours = findMatches(favourIDs);
   return { renown, favours };
 
