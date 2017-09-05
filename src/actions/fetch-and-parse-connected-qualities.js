@@ -1,8 +1,8 @@
 import $ from 'jquery';
 
-import * as factions from './factions';
-import renownIDs from './factions/renown';
-import favourIDs from './factions/favours';
+import * as factions from '../factions';
+import renownIDs from '../factions/renown';
+import favourIDs from '../factions/favours';
 
 function fetchConnectedQualities() {
   // TODO: see if the Fetch api is actually up to the task of
