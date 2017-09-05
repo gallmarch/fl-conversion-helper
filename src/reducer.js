@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 
 import { CATEGORY_EXPANSION } from './categories/actions';
+import { FAVOURS_AND_RENOWN } from './factions/actions';
 
 const INITIAL_FACTION_STATE = { favours: {}, renown: {} };
 
@@ -27,7 +28,7 @@ function attributesReducer(state = {}, action) {
 
 function factionReducer(state = INITIAL_FACTION_STATE, action ) {
   switch (action.type) {
-    case 'FAVOURS_AND_RENOWN':
+    case FAVOURS_AND_RENOWN:
       const { favours, renown } = action.payload;
       return {...state, favours, renown };
     default:
