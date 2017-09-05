@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { items } from '../factions';
-import { attributeRequired, favoursRequired } from '../renown-requirements';
+import { attributeRequired, favoursRequired } from '../factions/requirements';
 import { getInventoryMatch } from './Item';
 import BlankItem from './BlankItem';
 import UsableItem from './UsableItem';
