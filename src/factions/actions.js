@@ -15,5 +15,6 @@ function fetchConnectedQualities() {
 }
 
 export {
+  FAVOURS_AND_RENOWN,
   fetchConnectedQualities,
 };
