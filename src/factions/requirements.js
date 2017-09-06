@@ -17,16 +17,16 @@ function favoursRequired(renown) {
 }
 
 function attributeRequired(faction, renown) {
+  const attribute = attributes[faction];
   // If your Renown is less than 15, there's no attribute requirement
   // for conversion (even if you're equipping a Talkative Rattus Faber)
   if (renown < 15) {
-    return Number.NEGATIVE_INFINITY;
+    return { attribute, level: Number.NEGATIVE_INFINITY };
   }
 
   // Otherwise, you need [your current Renown] * 6 in the faction-relevant
   // attribute in order to convert
   const level = renown * 6;
-  const attribute = attributes[faction];
   return { attribute, level };
 }
 

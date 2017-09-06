@@ -1,8 +1,8 @@
 import React from 'react';
-import { cloneImage, cloneTooltip } from './Item';
+import { cloneImage, cloneTooltip, renderCustomTooltip } from './Item';
 
 export default function DummiedItem(props) {
-  const { quantity, inventoryMatch } = props;
+  const { quantity, inventoryMatch, message } = props;
   return (
     <li>
       <a className="tooltip flch-unlock">
@@ -10,7 +10,7 @@ export default function DummiedItem(props) {
         <div>
           {cloneImage(inventoryMatch.querySelector('img'))}
         </div>
-        {cloneTooltip(inventoryMatch)}
+        {(!!message && renderCustomTooltip(inventoryMatch, message)) || cloneTooltip(inventoryMatch)}
       </a>
     </li>
   );

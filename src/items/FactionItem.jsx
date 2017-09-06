@@ -6,6 +6,7 @@ import { getInventoryMatch } from './Item';
 import BlankItem from './BlankItem';
 import UsableItem from './UsableItem';
 import DummiedItem from './DummiedItem';
+import { attributeName } from '../attributes/names';
 import factionAttributes from '../factions/attributes';
 
 function meetsAttributeRequirement({ attributes, faction, renown }) {
@@ -43,9 +44,20 @@ function FactionItem(props) {
   }
 
   // If, for either reason, we can't convert, display a dummied-out item
+
+  console.info(`faction: ${faction}`);
+  console.info(attributeRequired(faction, renown[faction]));
+  const { attribute: relevantAttribute, level: necessaryLevel } = attributeRequired(faction, renown[faction]);
+  const actualAttributeLevel = attributes[relevantAttribute];
+  // Construct a string
+  const insufficientFavoursMessage = `${favoursRequired(renown[faction])} Favours (you have ${factionFavours === undefined ? 0 : factionFavours})`
+  const insufficientAttributeMessage = `${attributeName(relevantAttribute)} ${necessaryLevel} (you have ${actualAttributeLevel})`;
+  const message = `You need ${[insufficientFavoursMessage, insufficientAttributeMessage].join(' and ')}.`;
+
   return <DummiedItem
     inventoryMatch={inventoryMatch}
     quantity={factionFavours}
+    message={message}
   />;
 }
 

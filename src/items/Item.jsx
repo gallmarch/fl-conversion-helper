@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import React from 'react';
 import { conversionCost } from '.';
 import BlankItem from './BlankItem';
@@ -8,9 +9,9 @@ function getInventoryMatch(id) {
   return document.querySelector(`div#infoBarQImage${id}`);
 }
 
-export { getInventoryMatch, cloneImage, cloneTooltip };
+export { getInventoryMatch, cloneImage, cloneTooltip, renderCustomTooltip };
 
-export default function Item({ id, ...rest }) {
+export default function Item({ id, message, ...rest }) {
   const inventoryMatch = document.querySelector(`div#infoBarQImage${id}`);
   if (inventoryMatch) {
     const quantity = Number(inventoryMatch.parentNode.querySelector('div.qq').innerText);
@@ -22,12 +23,11 @@ export default function Item({ id, ...rest }) {
       );
     }
     return (
-      <DummiedItem inventoryMatch={inventoryMatch} quantity={quantity}>
+      <DummiedItem {...rest} inventoryMatch={inventoryMatch} quantity={quantity}>
           <div className="qq">{quantity}</div>
           <div>
             {cloneImage(inventoryMatch.querySelector('img'))}
           </div>
-          {cloneTooltip(inventoryMatch)}
       </DummiedItem>
     );
   }
@@ -58,6 +58,22 @@ function cloneTooltip(node) {
   return (
     <span className="tt" dangerouslySetInnerHTML={
       { __html: ttNode.innerHTML }
+    } />
+  );
+}
+
+function renderCustomTooltip(node, message) {
+  const ttNode = node.parentNode.querySelector('span.tt');
+  // If we have two <strong> elements, then the second is
+  // the message that we're replacing.
+  const clone = ttNode.cloneNode(true);
+  const strongs = clone.querySelectorAll('strong');
+  if (strongs.length >= 2) {
+    strongs[1].textContent = message;
+  }
+  return (
+    <span className="tt" dangerouslySetInnerHTML={
+      { __html: clone.innerHTML }
     } />
   );
 }
