@@ -19,4 +19,8 @@ export default {
     key: 'faction',
     title: 'Faction items',
   },
+  fidgetingWriter: {
+    key: 'fidgetingWriter',
+    title: 'Fidgeting Writer',
+  },
 }

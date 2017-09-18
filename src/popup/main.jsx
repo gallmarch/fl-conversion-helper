@@ -37,23 +37,7 @@ function loadPreferences() {
   storage.get(null, ({ preferences }) => {
     const expansions = (preferences && preferences.expansions) || {};
     const visibilities = (preferences && preferences.visibilities) || {};
-
-    const defaults = {
-      expansions: {
-        tier1: false,
-        tier2: false,
-        tier3: false,
-        tier4: false,
-        faction: false,
-      },
-      visibilities: {
-        tier1: true,
-        tier2: true,
-        tier3: true,
-        tier4: true,
-        faction: true,
-      },
-    };
+    const defaults = DEFAULT_PREFERENCES;
 
     const preferencesWithDefaults = {
       ...defaults,

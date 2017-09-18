@@ -4,7 +4,7 @@ import CategoryOption from './CategoryOption';
 import categories from './categories';
 
 function Popup(props) {
-  const categoryKeys = ['tier1', 'tier2', 'tier3', 'tier4', 'faction'];
+  const categoryKeys = ['tier1', 'tier2', 'tier3', 'tier4', 'faction', 'fidgetingWriter'];
   const { preferences } = props;
 
   // Wait for preferences to be loaded
