@@ -43,10 +43,26 @@ function FactionItem(props) {
     );
   }
 
-  // If, for either reason, we can't convert, display a dummied-out item
-  const failureReasons = [];
+  // If, for either reason, we can't convert, display a dummied-out item with an explanation in
+  // the tooltip
+  const message = createFailureMessage({
+    hasEnoughFavours,
+    hasAttributeLevel,
+    faction,
+    factionFavours,
+    renown,
+  });
+
+  return <DummiedItem
+    inventoryMatch={inventoryMatch}
+    quantity={factionFavours}
+    message={message}
+  />;
+}
+
+function createFailureMessage({ hasEnoughFavours, hasAttributeLevel, faction, factionFavours, renown }) {
   if (!hasEnoughFavours) {
-    const insufficientFavoursMessage = `${favoursRequired(renown[faction])} Favours (you have ${factionFavours === undefined ? 0 : factionFavours})`
+    const insufficientFavoursMessage = `${favoursRequired(renown[faction])} Favours (you have ${factionFavours === undefined ? 0 : factionFavours})`;
     failureReasons.push(insufficientFavoursMessage);
   }
 
@@ -59,11 +75,7 @@ function FactionItem(props) {
 
   const message = `You need ${failureReasons.join(' and ')}.`;
 
-  return <DummiedItem
-    inventoryMatch={inventoryMatch}
-    quantity={factionFavours}
-    message={message}
-  />;
+  return message;
 }
 
 function mapStateToProps(state) {
