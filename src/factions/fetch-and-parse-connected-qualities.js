@@ -33,7 +33,9 @@ function parseConnectedQualities(response) {
       if (match) {
         return {...acc, [factions[faction]]: Number(match[1])};
       }
-      return acc;
+      // If we don't find a number, then there's no Renown quality, so
+      // renown = 0
+      return { ...acc, [factions[faction]]: 0 };
     }, {});
   }
 }
