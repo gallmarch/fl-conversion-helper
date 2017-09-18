@@ -35,7 +35,6 @@ function preferencesReducer(state = DEFAULT_PREFERENCES, { type, payload }) {
     default:
       return state;
   }
-  return state;
 
   function handleCategoryExpansion({ category, expanded }) {
     return {
@@ -50,5 +49,5 @@ function preferencesReducer(state = DEFAULT_PREFERENCES, { type, payload }) {
 
 export default preferencesReducer;
 export {
-    DEFAULT_PREFERENCES,
+  DEFAULT_PREFERENCES,
 };

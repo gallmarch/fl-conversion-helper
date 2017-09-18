@@ -23,4 +23,4 @@ export default {
     key: 'fidgetingWriter',
     title: 'Fidgeting Writer',
   },
-}
+};

@@ -31,7 +31,7 @@ function parseConnectedQualities(response) {
       // Search for a number
       const match = /[^0-9]*([0-9]+)/.exec(text);
       if (match) {
-        return {...acc, [factions[faction]]: Number(match[1])};
+        return { ...acc, [factions[faction]]: Number(match[1]) };
       }
       // If we don't find a number, then there's no Renown quality, so
       // renown = 0
@@ -42,5 +42,5 @@ function parseConnectedQualities(response) {
 
 export default function fetchAndParseConnectedQualities() {
   return fetchConnectedQualities()
-  .then(parseConnectedQualities);
+    .then(parseConnectedQualities);
 }

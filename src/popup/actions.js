@@ -18,7 +18,7 @@ function setCategoryVisibility({ category, visible }) {
         },
       });
     });
-  }
+  };
 }
 
 export {

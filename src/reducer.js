@@ -6,12 +6,12 @@ import { FAVOURS_AND_RENOWN } from './factions/actions';
 const INITIAL_FACTION_STATE = { favours: {}, renown: {} };
 
 
-function mainReducer(state = {}, action) {
+function mainReducer(state = {}) {
   return state;
 }
 
 function attributesReducer(state = {}, action) {
-  switch(action.type) {
+  switch (action.type) {
     case 'ATTRIBUTES':
       return { ...state, ...action.payload };
     default:
@@ -19,11 +19,12 @@ function attributesReducer(state = {}, action) {
   }
 }
 
-function factionReducer(state = INITIAL_FACTION_STATE, action ) {
-  switch (action.type) {
-    case FAVOURS_AND_RENOWN:
-      const { favours, renown } = action.payload;
-      return {...state, favours, renown };
+function factionReducer(state = INITIAL_FACTION_STATE, { type, payload }) {
+  switch (type) {
+    case FAVOURS_AND_RENOWN: {
+      const { favours, renown } = payload;
+      return { ...state, favours, renown };
+    }
     default:
       return state;
   }

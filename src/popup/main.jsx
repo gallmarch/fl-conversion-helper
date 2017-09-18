@@ -21,11 +21,12 @@ loadPreferences();
 
 // Render the popup window
 const container = document.querySelector('#react-container');
-ReactDOM.render((
-  <Provider store={store}>
+ReactDOM.render(
+  (<Provider store={store}>
     <Popup />
-  </Provider>
-  ), container);
+  </Provider>),
+  container,
+);
 
 function listenForStorageChanges() {
   chrome.storage.onChanged.addListener(({ preferences: { newValue } }) => {

@@ -1,4 +1,3 @@
-import * as factions from './index';
 import attributes from './attributes';
 
 function favoursRequired(renown) {

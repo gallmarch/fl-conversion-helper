@@ -1,4 +1,3 @@
-import * as factions from '../factions';
 // These items have special conversion amounts
 const ABOMINABLE_SALT = '476';
 const AEOLIAN_SCREAM = '773';
@@ -164,7 +163,6 @@ const fidgetingWriter = [
 
 /* Look up the amount of an item necessary to mass-convert it */
 function conversionCost(id) {
-
   // Faction items can be used if we have at least one of them
   if (factionItems.includes(id)) {
     return 1;

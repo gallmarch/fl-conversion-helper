@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import { WATCHFUL, SHADOWY, PERSUASIVE, DANGEROUS } from './index';
 
 function attributeName(attr) {

@@ -5,12 +5,12 @@ const FAVOURS_AND_RENOWN = 'FAVOURS_AND_RENOWN';
 function fetchConnectedQualities() {
   return (dispatch) => {
     fetchAndParseConnectedQualities()
-    .then(({ favours, renown }) => {
-      dispatch({
-        type: FAVOURS_AND_RENOWN,
-        payload: { favours, renown },
+      .then(({ favours, renown }) => {
+        dispatch({
+          type: FAVOURS_AND_RENOWN,
+          payload: { favours, renown },
+        });
       });
-    });
   };
 }
 

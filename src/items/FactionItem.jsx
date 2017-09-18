@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { items } from '../factions';
 import { attributeRequired, favoursRequired } from '../factions/requirements';
@@ -7,12 +8,17 @@ import BlankItem from './BlankItem';
 import UsableItem from './UsableItem';
 import DummiedItem from './DummiedItem';
 import { attributeName } from '../attributes/names';
-import factionAttributes from '../factions/attributes';
 
 function meetsAttributeRequirement({ attributes, faction, renown }) {
   const { attribute, level } = attributeRequired(faction, renown[faction]);
   return attributes[attribute] >= level;
 }
+
+FactionItem.propTypes = {
+  attributes: PropTypes.objectOf(PropTypes.number).isRequired,
+  factions: PropTypes.objectOf(PropTypes.object).isRequired,
+  id: PropTypes.string.isRequired,
+};
 
 function FactionItem(props) {
   const { attributes, factions: { favours, renown }, id } = props;
@@ -38,14 +44,14 @@ function FactionItem(props) {
       <UsableItem
         inventoryMatch={inventoryMatch}
         quantity={factionFavours}
-      >
-      </UsableItem>
+      />
     );
   }
 
   // If, for either reason, we can't convert, display a dummied-out item with an explanation in
   // the tooltip
   const message = createFailureMessage({
+    attributes,
     hasEnoughFavours,
     hasAttributeLevel,
     faction,
@@ -53,21 +59,32 @@ function FactionItem(props) {
     renown,
   });
 
-  return <DummiedItem
+  return (<DummiedItem
     inventoryMatch={inventoryMatch}
     quantity={factionFavours}
     message={message}
-  />;
+  />);
 }
 
-function createFailureMessage({ hasEnoughFavours, hasAttributeLevel, faction, factionFavours, renown }) {
+function createFailureMessage({
+  attributes,
+  hasEnoughFavours,
+  hasAttributeLevel,
+  faction,
+  factionFavours,
+  renown,
+}) {
+  const failureReasons = [];
   if (!hasEnoughFavours) {
     const insufficientFavoursMessage = `${favoursRequired(renown[faction])} Favours (you have ${factionFavours === undefined ? 0 : factionFavours})`;
     failureReasons.push(insufficientFavoursMessage);
   }
 
   if (!hasAttributeLevel) {
-    const { attribute: relevantAttribute, level: necessaryLevel } = attributeRequired(faction, renown[faction]);
+    const {
+      attribute: relevantAttribute,
+      level: necessaryLevel,
+    } = attributeRequired(faction, renown[faction]);
     const actualAttributeLevel = attributes[relevantAttribute];
     const insufficientAttributeMessage = `${attributeName(relevantAttribute)} ${necessaryLevel} (you have ${actualAttributeLevel})`;
     failureReasons.push(insufficientAttributeMessage);

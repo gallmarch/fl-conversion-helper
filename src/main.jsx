@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import $ from 'jquery';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -6,6 +7,7 @@ import { createStore, applyMiddleware } from 'redux';
 import reduxThunk from 'redux-thunk';
 import MutationSummary from 'mutation-summary';
 
+// eslint-disable-next-line no-unused-vars
 import styles from './styles.scss';
 import reducer from './reducer';
 import Extension from './Extension';
@@ -43,24 +45,24 @@ function loadPreferences() {
 function watchForAttributeChanges() {
   const rootNode = document.querySelector('div#lhs_col');
   const queries = [{ element: 'ul.you_icon' }];
-  new MutationSummary({
+  return new MutationSummary({
     rootNode,
     queries,
     callback,
   });
 
-  function callback(summaries) {
-    const summary = summaries[0];
+  function callback() {
     // Retrieve modified stats from the LHS col attribute's tooltip
     const attributes = [WATCHFUL, SHADOWY, DANGEROUS, PERSUASIVE].reduce((acc, attributeID) => {
       const tooltipText = document.querySelector(`div#infoBarQImage${attributeID}`)
-      .nextSibling
-      .firstChild
-      .innerText;
+        .nextSibling
+        .firstChild
+        .innerText;
       const match = /[0-9]+/.exec(tooltipText);
       if (match) {
         return { ...acc, [attributeID]: Number(match[0]) };
       }
+      return acc;
     }, {});
     store.dispatch({ type: 'ATTRIBUTES', payload: attributes });
   }
@@ -70,7 +72,7 @@ function watchForInventorySectionAddition() {
   const rootNode = document.querySelector('div.tab_content');
   const queries = [{ element: 'div.you_bottom_rhs' }];
 
-  new MutationSummary({
+  return new MutationSummary({
     rootNode,
     queries,
     callback,
@@ -81,7 +83,6 @@ function watchForInventorySectionAddition() {
     // Only proceed if the element has been added: this is our cue that
     // we're entering the tab
     if (summary.added.length) {
-
       // Create a container element
       const container = createContainerElement();
 
@@ -90,7 +91,7 @@ function watchForInventorySectionAddition() {
         <Provider store={store}>
           <Extension />
         </Provider>,
-        container
+        container,
       );
     }
   }

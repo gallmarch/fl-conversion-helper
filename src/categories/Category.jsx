@@ -1,11 +1,22 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import CategoryToggle from './CategoryToggle';
 import { setCategoryExpansion } from '../preferences/actions';
 
+Category.propTypes = {
+  preferences: PropTypes.shape({
+    expansions: PropTypes.object.isRequired,
+  }).isRequired,
+  category: PropTypes.string.isRequired,
+  categoryName: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+};
+
 function Category(props) {
   const { preferences: { expansions }, category } = props;
   const expanded = expansions[category];
+  /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
   return (
     <div>
       <h3 onClick={() => toggleState(props)} className="flch-category-header">
@@ -20,13 +31,13 @@ function Category(props) {
       )}
     </div>
   );
-
+  /* eslint-enable jsx-a11y/no-noninteractive-element-interactions */
 }
 
 function toggleState(props) {
-  const { category, preferences: { expansions }, setCategoryExpansion } = props;
+  const { category, preferences: { expansions } } = props;
   const expanded = expansions[category];
-  setCategoryExpansion({ category, expanded: !expanded });
+  props.setCategoryExpansion({ category, expanded: !expanded });
 }
 
 
