@@ -12,6 +12,7 @@
     "babel-preset-stage-0": "^6.22.0",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.27.3",
+    "eslint": "^4.7.0",
     "extract-text-webpack-plugin": "^2.1.0",
     "jquery": "3.1.1",
     "mutation-summary": "^0.1.1",
@@ -31,6 +32,13 @@
     "cleanup": "rimraf dist/ && rimraf build/",
     "build": "yarn cleanup && webpack",
     "dist": "rimraf dist/ && webpack",
+    "lint": "eslint 'src/**/*.@(js|jsx)'",
     "start": "yarn cleanup && webpack --progress --watch"
+  },
+  "devDependencies": {
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.3.0"
   }
 }
