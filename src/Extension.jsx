@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Category from './categories/Category';
 import Item from './items/Item';
 import FactionItem from './items/FactionItem';
-import { tier1, tier2, tier3, tier4, factionItems } from './items';
+import { tier1, tier2, tier3, tier4, factionItems, fidgetingWriter } from './items';
 import { fetchConnectedQualities } from './factions/actions';
 
 class Extension extends Component {
@@ -49,6 +49,12 @@ class Extension extends Component {
         {visibilities.faction && (
           <Category category="factionItems" categoryName="Faction items">
             {factionItems.map((id) => <FactionItem key={id} id={id} />)}
+          </Category>
+        )}
+
+        {visibilities.fidgetingWriter && (
+          <Category category="fidgetingWriter" categoryName="Fidgeting Writer">
+            {fidgetingWriter.map((id) => <Item key={id} id={id} alwaysConvertible />)}
           </Category>
         )}
       </div>
