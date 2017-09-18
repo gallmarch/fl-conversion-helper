@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import CategoryOption from './CategoryOption';
 import categories from './categories';
@@ -22,9 +23,14 @@ function Popup(props) {
   );
 }
 
+Popup.propTypes = {
+  preferences: PropTypes.shape({
+    expansions: PropTypes.object,
+    visibilities: PropTypes.object,
+  }).isRequired,
+};
+
 function mapStateToProps(state) {
-  console.info('mapping state to props');
-  console.info(state);
   return { ...state.preferences };
 }
 
