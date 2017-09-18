@@ -11,6 +11,7 @@ const DEFAULT_PREFERENCES = {
     tier3: false,
     tier4: false,
     faction: false,
+    fidgetingWriter: false,
   },
   visibilities: {
     tier1: true,
@@ -18,6 +19,7 @@ const DEFAULT_PREFERENCES = {
     tier3: true,
     tier4: true,
     faction: true,
+    fidgetingWriter: false,
   },
 };
 

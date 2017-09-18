@@ -12,6 +12,7 @@ function setCategoryExpansion({ category, expanded }) {
         preferences: {
           ...preferences,
           expansions: { ...preferences.expansions, [category]: expanded },
+          visibilities: { ...preferences.visibilities, [category]: expanded },
         },
       });
     });
