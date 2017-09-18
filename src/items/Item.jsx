@@ -11,11 +11,12 @@ function getInventoryMatch(id) {
 
 export { getInventoryMatch, cloneImage, cloneTooltip, renderCustomTooltip };
 
-export default function Item({ id, message, ...rest }) {
+export default function Item({ id, message, alwaysConvertible, ...rest }) {
   const inventoryMatch = document.querySelector(`div#infoBarQImage${id}`);
   if (inventoryMatch) {
     const quantity = Number(inventoryMatch.parentNode.querySelector('div.qq').innerText);
-    const canConvert = quantity >= conversionCost(id);
+    // Some item categories are never disabled
+    const canConvert = alwaysConvertible || quantity >= conversionCost(id);
     if (canConvert) {
       return (
         <UsableItem {...rest} inventoryMatch={inventoryMatch} quantity={quantity}>
