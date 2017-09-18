@@ -6,5 +6,9 @@ export default function BlankItem(props) {
 }
 
 BlankItem.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
+};
+
+BlankItem.defaultProps = {
+  id: undefined,
 };
