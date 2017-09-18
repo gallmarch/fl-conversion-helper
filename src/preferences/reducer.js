@@ -5,19 +5,19 @@ const PREFERENCES_CHANGED = 'PREFERENCES_CHANGED';
 // Use these as the default expansion/visibility states if we don't
 // have meaningful data
 const DEFAULT_PREFERENCES = {
-  expanded: {
+  expansions: {
     tier1: false,
     tier2: false,
     tier3: false,
     tier4: false,
-    factionItems: false,
+    faction: false,
   },
-  visible: {
+  visibilities: {
     tier1: true,
     tier2: true,
     tier3: true,
     tier4: true,
-    factionItems: true,
+    faction: true,
   },
 };
 
@@ -47,3 +47,6 @@ function preferencesReducer(state = DEFAULT_PREFERENCES, { type, payload }) {
 }
 
 export default preferencesReducer;
+export {
+    DEFAULT_PREFERENCES,
+};

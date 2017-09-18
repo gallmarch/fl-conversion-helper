@@ -13,7 +13,12 @@ class Extension extends Component {
   }
 
   render() {
+    console.info('getting all proppy');
+    console.info(this.props);
     const { preferences: { visibilities } } = this.props;
+    if (!visibilities) {
+      return <div>Loading...</div>;
+    }
 
     return (
       <div>

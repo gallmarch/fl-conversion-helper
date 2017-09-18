@@ -7,6 +7,8 @@ import reduxThunk from 'redux-thunk';
 import reducer from './reducer';
 import Popup from './Popup';
 
+import { DEFAULT_PREFERENCES } from '../preferences';
+
 // Get a reference to whatever local storage is available
 const storage = chrome.storage.sync || chrome.storage.local;
 

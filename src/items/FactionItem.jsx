@@ -44,15 +44,20 @@ function FactionItem(props) {
   }
 
   // If, for either reason, we can't convert, display a dummied-out item
+  const failureReasons = [];
+  if (!hasEnoughFavours) {
+    const insufficientFavoursMessage = `${favoursRequired(renown[faction])} Favours (you have ${factionFavours === undefined ? 0 : factionFavours})`
+    failureReasons.push(insufficientFavoursMessage);
+  }
 
-  console.info(`faction: ${faction}`);
-  console.info(attributeRequired(faction, renown[faction]));
-  const { attribute: relevantAttribute, level: necessaryLevel } = attributeRequired(faction, renown[faction]);
-  const actualAttributeLevel = attributes[relevantAttribute];
-  // Construct a string
-  const insufficientFavoursMessage = `${favoursRequired(renown[faction])} Favours (you have ${factionFavours === undefined ? 0 : factionFavours})`
-  const insufficientAttributeMessage = `${attributeName(relevantAttribute)} ${necessaryLevel} (you have ${actualAttributeLevel})`;
-  const message = `You need ${[insufficientFavoursMessage, insufficientAttributeMessage].join(' and ')}.`;
+  if (!hasAttributeLevel) {
+    const { attribute: relevantAttribute, level: necessaryLevel } = attributeRequired(faction, renown[faction]);
+    const actualAttributeLevel = attributes[relevantAttribute];
+    const insufficientAttributeMessage = `${attributeName(relevantAttribute)} ${necessaryLevel} (you have ${actualAttributeLevel})`;
+    failureReasons.push(insufficientAttributeMessage);
+  }
+
+  const message = `You need ${failureReasons.join(' and ')}.`;
 
   return <DummiedItem
     inventoryMatch={inventoryMatch}
