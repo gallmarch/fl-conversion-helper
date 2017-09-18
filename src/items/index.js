@@ -14,12 +14,14 @@ const CORRESPONDENCE_PLAQUE = '932';
 const COMPROMISING_DOCUMENT = '830';
 export const COPPER_CIPHER_RING = '758';
 const CRYPTIC_CLUE = '389';
+const DEAL_WITH_A_DEVIL = '984';
 export const DIARY_OF_THE_DEAD = '762';
 export const ENDOWMENT_OF_A_UNIVERSITY_FELLOWSHIP = '759';
 export const ENGRAVED_PEWTER_TANKARD = '757';
 export const ENTRY_IN_SLOWCAKES_EXCEPTIONALS = '752';
 const EXTRAORDINARY_IMPLICATION = '809';
 const FOXFIRE_CANDLE = '374';
+const GLIMPSE_OF_SOMETHING_LARGER = '983';
 const GREYFIELDS_1882 = '383';
 const INCENDIARY_GOSSIP = '659';
 const INKLING_OF_IDENTITY = '656';
@@ -27,6 +29,8 @@ const INTRIGUING_SNIPPET = '588';
 const JADE_FRAGMENT = '377';
 const JOURNAL_OF_INFAMY = '525';
 const LAMPLIGHTER_BEESWAX = '384';
+const LAST_HOPE_OF_A_FIDGETING_WRITER = '986';
+const LENS_OF_BLACK_GLASS = '987'; // TODO: verify this ID
 const MANIACS_PRAYER = '935';
 const MAP_SCRAP = '920';
 const MEMORY_OF_DISTANT_SHORES = '825';
@@ -49,6 +53,8 @@ export const RED_FEATHERED_PIN = '761';
 const RELIC_OF_THE_THIRD_CITY = '424';
 const ROMANTIC_NOTION = '531';
 export const ROOKERY_PASSWORD = '751';
+const ROOM_NUMBER_AT_THE_ROYAL_BETH = '985';
+const SENSE_OF_DEJA_VU = '982';
 const SHARD_OF_GLIM = '378';
 const SILK_SCRAP = '381';
 const SOUL = '386';
@@ -145,6 +151,17 @@ const factionItems = [
   // O_BOYLES_PRACTICAL_PRIMER, // Widow
 ];
 
+// Fidgeting Writer
+const fidgetingWriter = [
+  TALE_OF_TERROR,
+  SENSE_OF_DEJA_VU,
+  GLIMPSE_OF_SOMETHING_LARGER,
+  DEAL_WITH_A_DEVIL,
+  ROOM_NUMBER_AT_THE_ROYAL_BETH,
+  LAST_HOPE_OF_A_FIDGETING_WRITER,
+  LENS_OF_BLACK_GLASS,
+];
+
 /* Look up the amount of an item necessary to mass-convert it */
 function conversionCost(id) {
 
@@ -215,4 +232,5 @@ export {
   tier2,
   tier3,
   tier4,
+  fidgetingWriter,
 };
