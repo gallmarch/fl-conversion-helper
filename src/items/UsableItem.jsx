@@ -6,10 +6,10 @@ import { cloneImage, cloneTooltip } from './Item';
 import { validateDOMElement } from '../util';
 
 export default function UsableItem(props) {
-  const { inventoryMatch, quantity } = props;
+  const { inventoryMatch, isDisabled, quantity } = props;
   return (
     <li>
-      <a className="tooltip usableitem" onClick={() => inventoryMatch.parentNode.click()}>
+      <a className={"tooltip usableitem" + (isDisabled ? ' disabled' : '')} onClick={() => inventoryMatch.parentNode.click()}>
         <div className="qq">{quantity}</div>
         <div>
           {cloneImage(inventoryMatch.querySelector('img'))}

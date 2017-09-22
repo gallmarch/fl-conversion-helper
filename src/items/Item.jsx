@@ -18,8 +18,11 @@ export default function Item({ id, message, alwaysConvertible, ...rest }) {
     // Some item categories are never disabled
     const canConvert = alwaysConvertible || quantity >= conversionCost(id);
     if (canConvert) {
+      // In areas where we can't use items (e.g., Menace areas), we might as well
+      // add the standard red border to indicate this
+      const isDisabled = inventoryMatch.parentElement.classList.contains('disabled');
       return (
-        <UsableItem {...rest} inventoryMatch={inventoryMatch} quantity={quantity} />
+        <UsableItem {...rest} inventoryMatch={inventoryMatch} quantity={quantity} isDisabled={isDisabled} />
       );
     }
     return (
