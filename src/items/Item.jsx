@@ -22,7 +22,12 @@ export default function Item({ id, message, alwaysConvertible, ...rest }) {
       // add the standard red border to indicate this
       const isDisabled = inventoryMatch.parentElement.classList.contains('disabled');
       return (
-        <UsableItem {...rest} inventoryMatch={inventoryMatch} quantity={quantity} isDisabled={isDisabled} />
+        <UsableItem
+          {...rest}
+          inventoryMatch={inventoryMatch}
+          quantity={quantity}
+          isDisabled={isDisabled}
+        />
       );
     }
     return (
