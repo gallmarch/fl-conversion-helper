@@ -2,6 +2,7 @@
 // Fallen London uses <a href="#"> for its clickable items too
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import { cloneImage, cloneTooltip } from './Item';
 import { validateDOMElement } from '../util';
 
@@ -9,7 +10,10 @@ export default function UsableItem(props) {
   const { inventoryMatch, isDisabled, quantity } = props;
   return (
     <li>
-      <a className={"tooltip usableitem" + (isDisabled ? ' disabled' : '')} onClick={() => inventoryMatch.parentNode.click()}>
+      <a
+        className={classNames('tooltip', 'usableitem', { disabled: 'isDisabled' })}
+        onClick={() => inventoryMatch.parentNode.click()}
+      >
         <div className="qq">{quantity}</div>
         <div>
           {cloneImage(inventoryMatch.querySelector('img'))}
