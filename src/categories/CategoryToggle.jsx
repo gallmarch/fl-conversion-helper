@@ -9,5 +9,9 @@ export default function CategoryToggle(props) {
 }
 
 CategoryToggle.propTypes = {
-  state: PropTypes.bool.isRequired,
+  state: PropTypes.bool,
+};
+
+CategoryToggle.defaultProps = {
+  state: false,
 };
