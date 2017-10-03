@@ -12,7 +12,9 @@ import styles from './styles.scss';
 import reducer from './reducer';
 import Extension from './Extension';
 
+// Import constants
 import { WATCHFUL, SHADOWY, DANGEROUS, PERSUASIVE } from './attributes';
+import { PREFERENCES_CHANGED } from './preferences';
 
 const storage = chrome.storage.sync || chrome.storage.local;
 
@@ -29,16 +31,18 @@ loadPreferences();
 listenForStorageChanges();
 
 function listenForStorageChanges() {
+  // Listen for changes to local storage and dispatch an action
+  // to update the UI
   chrome.storage.onChanged.addListener(({ preferences }) => {
     const { newValue } = preferences;
-    store.dispatch({ type: 'PREFERENCES_CHANGED', payload: newValue });
+    store.dispatch({ type: PREFERENCES_CHANGED, payload: newValue });
   });
 }
 
 function loadPreferences() {
-  // TODO
+  // Retrieve preferences and dispatch an action
   storage.get(null, ({ preferences }) => {
-    store.dispatch({ type: 'PREFERENCES_CHANGED', payload: preferences });
+    store.dispatch({ type: PREFERENCES_CHANGED, payload: preferences });
   });
 }
 
