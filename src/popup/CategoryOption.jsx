@@ -22,7 +22,7 @@ class CategoryOption extends Component {
         <input
           type="checkbox"
           name={key}
-          checked={preferences.visibilities[key]}
+          checked={!!preferences.visibilities[key]}
           onChange={this.handleCheckboxChange}
         />
         {title}
