@@ -10,6 +10,7 @@ function Popup(props) {
 
   // Wait for preferences to be loaded
   if (!preferences) {
+    console.info('oops no preferences prop yet');
     return null;
   }
 
@@ -27,7 +28,13 @@ Popup.propTypes = {
   preferences: PropTypes.shape({
     expansions: PropTypes.object,
     visibilities: PropTypes.object,
-  }).isRequired,
+  }),
+};
+Popup.defaultProps = {
+  preferences: {
+    expansions: {},
+    visibilities: {},
+  },
 };
 
 function mapStateToProps(state) {
