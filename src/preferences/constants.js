@@ -18,3 +18,5 @@ export const DEFAULT_PREFERENCES = {
     fidgetingWriter: false,
   },
 };
+
+export const PREFERENCES_CHANGED = 'PREFERENCES_CHANGED';
