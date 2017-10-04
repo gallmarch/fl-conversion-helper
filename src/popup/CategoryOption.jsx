@@ -21,6 +21,7 @@ class CategoryOption extends Component {
       <label className="flch-popup__option" htmlFor={key}>
         <input
           type="checkbox"
+          id={key}
           name={key}
           checked={!!preferences.visibilities[key]}
           onChange={this.handleCheckboxChange}
