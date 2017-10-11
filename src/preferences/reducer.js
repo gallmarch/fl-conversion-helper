@@ -1,7 +1,6 @@
 import { CATEGORY_EXPANSION_CHANGED } from './actions';
-import { DEFAULT_PREFERENCES } from './constants';
+import { DEFAULT_PREFERENCES, PREFERENCES_CHANGED } from './constants';
 
-const PREFERENCES_CHANGED = 'PREFERENCES_CHANGED';
 
 
 function preferencesReducer(state = DEFAULT_PREFERENCES, { type, payload }) {
