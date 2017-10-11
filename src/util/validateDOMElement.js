@@ -1,6 +1,8 @@
 /* eslint-disable consistent-return */
 
 function createValidateDOMElement(isRequired = false) {
+  // Given a set of props, a propname, and a component that's receiving
+  // the props, verify that the prop is a DOM Element, or throw an Error.
   return function validateDOMElement(props, propName, componentName) {
     const prop = props[propName];
     if (prop instanceof Element === false) {

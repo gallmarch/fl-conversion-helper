@@ -3,8 +3,10 @@ import preferencesReducer from './preferences/reducer';
 
 import { FAVOURS_AND_RENOWN } from './factions/actions';
 
+// The default for faction quality information maintains the
+// expected structure, so we shouldn't get any attempts to
+// access properties of an undefined object.
 const INITIAL_FACTION_STATE = { favours: {}, renown: {} };
-
 
 function mainReducer(state = {}) {
   return state;
@@ -19,6 +21,8 @@ function attributesReducer(state = {}, action) {
   }
 }
 
+// When we receive values for Favours and Renown qualities, pack
+// them into state
 function factionReducer(state = INITIAL_FACTION_STATE, { type, payload }) {
   switch (type) {
     case FAVOURS_AND_RENOWN: {

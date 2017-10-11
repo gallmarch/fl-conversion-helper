@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { CATEGORY_VISIBILITY_CHANGED } from './actions';
 
+// Pack new preferences (including newly-loaded prefs) into state
 function preferencesReducer(state = {}, action) {
   switch (action.type) {
     case 'PREFERENCES_CHANGE':

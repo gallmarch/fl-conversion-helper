@@ -7,6 +7,9 @@ import classNames from 'classnames';
 import { cloneImage, cloneTooltip } from './Item';
 import { validateDOMElement } from '../util';
 
+// To create a usable item, we couple the React-controlled element in
+// our category list with the original element. Rather than write our own
+// onclick handler, we can simply script a click on the linked element.
 export default function UsableItem(props) {
   const { inventoryMatch, isDisabled, quantity } = props;
   return (

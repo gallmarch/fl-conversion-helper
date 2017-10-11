@@ -1,3 +1,4 @@
+// The faction item IDs are kept with the other item IDs
 import {
   OLD_BONE_SKELETON_KEY,
   ENGRAVED_PEWTER_TANKARD,
@@ -27,6 +28,7 @@ export const SOCIETY = 'Society';
 export const TOMB_COLONIES = 'Tomb-Colonies';
 export const URCHINS = 'Urchins';
 
+// Map each item's ID to its corresponding faction
 export const items = {
   [OLD_BONE_SKELETON_KEY]: CRIMINALS,
   [ENGRAVED_PEWTER_TANKARD]: DOCKS,

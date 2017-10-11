@@ -1,5 +1,8 @@
 const CATEGORY_VISIBILITY_CHANGED = 'CATEGORY_VISIBILITY_CHANGED';
 
+// When we make a change in the popup, update the storage accordingly.
+// The content script is listening for storage changes, so it'll pick
+// up on this and change how it renders the categories accordingly.
 function setCategoryVisibility({ category, visible }) {
   return (dispatch) => {
     // Dispatch an action (to update UI)

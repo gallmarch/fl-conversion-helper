@@ -13,6 +13,10 @@ Category.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
+// A Category is the container for a list of items. The component
+// is only added if the user's preferences ask for it to be visible,
+// so we don't need to check that here. What we *do* do here is decide
+// whether to show it as expanded or contracted.
 function Category(props) {
   const { preferences: { expansions }, category } = props;
   const expanded = expansions[category];
@@ -34,6 +38,7 @@ function Category(props) {
   /* eslint-enable jsx-a11y/no-noninteractive-element-interactions */
 }
 
+// Toggle between 'expanded' and 'contracted' states
 function toggleState(props) {
   const { category, preferences: { expansions } } = props;
   const expanded = expansions[category];

@@ -1,6 +1,8 @@
 import * as factions from './index';
 import { WATCHFUL, SHADOWY, DANGEROUS, PERSUASIVE } from '../attributes';
 
+// This maps each faction's ID to the attribute whose level determines
+// we can raise Renown
 export default {
   [factions.BOHEMIANS]: PERSUASIVE,
   [factions.CHURCH]: WATCHFUL,

@@ -1,6 +1,7 @@
 import * as factions from './index';
-// Quality IDs for faction Favours
 
+// Quality IDs for faction Favours; we use these when parsing the HTML
+// returned from the call to get 'Contacts'
 export default {
   [factions.BOHEMIANS]: '133829',
   [factions.CHURCH]: '133827',

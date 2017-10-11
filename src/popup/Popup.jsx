@@ -4,13 +4,17 @@ import { connect } from 'react-redux';
 import CategoryOption from './CategoryOption';
 import categories from './categories';
 
+// The Popup component displays the current state of our display
+// preferences and updates the preference storage when we make
+// changes. The content script is listening for storage changes, so
+// we don't need to construct any sort of link between popup and
+// content script.
 function Popup(props) {
   const categoryKeys = ['tier1', 'tier2', 'tier3', 'tier4', 'faction', 'fidgetingWriter'];
   const { preferences } = props;
 
   // Wait for preferences to be loaded
   if (!preferences) {
-    console.info('oops no preferences prop yet');
     return null;
   }
 

@@ -1,4 +1,5 @@
 import { DEFAULT_PREFERENCES } from './constants';
+
 const CATEGORY_EXPANSION_CHANGED = 'CATEGORY_EXPANSION_CHANGED';
 
 function setCategoryExpansion({ category, expanded }) {

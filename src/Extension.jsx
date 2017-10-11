@@ -9,7 +9,10 @@ import { fetchConnectedQualities } from './factions/actions';
 
 class Extension extends Component {
   componentDidMount() {
-    // Only fetch the Renown/Favours qualities when the component mounts
+    // Only fetch the Renown/Favours qualities when the component mounts;
+    // the Extension mounts when the 'Myself' tab loads, and it's not
+    // possible to change Renown/Favours directly from this tab, so
+    // the qualities are static throughout the component's lifetime.
     this.props.fetchConnectedQualities();
   }
 
@@ -19,6 +22,9 @@ class Extension extends Component {
       return <div>Loading...</div>;
     }
 
+    // Show each category if the user's preference is that we do so.
+    // In theory we could shoehorn this into a single map, but it's
+    // probably better to be explicit here.
     return (
       <div>
         {visibilities.tier1 && (
