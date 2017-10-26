@@ -42,7 +42,6 @@ function Category(props) {
 function toggleState(props) {
   const { category, preferences: { expansions } } = props;
   const expanded = expansions[category];
-  console.info(`Toggling ${category} expanded to '${!expanded}'`);
   props.setCategoryExpansion({ category, expanded: !expanded });
 }
 
