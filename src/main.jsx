@@ -16,7 +16,7 @@ import Extension from './Extension';
 import { WATCHFUL, SHADOWY, DANGEROUS, PERSUASIVE } from './attributes';
 import { DEFAULT_PREFERENCES, PREFERENCES_CHANGED } from './preferences';
 
-const storage = chrome.storage.sync || chrome.storage.local;
+const storage = chrome.storage.local;
 
 // Create the store
 const store = applyMiddleware(reduxThunk)(createStore)(reducer);
