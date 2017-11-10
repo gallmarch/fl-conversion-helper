@@ -17,7 +17,7 @@ import { DEFAULT_PREFERENCES } from '../preferences';
  */
 
 // Get a reference to whatever local storage is available
-const storage = chrome.storage.sync || chrome.storage.local;
+const storage = chrome.storage.local;
 
 // Create the Redux store
 const store = applyMiddleware(reduxThunk)(createStore)(reducer);

@@ -8,7 +8,7 @@ function setCategoryExpansion({ category, expanded }) {
     dispatch({ type: CATEGORY_EXPANSION_CHANGED, payload: { category, expanded } });
 
     // Update storage
-    const storage = chrome.storage.sync || chrome.storage.local;
+    const storage = chrome.storage.local;
     storage.get(null, (stuff) => {
       const { preferences } = stuff;
       if (preferences === null || preferences === undefined) {

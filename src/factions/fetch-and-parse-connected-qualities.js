@@ -10,7 +10,7 @@ function fetchConnectedQualities() {
   // sort of seems like overkill to bundle JQuery just to make
   // a call like this (but axios' code contains calls to eval()
   // that cause it to fail Mozilla's validation).
-  const url = '/Me/StatusesForCategory?category=Contacts';
+  const url = '//fallenlondon.storynexus.com/Me/StatusesForCategory?category=Contacts';
   const datatype = 'html';
   return $.ajax({ url, datatype });
 }

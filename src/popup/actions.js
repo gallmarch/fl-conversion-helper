@@ -9,7 +9,7 @@ function setCategoryVisibility({ category, visible }) {
     dispatch({ type: CATEGORY_VISIBILITY_CHANGED, payload: { category, visible } });
 
     // Update storage
-    const storage = chrome.storage.sync || chrome.storage.local;
+    const storage = chrome.storage.local;
     storage.get(null, ({ preferences }) => {
       storage.set({
         preferences: {
