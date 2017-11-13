@@ -1,4 +1,3 @@
-// The faction item IDs are kept with the other item IDs
 import {
   OLD_BONE_SKELETON_KEY,
   ENGRAVED_PEWTER_TANKARD,
@@ -12,7 +11,7 @@ import {
   ORNATE_TYPEWRITER,
   RED_FEATHERED_PIN,
   ENTRY_IN_SLOWCAKES_EXCEPTIONALS,
-} from '../items';
+} from '../items/constants';
 
 // IDs for faction qualities
 export const BOHEMIANS = 'Bohemians';
