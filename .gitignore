@@ -1,5 +1,4 @@
 *.*.sw[op]
 node_modules/
 build/
-dist/*.*
-!dist/*.zip
+dist/
