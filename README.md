@@ -8,7 +8,7 @@ This extension adds some new sections to the top of the Inventory section of the
 
 Each 'Tier X' section contains the convertible items you own in that tier,
 arranged by each item's category's place in the Tier 3 side-conversion chain (starting with Academic, and ending with Rumour). Missing items in each section are indicated by an empty slot.
-By default, an item's icon is disabled (greyed-out) if you don't have enough of it to perform the (slightly-profitable) mass-conversion action. (You can change this in your preferences.)
+By default, an item's icon is disabled (greyed out) if you don't have enough of it to perform the (slightly profitable) mass-conversion action. (You can change this in your preferences.)
 
 ![Screenshot](https://i.imgur.com/TprSfaJ.png)
 
@@ -20,15 +20,14 @@ Missing items in each section are indicated by an empty slot. By default, if you
 
 ![Screenshot](http://imgur.com/MvAgzOT.png)
 
-## Options
+## Preferences
 
 There are a few ways in which you can change the extension's behaviour, available on the extension's popup menu.
 
 ![Screenshot](https://i.imgur.com/lB5Jd9n.png)
 
-You can hide sections completely by editing the options in the popup menu, reached by clicking the extension's icon beside the address bar.
+You can hide sections completely by editing the options in the popup menu.
 
-You can also change when items are enabled or disabled.
-By default, each item in a tier is only enabled if you have enough to perform the (slightly profitable) mass conversion action. You can change this so that each tiered item is enabled if you can perform the smaller conversion action, or so that tiered items are always enabled.
+You can change the behaviour of the 'Tier X' sections so that an item is enabled if you can perform the smaller conversion action, or so that tier items are always enabled.
 
 Similarly, you can change the default behaviour of faction items, so that they're always enabled. This might be useful if you want to change your Quirks.
