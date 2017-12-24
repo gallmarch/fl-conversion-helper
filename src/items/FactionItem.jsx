@@ -42,10 +42,14 @@ function FactionItem(props) {
   const hasEnoughFavours = factionFavours >= favoursRequired(renown[faction]);
   const hasAttributeLevel = meetsAttributeRequirement({ attributes, faction, renown });
 
+  // Faction items are enabled either if
+  // (a) the user wants them always to be enabled, or
+  // (b) the user has enough Favours and a high enough level in the relevant
+  //     attribute.
   const convertible = enablementPreference === FACTIONS.ALWAYS
     || hasEnoughFavours && hasAttributeLevel;
 
-  // If we are in a position to convert, then display an enabled item
+  // If we are enabled, then display an enabled item
   if (convertible) {
     return (
       <UsableItem
@@ -55,7 +59,7 @@ function FactionItem(props) {
     );
   }
 
-  // If, for either reason, we can't convert, display a dummied-out item with an explanation in
+  // If, for some reason, we shouldn't be enabled, display a dummied-out item with an explanation in
   // the tooltip
   const message = createFailureMessage({
     attributes,
