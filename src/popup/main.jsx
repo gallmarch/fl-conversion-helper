@@ -51,6 +51,7 @@ function loadAndStorePreferences() {
     // the stored preferences, if they exist
     const expansions = (preferences && preferences.expansions) || {};
     const visibilities = (preferences && preferences.visibilities) || {};
+    const enablements = (preferences && preferences.enablements) || {};
     const defaults = DEFAULT_PREFERENCES;
 
     // Build a guaranteed-valid object using existing prefs and defaults
@@ -59,6 +60,7 @@ function loadAndStorePreferences() {
       ...preferences,
       expansions: { ...defaults.expansions, ...expansions },
       visibilities: { ...defaults.visibilities, ...visibilities },
+      enablements: { ...defaults.enablements, ...enablements },
     };
 
     // Dispatch an action

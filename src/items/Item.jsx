@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { TIERS } from '../preferences/constants';
 import { conversionCost } from '.';
 import BlankItem from './BlankItem';
 import UsableItem from './UsableItem';
@@ -11,7 +12,7 @@ function getInventoryMatch(id) {
 
 export { getInventoryMatch, cloneImage, cloneTooltip, renderCustomTooltip };
 
-export default function Item({ id, message, alwaysConvertible, ...rest }) {
+export default function Item({ id, message, alwaysConvertible, enablementPreference, ...rest }) {
   // Look for a DOM element in the inventory that has this item ID. This tells
   // us whether we have any of the item at all.
   const inventoryMatch = document.querySelector(`div#infoBarQImage${id}`);
@@ -25,7 +26,12 @@ export default function Item({ id, message, alwaysConvertible, ...rest }) {
     // Writer you probably want to be able to convert any ToT you have --- so
     // we'll check for a prop that overrides checking the usual conversion 
     // requirements.
-    const canConvert = alwaysConvertible || quantity >= conversionCost(id);
+    //
+    // We now also support user-defined preferences for forcing enablement.
+    // To check this, we do a comparison
+    const canConvert = alwaysConvertible
+      || enablementPreference === TIERS.ALWAYS
+      || quantity >= conversionCost(id, (enablementPreference===TIERS.SMALL));
 
     // If we can convert this item, then display it as clickable
     if (canConvert) {

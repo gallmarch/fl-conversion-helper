@@ -36,11 +36,12 @@ UsableItem.propTypes = {
   ]),
   inventoryMatch: validateDOMElement.isRequired,
   isDisabled: PropTypes.bool,
-  quantity: PropTypes.number.isRequired,
+  quantity: PropTypes.number,
 };
 
 UsableItem.defaultProps = {
   children: null,
   isDisabled: false,
+  quantity: 0,
 };
 

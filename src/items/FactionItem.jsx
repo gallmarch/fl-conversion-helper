@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { items } from '../factions';
 import { attributeRequired, favoursRequired } from '../factions/requirements';
+import { FACTIONS } from '../preferences/constants';
 import { getInventoryMatch } from './Item';
 import BlankItem from './BlankItem';
 import UsableItem from './UsableItem';
@@ -21,7 +22,12 @@ FactionItem.propTypes = {
 };
 
 function FactionItem(props) {
-  const { attributes, factions: { favours, renown }, id } = props;
+  const {
+    attributes,
+    enablementPreference,
+    factions: { favours, renown },
+    id
+  } = props;
   // Look for the faction's item in our inventory
   const inventoryMatch = getInventoryMatch(id);
   // If we don't have the item, then return a blank
@@ -36,7 +42,8 @@ function FactionItem(props) {
   const hasEnoughFavours = factionFavours >= favoursRequired(renown[faction]);
   const hasAttributeLevel = meetsAttributeRequirement({ attributes, faction, renown });
 
-  const convertible = hasEnoughFavours && hasAttributeLevel;
+  const convertible = enablementPreference === FACTIONS.ALWAYS
+    || hasEnoughFavours && hasAttributeLevel;
 
   // If we are in a position to convert, then display an enabled item
   if (convertible) {

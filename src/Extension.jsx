@@ -17,7 +17,8 @@ class Extension extends Component {
   }
 
   render() {
-    const { preferences: { visibilities } } = this.props;
+    const { preferences: { enablements, visibilities } } = this.props;
+
     if (!visibilities) {
       return <div>Loading...</div>;
     }
@@ -29,31 +30,31 @@ class Extension extends Component {
       <div>
         {visibilities.tier1 && (
           <Category category="tier1" categoryName="Tier 1">
-            {tier1.map(id => <Item key={id} id={id} />)}
+            {tier1.map(id => <Item key={id} id={id} enablementPreference={enablements.tiers} />)}
           </Category>
         )}
 
         {visibilities.tier2 && (
           <Category category="tier2" categoryName="Tier 2">
-            {tier2.map(id => <Item key={id} id={id} />)}
+            {tier2.map(id => <Item key={id} id={id} enablementPreference={enablements.tiers} />)}
           </Category>
         )}
 
         {visibilities.tier3 && (
           <Category category="tier3" categoryName="Tier 3">
-            {tier3.map(id => <Item key={id} id={id} />)}
+            {tier3.map(id => <Item key={id} id={id} enablementPreference={enablements.tiers} />)}
           </Category>
         )}
 
         {visibilities.tier4 && (
           <Category category="tier4" categoryName="Tier 4">
-            {tier4.map(id => <Item key={id} id={id} />)}
+            {tier4.map(id => <Item key={id} id={id} enablementPreference={enablements.tiers} />)}
           </Category>
         )}
 
         {visibilities.faction && (
           <Category category="factionItems" categoryName="Faction items">
-            {factionItems.map(id => <FactionItem key={id} id={id} />)}
+            {factionItems.map(id => <FactionItem key={id} id={id} enablementPreference={enablements.factions} />)}
           </Category>
         )}
 

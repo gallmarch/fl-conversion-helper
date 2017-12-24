@@ -9,6 +9,7 @@ import {
   SHARD_OF_GLIM,
   SILK_SCRAP,
   STOLEN_CORRESPONDENCE,
+  WHISPERED_HINT,
   factionItems,
   tier1,
   tier2,

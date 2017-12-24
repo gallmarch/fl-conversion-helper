@@ -18,7 +18,10 @@ Category.propTypes = {
 // so we don't need to check that here. What we *do* do here is decide
 // whether to show it as expanded or contracted.
 function Category(props) {
-  const { preferences: { expansions }, category } = props;
+  const {
+    preferences: { expansions },
+    category,
+  } = props;
   const expanded = expansions[category];
   /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
   return (

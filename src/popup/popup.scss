@@ -18,4 +18,12 @@
     font-size: 110%;
     margin-bottom: 0.5em;
   }
+  &__radio-group {
+    display: flex;
+    flex-direction: column;
+  }
+  &__radio-option {
+    display: flex;
+    align-items: center;
+  }
 }
