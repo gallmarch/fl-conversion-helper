@@ -28,6 +28,7 @@ class CategoryOption extends Component {
     return (
       <label className="flch-popup__option" htmlFor={key}>
         <input
+          className="flch-popup__checkbox"
           type="checkbox"
           id={key}
           name={key}

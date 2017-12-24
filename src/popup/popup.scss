@@ -1,9 +1,9 @@
 .flch-popup {
   color: #2d2d2d;
   font-family: sans-serif;
-  font-size: 75%;
+  font-size: 100%;
   margin: 8px;
-  min-width: 200px;
+  min-width: 240px;
 
   &__header {
     border-bottom: solid 1px #1d1d1d;
@@ -15,15 +15,26 @@
   &__option {
     display: flex;
     align-items: center;
-    font-size: 110%;
     margin-bottom: 0.5em;
   }
+
+  &__checkbox,
+  &__radio-button {
+    margin-right: 0.333rem;
+  }
+
+  &__preference-title {
+    margin-bottom: 0.333rem;
+  }
+
   &__radio-group {
     display: flex;
     flex-direction: column;
   }
+
   &__radio-option {
     display: flex;
     align-items: center;
+    margin-bottom: 0.333rem;
   }
 }

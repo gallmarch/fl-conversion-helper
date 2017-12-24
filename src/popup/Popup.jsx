@@ -29,64 +29,69 @@ function Popup(props) {
       {categoryKeys.map(key => (
         <CategoryOption key={key} category={categories[key]} preferences={preferences} />
       ))}
-      <h2 className="flch-popup__header">Options</h2>
+      <h2 className="flch-popup__header">Preferences</h2>
       <div>
-        <p>Enable tier items</p>
+        <p className="flch-popup__preference-title">Enable tier items</p>
         <div className="flch-popup__radio-group">
           <label className="flch-popup__radio-option">
             <input
               checked={preferences.enablements.tiers === TIERS.MASS}
+              className="flch-popup__radio-button"
               name="tiers"
               onChange={handleEnablementPreferenceChange}
               type="radio"
               value={TIERS.MASS}
             />
-            For mass conversions
+            <span>For mass conversions</span>
           </label>
           <label className="flch-popup__radio-option">
             <input
               checked={preferences.enablements.tiers === TIERS.SMALL}
+              className="flch-popup__radio-button"
               name="tiers"
               onChange={handleEnablementPreferenceChange}
               type="radio"
               value={TIERS.SMALL}
             />
-            For small conversions
+            <span>For small conversions</span>
           </label>
           <label className="flch-popup__radio-option">
             <input
               checked={preferences.enablements.tiers === TIERS.ALWAYS}
+              className="flch-popup__radio-button"
               name="tiers"
               onChange={handleEnablementPreferenceChange}
               type="radio"
               value={TIERS.ALWAYS}
             />
-            Always
+            <span>Always</span>
           </label>
         </div>
       </div>
       <div>
-        <p>Enable faction items</p>
+        <p className="flch-popup__preference-title">Enable faction items</p>
         <div className="flch-popup__radio-group">
           <label className="flch-popup__radio-option">
             <input
               checked={preferences.enablements.factions === FACTIONS.RENOWN}
+              className="flch-popup__radio-button"
               name="factions"
               onChange={handleEnablementPreferenceChange}
               type="radio"
               value={FACTIONS.RENOWN}
             />
-            For renown conversions
+            <span>For renown conversions</span>
           </label>
           <label className="flch-popup__radio-option">
             <input
               checked={preferences.enablements.factions === FACTIONS.ALWAYS}
+              className="flch-popup__radio-button"
               name="factions"
               onChange={handleEnablementPreferenceChange}
               type="radio"
               value={FACTIONS.ALWAYS}
             />
-            Always
+            <span>Always</span>
           </label>
         </div>
       </div>
