@@ -2,7 +2,10 @@
 
 An unofficial extension for [Fallen London](http://fallenlondon.storynexus.com/) that makes converting certain kinds of items easier.
 
-[![Chrome Web Store](assets/images/cws.png)](https://chrome.google.com/webstore/detail/fallen-london-conversion/bajlcoahedhgjfpfgahdfaoeohmjbhfb)
+<div class="extension-link-container" markdown="1">
+  [![Chrome Web Store](assets/images/cws.png)](https://chrome.google.com/webstore/detail/fallen-london-conversion/bajlcoahedhgjfpfgahdfaoeohmjbhfb)
+  [![addons.mozilla.org](assets/images/amo.png)](https://addons.mozilla.org/en-US/firefox/addon/fl-conversion-helper/)
+</div>
 
 This extension adds some new sections to the top of the Inventory section of the 'Myself' tab: one each for tiers 1–4, and one for faction-related items. They're collapsed by default, but you can click to expand them. (You can choose which sections to show and hide in your preferences.)
 
