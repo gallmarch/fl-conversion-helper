@@ -8,6 +8,11 @@
   font-family: 'Roboto Slab', 
 }
 
+.extension-link-container p {
+  display: flex;
+  justify-content: space-around;
+}
+
 .image-container img {
   display: block;
   margin-left: auto;
