@@ -5,7 +5,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
 
 .project-name {
-  font-family: 'Roboto Slab', 
+  font-family: 'Roboto Slab', sans-serif;
 }
 
 .extension-link-container p {
@@ -17,6 +17,12 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+.main-content h1 {
+  color: inherit;
+  font-family: 'Roboto Slab', sans-serif;
+  text-align: center;
 }
 
 .main-content p {
