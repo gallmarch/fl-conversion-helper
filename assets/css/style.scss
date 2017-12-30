@@ -4,6 +4,10 @@
 @import "{{ site.theme }}";
 @import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
 
+.project-name {
+  font-family: 'Roboto Slab', 
+}
+
 .image-container img {
   display: block;
   margin-left: auto;
