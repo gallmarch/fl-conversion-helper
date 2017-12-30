@@ -12,17 +12,23 @@ Each 'Tier X' section contains the convertible items you own in that tier,
 arranged by each item's category's place in the Tier 3 side-conversion chain (starting with Academic, and ending with Rumour). Missing items in each section are indicated by an empty slot.
 By default, an item's icon is disabled (greyed out) if you don't have enough of it to perform the (slightly profitable) mass-conversion action. (You can change this in your preferences.)
 
+<div class="image-container" markdown="1">
 ![Screenshot](https://i.imgur.com/TprSfaJ.png)
+</div>
 
 The Faction Items section contains any of the items you own that are connected to the factions in the game that use Favours and Renown. The quantity indicator on the icon shows how many of that faction's Favours you have. By default, if you don't have enough Favours to convert into Renown with that faction, the item is disabled.
 
+<div class="image-container" markdown="1">
 ![Screenshot](https://i.imgur.com/ZKGmRnQ.png)
+</div>
 
 ## Preferences
 
 There are a few ways in which you can change the extension's behaviour, available on the extension's popup menu.
 
+<div class="image-container" markdown="1">
 ![Screenshot](https://i.imgur.com/lB5Jd9n.png)
+</div>
 
 You can hide sections completely by editing the options in the popup menu.
 
