@@ -4,7 +4,9 @@ An unofficial extension for [Fallen London](http://fallenlondon.storynexus.com/)
 
 This extension adds some new sections to the top of the Inventory section of the 'Myself' tab: one each for tiers 1–4, and one for faction-related items. They're collapsed by default, but you can click to expand them. (You can choose which sections to show and hide in your preferences.)
 
-![Screenshot](https://i.imgur.com/hOAaSVm.png)
+<div class="image-container">
+  ![Screenshot](https://i.imgur.com/hOAaSVm.png)
+</div>
 
 Each 'Tier X' section contains the convertible items you own in that tier,
 arranged by each item's category's place in the Tier 3 side-conversion chain (starting with Academic, and ending with Rumour). Missing items in each section are indicated by an empty slot.
