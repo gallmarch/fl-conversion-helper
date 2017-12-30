@@ -1,4 +1,1 @@
 *.*.sw[op]
-node_modules/
-build/
-dist/
