@@ -16,10 +16,6 @@ The Faction Items section contains any of the items you own that are connected t
 
 ![Screenshot](https://i.imgur.com/ZKGmRnQ.png)
 
-Missing items in each section are indicated by an empty slot. By default, if you don't have enough of an item to mass-convert it, its icon is disabled.
-
-![Screenshot](http://imgur.com/MvAgzOT.png)
-
 ## Preferences
 
 There are a few ways in which you can change the extension's behaviour, available on the extension's popup menu.
