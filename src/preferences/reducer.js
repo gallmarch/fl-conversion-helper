@@ -1,4 +1,4 @@
-import { CATEGORY_EXPANSION_CHANGED, ENABLEMENT_PREFERENCE_CHANGED } from './actions';
+import { CATEGORY_EXPANSION_CHANGED } from './actions';
 import { DEFAULT_PREFERENCES, PREFERENCES_CHANGED } from './constants';
 
 function preferencesReducer(state = DEFAULT_PREFERENCES, { type, payload }) {
@@ -21,12 +21,6 @@ function preferencesReducer(state = DEFAULT_PREFERENCES, { type, payload }) {
         ...state.expanded,
         [category]: expanded,
       },
-    };
-  }
-
-  function handleEnablementPreferenceChange({ name, value }) {
-    return {
-      ...state,
     };
   }
 }

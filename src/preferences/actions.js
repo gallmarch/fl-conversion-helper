@@ -25,25 +25,6 @@ function setCategoryExpansion({ category, expanded }) {
   };
 }
 
-function setEnablement({ which, value }) {
-  return (dispatch) => {
-    // Dispatch an action
-    dispatch({ type: ENABLEMENT_CHANGED, payload: { which, value } });
-    storage.get(null, (stuff) => {
-      const { preferences } = stuff;
-      if (preferences === null || preferences === undefined) {
-        return storage.get(DEFAULT_PREFERENCES);
-      }
-      return storage.set({
-        preferences: {
-          ...preferences,
-          enablements: { ...preferences.enablements, [which]: value },
-        },
-      });
-    });
-  };
-}
-
 export {
   CATEGORY_EXPANSION_CHANGED,
   ENABLEMENT_CHANGED,
