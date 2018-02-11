@@ -1,6 +1,7 @@
-/* eslint-disable import/prefer-default-export */
+import isLegacy from './isLegacy';
 import validateDOMElement from './validateDOMElement';
 
 export {
+  isLegacy,
   validateDOMElement,
 };
