@@ -11,6 +11,7 @@ import MutationSummary from 'mutation-summary';
 import styles from './styles.scss';
 import reducer from './reducer';
 import Extension from './Extension';
+import { loadPreferences } from './preferences/utils';
 
 // Import constants
 import { WATCHFUL, SHADOWY, DANGEROUS, PERSUASIVE } from './attributes';
@@ -28,7 +29,7 @@ watchForInventorySectionAddition();
 // Listen for storage changes
 listenForStorageChanges();
 // Load expansion preferences
-loadPreferences();
+loadPreferences({ storage, store });
 
 // Listen for changes to local storage and dispatch an action
 // to update the UI
@@ -40,26 +41,6 @@ function listenForStorageChanges() {
     }
     const { newValue } = preferences;
     store.dispatch({ type: PREFERENCES_CHANGED, payload: newValue });
-  });
-}
-
-// Loading preferences kicks everything off; if we have pre-existing
-// preferences, then we'll dispatch an action to tell the UI what it
-// should display; if not, then we are probably at first run, in which
-// case we'll populate the preferences with our defaults.
-function loadPreferences() {
-  // Retrieve preferences
-  storage.get(null, ({ preferences }) => {
-    // Check whether we have stored preferences. If not, then storage
-    // is empty, so insert default preferences into storage (which
-    // should trigger a storage changed event)
-    if (preferences === undefined) {
-      const defaultPreferences = DEFAULT_PREFERENCES;
-      return storage.set({ preferences: defaultPreferences });
-    }
-    // If we have preferences, dispatch an action so that the UI knows
-    // how to present itself
-    store.dispatch({ type: PREFERENCES_CHANGED, payload: preferences });
   });
 }
 
