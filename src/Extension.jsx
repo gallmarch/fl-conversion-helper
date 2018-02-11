@@ -54,7 +54,9 @@ class Extension extends Component {
 
         {visibilities.faction && (
           <Category category="factionItems" categoryName="Faction items">
-            {factionItems.map(id => <FactionItem key={id} id={id} enablementPreference={enablements.factions} />)}
+            {factionItems.map(id => (
+              <FactionItem key={id} id={id} enablementPreference={enablements.factions} />
+            ))}
           </Category>
         )}
 
