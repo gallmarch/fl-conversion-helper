@@ -6,6 +6,14 @@ import CategoryOption from './CategoryOption';
 import { setEnablementPreference } from './actions';
 import categories from './categories';
 
+Popup.propTypes = {
+  handleEnablementPreferenceChange: PropTypes.func.isRequired,
+  preferences: PropTypes.shape({
+    expansions: PropTypes.object.isRequired,
+    visibilities: PropTypes.object.isRequired,
+  }).isRequired,
+};
+
 // The Popup component displays the current state of our display
 // preferences and updates the preference storage when we make
 // changes. The content script is listening for storage changes, so
