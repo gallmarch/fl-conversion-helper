@@ -1,9 +1,4 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
 import MutationSummary from 'mutation-summary';
-
-import Extension from '../Extension';
 import insertExtension from './insertExtension';
 
 // Insert the conversion-helper elements when we detect that the
