@@ -65,6 +65,7 @@ export default function Item({ id, message, alwaysConvertible, enablementPrefere
 
 Item.propTypes = {
   alwaysConvertible: PropTypes.bool,
+  enablementPreference: PropTypes.number.isRequired,
   id: PropTypes.string.isRequired,
   message: PropTypes.string,
 };

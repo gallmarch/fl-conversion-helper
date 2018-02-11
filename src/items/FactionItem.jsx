@@ -17,6 +17,7 @@ function meetsAttributeRequirement({ attributes, faction, renown }) {
 
 FactionItem.propTypes = {
   attributes: PropTypes.objectOf(PropTypes.number).isRequired,
+  enablementPreference: PropTypes.number.isRequired,
   factions: PropTypes.objectOf(PropTypes.object).isRequired,
   id: PropTypes.string.isRequired,
 };
