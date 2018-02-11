@@ -25,7 +25,7 @@ function setCategoryVisibility({ category, visible }) {
 }
 
 function setEnablementPreference({ name, value }) {
-  return (dispatch) => {
+  return () => {
     // Update storage
     const storage = chrome.storage.local;
     storage.get(null, ({ preferences }) => {
