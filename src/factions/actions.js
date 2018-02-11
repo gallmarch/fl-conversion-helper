@@ -8,10 +8,12 @@ export const FAVOURS_AND_RENOWN = 'FAVOURS_AND_RENOWN';
 // parse them, and dispatch an action
 function fetchConnectedQualities() {
   return (dispatch) => {
-    baseFetchConnectedQualities()
+    return baseFetchConnectedQualities()
       .then(parseConnectedQualities)
       .then(({ favours, renown }) => {
-        dispatch({ type: FAVOURS_AND_RENOWN, payload: { favours, renown } });
+        // console.info('favours are');
+        // console.info(favours);
+        return dispatch({ type: FAVOURS_AND_RENOWN, payload: { favours, renown } });
       });
   };
 }
