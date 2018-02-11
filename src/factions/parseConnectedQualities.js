@@ -17,7 +17,8 @@ export default function parseConnectedQualities(response) {
   return { renown, favours };
 
   function findMatches(ids) {
-    return Object.keys(factions).reduce((acc, faction) => {
+    const { items, ...rest } = factions;
+    return Object.keys(rest).reduce((acc, faction) => {
       // Find the favour or renown ID corresponding to this faction
       const id = ids[factions[faction]];
       // Find the text of the corresponding element (this is why we 
@@ -25,8 +26,7 @@ export default function parseConnectedQualities(response) {
       const text = $el.children().has(`div#infoBarQImage${id}`).text();
       // Search for a number
       const match = /[^0-9]*([0-9]+)/.exec(text);
-      // If we get one, that's the value for the quality we're looking
-      // for
+      // If we get one, that's the value for the quality we're looking for
       if (match) {
         return { ...acc, [factions[faction]]: Number(match[1]) };
       }
