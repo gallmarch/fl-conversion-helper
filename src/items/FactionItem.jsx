@@ -48,7 +48,7 @@ function FactionItem(props) {
   // (b) the user has enough Favours and a high enough level in the relevant
   //     attribute.
   const convertible = enablementPreference === FACTIONS.ALWAYS
-    || hasEnoughFavours && hasAttributeLevel;
+    || (hasEnoughFavours && hasAttributeLevel);
 
   // If we are enabled, then display an enabled item
   if (convertible) {
