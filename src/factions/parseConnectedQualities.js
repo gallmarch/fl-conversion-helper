@@ -4,20 +4,9 @@ import * as factions from '../factions';
 import renownIDs from '../factions/renown';
 import favourIDs from '../factions/favours';
 
-function fetchConnectedQualities() {
-  // TODO: see if the Fetch API is actually up to the task of
-  // handling this when we're calling from a web extension. It
-  // sort of seems like overkill to bundle JQuery just to make
-  // a call like this (but axios' code contains calls to eval()
-  // that cause it to fail Mozilla's validation).
-  const url = '//fallenlondon.storynexus.com/Me/StatusesForCategory?category=Contacts';
-  const datatype = 'html';
-  return $.ajax({ url, datatype });
-}
-
 // Given the HTML response from the server, do some DOM searching
 // and return Renown and Favours in a format that we can use
-function parseConnectedQualities(response) {
+export default function parseConnectedQualities(response) {
   // JQuery lets us find elements by children's IDs, which is a pain
   // otherwise.
   const $el = $(response);
@@ -46,9 +35,4 @@ function parseConnectedQualities(response) {
       return { ...acc, [factions[faction]]: 0 };
     }, {});
   }
-}
-
-export default function fetchAndParseConnectedQualities() {
-  return fetchConnectedQualities()
-    .then(parseConnectedQualities);
 }

@@ -1,22 +1,19 @@
-import fetchAndParseConnectedQualities from './fetch-and-parse-connected-qualities';
+/* eslint-disable import/prefer-default-export */
+import baseFetchConnectedQualities from './fetchConnectedQualities';
+import parseConnectedQualities from './parseConnectedQualities';
 
-const FAVOURS_AND_RENOWN = 'FAVOURS_AND_RENOWN';
+export const FAVOURS_AND_RENOWN = 'FAVOURS_AND_RENOWN';
 
 // Retrieve the Favours and Renown qualities from the server,
 // parse them, and dispatch an action
 function fetchConnectedQualities() {
   return (dispatch) => {
-    fetchAndParseConnectedQualities()
+    baseFetchConnectedQualities()
+      .then(parseConnectedQualities)
       .then(({ favours, renown }) => {
-        dispatch({
-          type: FAVOURS_AND_RENOWN,
-          payload: { favours, renown },
-        });
+        dispatch({ type: FAVOURS_AND_RENOWN, payload: { favours, renown } });
       });
   };
 }
 
-export {
-  FAVOURS_AND_RENOWN,
-  fetchConnectedQualities,
-};
+export { fetchConnectedQualities };
