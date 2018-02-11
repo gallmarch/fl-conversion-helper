@@ -41,7 +41,7 @@ function setEnablementPreference({ name, value }) {
             ...preferences.enablements,
             [name]: value,
           },
-        }
+        },
       });
     });
   };

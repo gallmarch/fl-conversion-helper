@@ -112,7 +112,7 @@ class PopupContainer extends Component {
   }
 
   render() {
-    return <Popup {...this.props} handleEnablementPreferenceChange={this.handleEnablementPreferenceChange} />
+    return <Popup {...this.props} handleEnablementPreferenceChange={this.handleEnablementPreferenceChange} />;
   }
 }
 

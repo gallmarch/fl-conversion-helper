@@ -31,7 +31,7 @@ export default function Item({ id, message, alwaysConvertible, enablementPrefere
     // To check this, we do a comparison
     const canConvert = alwaysConvertible
       || enablementPreference === TIERS.ALWAYS
-      || quantity >= conversionCost(id, (enablementPreference===TIERS.SMALL));
+      || quantity >= conversionCost(id, (enablementPreference === TIERS.SMALL));
 
     // If we can convert this item, then display it as clickable
     if (canConvert) {

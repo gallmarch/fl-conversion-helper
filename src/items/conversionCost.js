@@ -17,7 +17,7 @@ import {
   tier4,
 } from './constants';
 
-export default function conversionCost(id, enableSmallConversions=false) {
+export default function conversionCost(id, enableSmallConversions = false) {
   if (enableSmallConversions) {
     return smallConversionCost(id);
   }
@@ -47,7 +47,7 @@ function smallConversionCost(id) {
     }
     return 50;
   }
-  
+
   // Tier 1 items are mostly either 100 or 50
   if (tier1.includes(id)) {
     // Whispered Hints always require 500 (no small-quantity conversions)

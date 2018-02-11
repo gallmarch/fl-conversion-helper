@@ -26,7 +26,7 @@ function FactionItem(props) {
     attributes,
     enablementPreference,
     factions: { favours, renown },
-    id
+    id,
   } = props;
   // Look for the faction's item in our inventory
   const inventoryMatch = getInventoryMatch(id);
