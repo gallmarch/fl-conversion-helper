@@ -20,9 +20,6 @@ function Popup(props) {
     return null;
   }
 
-  console.info('preferences');
-  console.info(preferences);
-
   return (
     <div>
       <h1 className="flch-popup__header">Show categories</h1>
@@ -107,15 +104,14 @@ class PopupContainer extends Component {
 
   handleEnablementPreferenceChange(evt) {
     const { name, value } = evt.target;
-    console.info({ name, value });
     this.props.setEnablementPreference({ name, value: Number(value) });
   }
 
   render() {
-    return <Popup
+    return (<Popup
       {...this.props}
       handleEnablementPreferenceChange={this.handleEnablementPreferenceChange}
-    />;
+    />);
   }
 }
 
@@ -124,6 +120,7 @@ PopupContainer.propTypes = {
     expansions: PropTypes.object,
     visibilities: PropTypes.object,
   }),
+  setEnablementPreference: PropTypes.func.isRequired,
 };
 PopupContainer.defaultProps = {
   preferences: {
