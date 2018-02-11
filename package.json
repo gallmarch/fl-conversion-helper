@@ -35,12 +35,15 @@
     "build": "yarn cleanup && webpack",
     "dist": "rimraf dist/ && webpack -p",
     "lint": "eslint 'src/**/*.@(js|jsx)'",
-    "start": "yarn cleanup && webpack --progress --watch"
+    "start": "yarn cleanup && webpack --progress --watch",
+    "test": "jest"
   },
   "devDependencies": {
+    "babel-jest": "^22.2.2",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
-    "eslint-plugin-react": "^7.3.0"
+    "eslint-plugin-react": "^7.3.0",
+    "jest": "^22.2.2"
   }
 }
