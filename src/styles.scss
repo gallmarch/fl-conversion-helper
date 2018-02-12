@@ -16,3 +16,8 @@
     margin: 2px 10px 8px 0;
   }
 }
+
+// This rule needs to be a higher specificity than 'ul.you_icon'
+ul.flch-contracted.flch-contracted {
+  display: none;
+}

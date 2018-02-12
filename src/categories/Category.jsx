@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 import { connect } from 'react-redux';
 import CategoryToggle from './CategoryToggle';
 import { setCategoryExpansion } from '../preferences/actions';
@@ -31,11 +32,9 @@ function Category(props) {
         {' '}
         <span className="flch-category-header__text">{props.categoryName}</span>
       </h3>
-      {expanded && (
-        <ul className="you_icon cf">
-          {props.children}
-        </ul>
-      )}
+      <ul className={classnames('you_icon cf', expanded || 'flch-contracted')}>
+        {props.children}
+      </ul>
     </div>
   );
   /* eslint-enable jsx-a11y/no-noninteractive-element-interactions */
