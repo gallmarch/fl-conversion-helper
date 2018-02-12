@@ -3,6 +3,9 @@
   "version": "1.4.1",
   "description": "Add new categories of convertible items to the inventory",
   "author": "sdobuadhachain@gmail.com",
+  "jest": {
+    "collectCoverageFrom": ["src/**/*.{js,jsx}"]
+  },
   "license": "MIT",
   "dependencies": {
     "babel-core": "^6.24.0",
