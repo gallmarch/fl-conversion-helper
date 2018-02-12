@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DummiedItem matches its snapshot 1`] = `
+<li>
+  <a
+    className="tooltip flch-unlock"
+  >
+    <div
+      className="qq"
+    >
+      5
+    </div>
+    <div>
+      <img
+        alt="some alt text"
+        height={null}
+        src="//example.com/image.png"
+        width={null}
+      />
+    </div>
+    <span
+      className="tt"
+    />
+  </a>
+</li>
+`;
