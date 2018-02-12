@@ -2,7 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { items } from '../factions';
-import { attributeRequired, favoursRequired } from '../factions/requirements';
+import {
+  attributeRequired,
+  createFailureMessage,
+  favoursRequired,
+  meetsAttributeRequirement,
+} from '../factions/requirements';
 import { FACTIONS } from '../preferences/constants';
 import { getInventoryMatch } from './Item';
 import BlankItem from './BlankItem';
@@ -10,10 +15,10 @@ import UsableItem from './UsableItem';
 import DummiedItem from './DummiedItem';
 import { attributeName } from '../attributes/names';
 
-function meetsAttributeRequirement({ attributes, faction, renown }) {
-  const { attribute, level } = attributeRequired(faction, renown[faction]);
-  return attributes[attribute] >= level;
-}
+export {
+  isConvertible,
+  FactionItem,
+};
 
 FactionItem.propTypes = {
   attributes: PropTypes.objectOf(PropTypes.number).isRequired,
@@ -26,7 +31,7 @@ FactionItem.propTypes = {
 // (a) the user wants them always to be enabled, or
 // (b) the user has enough Favours and a high enough level in the relevant
 //     attribute.
-export function isConvertible({
+function isConvertible({
   attributes,
   enablementPreference,
   faction,
@@ -46,7 +51,7 @@ export function isConvertible({
   return hasEnoughFavours && hasAttributeLevel;
 }
 
-export function FactionItem(props) {
+function FactionItem(props) {
   const {
     attributes,
     enablementPreference,
@@ -95,38 +100,6 @@ export function FactionItem(props) {
   />);
 }
 
-export function createFailureMessage({
-  attributes,
-  favours,
-  id,
-  renown,
-}) {
-  const failureReasons = [];
-
-  const faction = items[id];
-  const factionFavours = favours[faction];
-  const hasEnoughFavours = factionFavours >= favoursRequired(renown[faction]);
-  const hasAttributeLevel = meetsAttributeRequirement({ attributes, faction, renown });
-
-  if (!hasEnoughFavours) {
-    const insufficientFavoursMessage = `${favoursRequired(renown[faction])} Favours (you have ${factionFavours === undefined ? 0 : factionFavours})`;
-    failureReasons.push(insufficientFavoursMessage);
-  }
-
-  if (!hasAttributeLevel) {
-    const {
-      attribute: relevantAttribute,
-      level: necessaryLevel,
-    } = attributeRequired(faction, renown[faction]);
-    const actualAttributeLevel = attributes[relevantAttribute];
-    const insufficientAttributeMessage = `${attributeName(relevantAttribute)} ${necessaryLevel} (you have ${actualAttributeLevel})`;
-    failureReasons.push(insufficientAttributeMessage);
-  }
-
-  const message = `You need ${failureReasons.join(' and ')}.`;
-
-  return message;
-}
 
 function mapStateToProps(state) {
   return {

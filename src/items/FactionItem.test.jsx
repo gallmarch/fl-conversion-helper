@@ -1,7 +1,10 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import { FactionItem } from './FactionItem';
+import {
+
+  FactionItem,
+} from './FactionItem';
 
 describe('FactionItem', () => {
   describe('when the user has no matching item', () => {
