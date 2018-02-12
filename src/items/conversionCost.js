@@ -24,6 +24,8 @@ export default function conversionCost(id, enableSmallConversions = false) {
   return largeConversionCost(id);
 }
 
+export { conversionCost, largeConversionCost, smallConversionCost };
+
 function smallConversionCost(id) {
   // Tier 4 items have no small/large conversion differences
   if (tier4.includes(id)) {
