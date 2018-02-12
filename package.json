@@ -6,6 +6,9 @@
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}"
+    ],
+    "setupFiles": [
+      "./.jest/MutationObserver.js"
     ]
   },
   "license": "MIT",

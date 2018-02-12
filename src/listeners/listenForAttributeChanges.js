@@ -17,8 +17,8 @@ import {
 // requirements for Favour -> Renown conversions, and we want the faction
 // item category to update itself to reflect this without forcing the user
 // to tab away and back.
-export default function listenForAttributeChanges({ store }) {
-  const rootNode = document.querySelector('div#lhs_col');
+export default function listenForAttributeChanges({ store, isLegacy=true }) {
+  const rootNode = document.querySelector(getRootNodeSelector());
   const queries = [{ element: 'ul.you_icon' }];
   return new MutationSummary({
     rootNode,
@@ -31,7 +31,7 @@ export function callback({ document, store }) {
   // Retrieve modified WSDP attribute values (i.e., gear effects included) and build a
   // dictionary
   const attributes = [WATCHFUL, SHADOWY, DANGEROUS, PERSUASIVE].reduce((acc, attributeID) => {
-    const attributeValue = getAttributeValueFromDOM(attributeID);
+    const attributeValue = getAttributeValueFromDOM({ attributeID, document });
     if (attributeValue) {
       return { ...acc, [attributeID]: attributeValue };
     }
@@ -42,19 +42,22 @@ export function callback({ document, store }) {
   store.dispatch({ type: 'ATTRIBUTES', payload: attributes });
 }
 
-export function getAttributeValueFromDOM(attributeID) {
-  // The *modified* attribute is only found inside the tooltip that we get when
-  // hovering over the attribute's icon, so we'll do a regexp search for a numeric
-  // string inside it.
-  const tooltipText = document.querySelector(`div#infoBarQImage${attributeID}`)
-    .nextSibling
-    .firstChild
-    .innerText;
-  const match = /[0-9]+/.exec(tooltipText);
-  if (match) {
-    return Number(match[0]);
+export function getAttributeValueFromDOM({attributeID, document, isLegacy=true }) {
+  if (isLegacy) {
+    // The *modified* attribute is only found inside the tooltip that we get when
+    // hovering over the attribute's icon, so we'll do a regexp search for a numeric
+    // string inside it.
+    const tooltipText = document.querySelector(`div#infoBarQImage${attributeID}`)
+      .nextSibling
+      .firstChild
+      .innerText;
+    const match = /[0-9]+/.exec(tooltipText);
+    if (match) {
+      return Number(match[0]);
+    }
+    return undefined;
   }
-  return undefined;
+  throw new Error({ message: 'Not implemented for non-legacy; waiting for beta' });
 }
 
 export function getRootNodeSelector({ isLegacy }) {
@@ -62,7 +65,5 @@ export function getRootNodeSelector({ isLegacy }) {
     return 'div#lhs_col';
   }
   // TODO: Check the new front-end for a selector
-  throw new Error({
-    message: 'The new front-end is not supported yet.',
-  });
+  throw new Error({ message: 'The new front-end isn\'t supported yet.' });
 }
