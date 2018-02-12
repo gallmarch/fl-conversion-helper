@@ -18,7 +18,7 @@ Category.propTypes = {
 // is only added if the user's preferences ask for it to be visible,
 // so we don't need to check that here. What we *do* do here is decide
 // whether to show it as expanded or contracted.
-function Category(props) {
+export function Category(props) {
   const {
     preferences: { expansions },
     category,
@@ -41,14 +41,14 @@ function Category(props) {
 }
 
 // Toggle between 'expanded' and 'contracted' states
-function toggleState(props) {
+export function toggleState(props) {
   const { category, preferences: { expansions } } = props;
   const expanded = expansions[category];
   props.setCategoryExpansion({ category, expanded: !expanded });
 }
 
 
-function mapStateToProps(state) {
+export function mapStateToProps(state) {
   return { preferences: state.preferences };
 }
 
