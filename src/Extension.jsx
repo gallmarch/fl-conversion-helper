@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Category from './categories/Category';
 import Item from './items/Item';
-import FactionItem from './items/FactionItem';
+import FactionItemContainer from './items/FactionItemContainer';
 import { tier1, tier2, tier3, tier4, factionItems, fidgetingWriter } from './items';
 import { fetchConnectedQualities } from './factions/actions';
 
@@ -55,7 +55,7 @@ class Extension extends Component {
         {visibilities.faction && (
           <Category category="factionItems" categoryName="Faction items">
             {factionItems.map(id => (
-              <FactionItem key={id} id={id} enablementPreference={enablements.factions} />
+              <FactionItemContainer key={id} id={id} enablementPreference={enablements.factions} />
             ))}
           </Category>
         )}
