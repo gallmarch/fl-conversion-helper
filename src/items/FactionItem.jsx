@@ -22,7 +22,31 @@ FactionItem.propTypes = {
   id: PropTypes.string.isRequired,
 };
 
-function FactionItem(props) {
+// Faction items are enabled either if
+// (a) the user wants them always to be enabled, or
+// (b) the user has enough Favours and a high enough level in the relevant
+//     attribute.
+export function isConvertible({
+  attributes,
+  enablementPreference,
+  faction,
+  factionFavours,
+  factionRenown,
+  renown,
+}) {
+  // If the user always wants to convert, then return true
+  if (enablementPreference === FACTIONS.ALWAYS) {
+    return true;
+  }
+
+  // Check whether we meet the attribute requirement and have enough
+  // Favours to perform a conversion
+  const hasEnoughFavours = factionFavours >= favoursRequired(factionRenown);
+  const hasAttributeLevel = meetsAttributeRequirement({ attributes, faction, renown });
+  return hasEnoughFavours && hasAttributeLevel;
+}
+
+export function FactionItem(props) {
   const {
     attributes,
     enablementPreference,
@@ -31,43 +55,36 @@ function FactionItem(props) {
   } = props;
   // Look for the faction's item in our inventory
   const inventoryMatch = getInventoryMatch(id);
+
   // If we don't have the item, then return a blank
   if (!inventoryMatch) {
     return <BlankItem />;
   }
 
-  // Check whether we meet the attribute requirement and have enough
-  // Favours to perform a conversion
   const faction = items[id];
   const factionFavours = favours[faction];
-  const hasEnoughFavours = factionFavours >= favoursRequired(renown[faction]);
-  const hasAttributeLevel = meetsAttributeRequirement({ attributes, faction, renown });
+  const factionRenown = renown[faction];
 
-  // Faction items are enabled either if
-  // (a) the user wants them always to be enabled, or
-  // (b) the user has enough Favours and a high enough level in the relevant
-  //     attribute.
-  const convertible = enablementPreference === FACTIONS.ALWAYS
-    || (hasEnoughFavours && hasAttributeLevel);
+  const convertible = isConvertible({
+    attributes,
+    enablementPreference,
+    faction,
+    factionFavours,
+    factionRenown,
+    renown,
+  });
 
   // If we are enabled, then display an enabled item
   if (convertible) {
-    return (
-      <UsableItem
-        inventoryMatch={inventoryMatch}
-        quantity={factionFavours}
-      />
-    );
+    return <UsableItem inventoryMatch={inventoryMatch} quantity={factionFavours} />;
   }
 
-  // If, for some reason, we shouldn't be enabled, display a dummied-out item with an explanation in
-  // the tooltip
+  // If, for some reason, we shouldn't be enabled, display a dummied-out item
+  // with an explanation in the tooltip
   const message = createFailureMessage({
     attributes,
-    hasEnoughFavours,
-    hasAttributeLevel,
-    faction,
-    factionFavours,
+    favours,
+    id,
     renown,
   });
 
@@ -78,15 +95,19 @@ function FactionItem(props) {
   />);
 }
 
-function createFailureMessage({
+export function createFailureMessage({
   attributes,
-  hasEnoughFavours,
-  hasAttributeLevel,
-  faction,
-  factionFavours,
+  favours,
+  id,
   renown,
 }) {
   const failureReasons = [];
+
+  const faction = items[id];
+  const factionFavours = favours[faction];
+  const hasEnoughFavours = factionFavours >= favoursRequired(renown[faction]);
+  const hasAttributeLevel = meetsAttributeRequirement({ attributes, faction, renown });
+
   if (!hasEnoughFavours) {
     const insufficientFavoursMessage = `${favoursRequired(renown[faction])} Favours (you have ${factionFavours === undefined ? 0 : factionFavours})`;
     failureReasons.push(insufficientFavoursMessage);
