@@ -23,31 +23,38 @@ export default function listenForAttributeChanges({ store }) {
   return new MutationSummary({
     rootNode,
     queries,
-    callback,
+    callback: callback({ document, store }),
   });
+}
 
-  function callback() {
-    // Retrieve modified WSDP attribute values (i.e., gear effects included) and build a
-    // dictionary
-    const attributes = [WATCHFUL, SHADOWY, DANGEROUS, PERSUASIVE].reduce((acc, attributeID) => {
-      // The *modified* attribute is only found inside the tooltip that we get when
-      // hovering over the attribute's icon, so we'll do a regexp search for a numeric
-      // string inside it.
-      const tooltipText = document.querySelector(`div#infoBarQImage${attributeID}`)
-        .nextSibling
-        .firstChild
-        .innerText;
-      const match = /[0-9]+/.exec(tooltipText);
-      if (match) {
-        // If we found a match, then 
-        return { ...acc, [attributeID]: Number(match[0]) };
-      }
-      return acc;
-    }, {});
-    // We have our dict; dispatch an action so that the faction item category can
-    // update itself
-    store.dispatch({ type: 'ATTRIBUTES', payload: attributes });
+export function callback({ document, store }) {
+  // Retrieve modified WSDP attribute values (i.e., gear effects included) and build a
+  // dictionary
+  const attributes = [WATCHFUL, SHADOWY, DANGEROUS, PERSUASIVE].reduce((acc, attributeID) => {
+    const attributeValue = getAttributeValueFromDOM(attributeID);
+    if (attributeValue) {
+      return { ...acc, [attributeID]: attributeValue };
+    }
+    return acc;
+  }, {});
+  // We have our dict; dispatch an action so that the faction item category can
+  // update itself
+  store.dispatch({ type: 'ATTRIBUTES', payload: attributes });
+}
+
+export function getAttributeValueFromDOM(attributeID) {
+  // The *modified* attribute is only found inside the tooltip that we get when
+  // hovering over the attribute's icon, so we'll do a regexp search for a numeric
+  // string inside it.
+  const tooltipText = document.querySelector(`div#infoBarQImage${attributeID}`)
+    .nextSibling
+    .firstChild
+    .innerText;
+  const match = /[0-9]+/.exec(tooltipText);
+  if (match) {
+    return Number(match[0]);
   }
+  return undefined;
 }
 
 export function getRootNodeSelector({ isLegacy }) {
