@@ -1,8 +1,11 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import {
+import factionAttributes from '../factions/attributes';
+import { FACTIONS } from '../preferences/constants';
 
+import {
+  isConvertible,
   FactionItem,
 } from './FactionItem';
 
@@ -18,5 +21,11 @@ describe('FactionItem', () => {
       const component = renderer.create(<FactionItem {...props} />);
       expect(component).toMatchSnapshot();
     });
+  });
+});
+
+describe('isConvertible', () => {
+  it('returns true if it should always be convertible', () => {
+    expect(isConvertible({ enablementPreference: FACTIONS.ALWAYS })).toBe(true);
   });
 });
