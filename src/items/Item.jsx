@@ -93,8 +93,11 @@ function cloneImage(node) {
 // like this. If there's malicious code in the tooltip HTML, then it's already
 // on the page, and there's nothing we can do about it, so we'll hush ESLint.
 function cloneTooltip(node) {
-  // Find the node's tooltip
-  const ttNode = node.parentNode.querySelector('span.tt');
+  // Find the node's tooltip; fail gracefully if not found
+  const ttNode = node.parentNode && node.parentNode.querySelector('span.tt');
+  if (!ttNode) {
+    return <span className="tt" />;
+  }
   // eslint-disable-next-line react/no-danger
   return <span className="tt" dangerouslySetInnerHTML={{ __html: ttNode.innerHTML }} />;
 }
@@ -105,8 +108,12 @@ function cloneTooltip(node) {
 // anything malicious in the tooltip, then it's already on the page, so we'll
 // hush ESLint.
 function renderCustomTooltip(node, message) {
-  // Find the node's tooltip
-  const ttNode = node.parentNode.querySelector('span.tt');
+  // Find the node's tooltip; fail gracefully if not found
+  const ttNode = node.parentNode && node.parentNode.querySelector('span.tt');
+  if (!ttNode) {
+    return <span className="tt" />;
+  }
+
   // Clone the tooltip
   const clone = ttNode.cloneNode(true);
   // If we have two <strong> elements, then the second is
