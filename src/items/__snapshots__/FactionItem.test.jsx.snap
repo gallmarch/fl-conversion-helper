@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FactionItem when the user has no matching item matches its snapshot 1`] = `
+<li
+  className="empty-icon flch-empty-icon"
+  id={undefined}
+/>
+`;
