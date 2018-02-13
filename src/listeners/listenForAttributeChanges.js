@@ -18,7 +18,7 @@ import {
 // item category to update itself to reflect this without forcing the user
 // to tab away and back.
 export default function listenForAttributeChanges({ store, isLegacy=true }) {
-  const rootNode = document.querySelector(getRootNodeSelector());
+  const rootNode = document.querySelector(getRootNodeSelector({ isLegacy }));
   const queries = [{ element: 'ul.you_icon' }];
   return new MutationSummary({
     rootNode,
@@ -28,18 +28,20 @@ export default function listenForAttributeChanges({ store, isLegacy=true }) {
 }
 
 export function callback({ document, store }) {
-  // Retrieve modified WSDP attribute values (i.e., gear effects included) and build a
-  // dictionary
-  const attributes = [WATCHFUL, SHADOWY, DANGEROUS, PERSUASIVE].reduce((acc, attributeID) => {
-    const attributeValue = getAttributeValueFromDOM({ attributeID, document });
-    if (attributeValue) {
-      return { ...acc, [attributeID]: attributeValue };
-    }
-    return acc;
-  }, {});
-  // We have our dict; dispatch an action so that the faction item category can
-  // update itself
-  store.dispatch({ type: 'ATTRIBUTES', payload: attributes });
+  return () => {
+    // Retrieve modified WSDP attribute values (i.e., gear effects included) and build a
+    // dictionary
+    const attributes = [WATCHFUL, SHADOWY, DANGEROUS, PERSUASIVE].reduce((acc, attributeID) => {
+      const attributeValue = getAttributeValueFromDOM({ attributeID, document });
+      if (attributeValue) {
+        return { ...acc, [attributeID]: attributeValue };
+      }
+      return acc;
+    }, {});
+    // We have our dict; dispatch an action so that the faction item category can
+    // update itself
+    store.dispatch({ type: 'ATTRIBUTES', payload: attributes });
+  };
 }
 
 export function getAttributeValueFromDOM({attributeID, document, isLegacy=true }) {
@@ -60,7 +62,7 @@ export function getAttributeValueFromDOM({attributeID, document, isLegacy=true }
   throw new Error({ message: 'Not implemented for non-legacy; waiting for beta' });
 }
 
-export function getRootNodeSelector({ isLegacy }) {
+export function getRootNodeSelector({ isLegacy = true }) {
   if (isLegacy) {
     return 'div#lhs_col';
   }
