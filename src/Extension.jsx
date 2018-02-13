@@ -17,7 +17,7 @@ class Extension extends Component {
   }
 
   render() {
-    const { preferences: { enablements, visibilities } } = this.props;
+    const { isLegacy, preferences: { enablements, visibilities } } = this.props;
 
     if (!visibilities) {
       return <div>Loading...</div>;
@@ -30,39 +30,68 @@ class Extension extends Component {
       <div>
         {visibilities.tier1 && (
           <Category category="tier1" categoryName="Tier 1">
-            {tier1.map(id => <Item key={id} id={id} enablementPreference={enablements.tiers} />)}
+            {tier1.map(id => (<Item
+              key={id}
+              id={id}
+              enablementPreference={enablements.tiers}
+              isLegacy={isLegacy}
+            />))}
           </Category>
         )}
 
         {visibilities.tier2 && (
           <Category category="tier2" categoryName="Tier 2">
-            {tier2.map(id => <Item key={id} id={id} enablementPreference={enablements.tiers} />)}
+            {tier2.map(id => (<Item
+              isLegacy={isLegacy}
+              key={id}
+              id={id}
+              enablementPreference={enablements.tiers}
+              isLegacy={isLegacy}
+            />))}
           </Category>
         )}
 
         {visibilities.tier3 && (
           <Category category="tier3" categoryName="Tier 3">
-            {tier3.map(id => <Item key={id} id={id} enablementPreference={enablements.tiers} />)}
+            {tier3.map(id => (<Item
+              key={id}
+              id={id}
+              enablementPreference={enablements.tiers}
+              isLegacy={isLegacy}
+            />))}
           </Category>
         )}
 
         {visibilities.tier4 && (
           <Category category="tier4" categoryName="Tier 4">
-            {tier4.map(id => <Item key={id} id={id} enablementPreference={enablements.tiers} />)}
+            {tier4.map(id => (<Item
+              key={id}
+              id={id}
+              enablementPreference={enablements.tiers}
+              isLegacy={isLegacy}
+            />))}
           </Category>
         )}
 
         {visibilities.faction && (
           <Category category="factionItems" categoryName="Faction items">
-            {factionItems.map(id => (
-              <FactionItem key={id} id={id} enablementPreference={enablements.factions} />
-            ))}
+            {factionItems.map(id => (<FactionItem
+              key={id}
+              id={id}
+              enablementPreference={enablements.factions}
+              isLegacy={isLegacy}
+            />))}
           </Category>
         )}
 
         {visibilities.fidgetingWriter && (
           <Category category="fidgetingWriter" categoryName="Fidgeting Writer">
-            {fidgetingWriter.map(id => <Item key={id} id={id} alwaysConvertible />)}
+            {fidgetingWriter.map(id => (<Item
+              key={id}
+              id={id}
+              alwaysConvertible
+              isLegacy={isLegacy}
+            />))}
           </Category>
         )}
       </div>
@@ -72,6 +101,7 @@ class Extension extends Component {
 
 Extension.propTypes = {
   fetchConnectedQualities: PropTypes.func.isRequired,
+  isLegacy: PropTypes.bool.isRequired,
   preferences: PropTypes.shape({
     extensions: PropTypes.object,
     visibilities: PropTypes.object,
