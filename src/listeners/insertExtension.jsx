@@ -22,7 +22,7 @@ export default function insertExtension({ store, isLegacy = true }) {
   // Render our extension UI inside the container element
   ReactDOM.render(
     <Provider store={store}>
-      <Extension />
+      <Extension isLegacy={isLegacy} />
     </Provider>,
     container,
   );
