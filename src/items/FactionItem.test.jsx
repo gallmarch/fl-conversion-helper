@@ -1,7 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import factionAttributes from '../factions/attributes';
 import { FACTIONS } from '../preferences/constants';
 
 import {

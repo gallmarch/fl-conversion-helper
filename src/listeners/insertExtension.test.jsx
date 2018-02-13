@@ -1,4 +1,4 @@
-import insertExtension, {
+import {
   createContainer,
   getParentSelector,
   getReferenceNodeSelector,

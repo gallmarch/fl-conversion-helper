@@ -12,10 +12,11 @@ describe('Category', () => {
     const component = renderer.create(<Category
       category={category}
       categoryName={categoryName}
-      children={children}
       preferences={preferences}
     >
+      {children}
     </Category>);
+
     expect(component).toMatchSnapshot();
   });
 

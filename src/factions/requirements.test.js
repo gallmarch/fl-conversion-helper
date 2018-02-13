@@ -6,10 +6,8 @@ import {
   attributeRequired,
   createFailureMessage,
   favoursRequired,
-  meetsAttributeRequirement,
+  // meetsAttributeRequirement,
 } from './requirements';
-
-import * as factions from './index';
 
 describe('factions/requirements', () => {
   describe('#attributeRequired', () => {
@@ -28,7 +26,9 @@ describe('factions/requirements', () => {
 
   describe('#createFailureMessage', () => {
     const id = ORNATE_TYPEWRITER;
-    let attributes, favours, renown;
+    let attributes;
+    let favours;
+    let renown;
 
     beforeEach(() => {
       attributes = {};
@@ -47,14 +47,14 @@ describe('factions/requirements', () => {
       favours.Bohemians = 7;
       renown.Bohemians = 40;
       const message = createFailureMessage({ attributes, favours, id, renown });
-      expect(message).toBe(`You need Persuasive ${40*6} (you have 10).`);
+      expect(message).toBe(`You need Persuasive ${40 * 6} (you have 10).`);
     });
 
     it('mentions both', () => {
       attributes[factionAttributes[BOHEMIANS]] = 10;
       renown.Bohemians = 40;
       const message = createFailureMessage({ attributes, favours, id, renown });
-      expect(message).toBe(`You need 7 Favours (you have 0) and Persuasive ${40*6} (you have 10).`);
+      expect(message).toBe(`You need 7 Favours (you have 0) and Persuasive ${40 * 6} (you have 10).`);
     });
   });
 

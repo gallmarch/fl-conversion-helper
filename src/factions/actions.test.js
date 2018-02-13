@@ -1,7 +1,7 @@
-import { fetchConnectedQualities } from './actions';
 import $ from 'jquery';
 
 import * as factions from './index';
+import { fetchConnectedQualities } from './actions';
 
 import { mockConnections } from './__mocks__/mockResponses';
 
@@ -32,13 +32,13 @@ describe('factions/actions', () => {
 
       beforeEach(() => {
         // Mock out the AJAX call
-        jest.spyOn($, 'ajax').mockImplementation(() => new Promise((resolve, reject) => {
+        jest.spyOn($, 'ajax').mockImplementation(() => new Promise((resolve) => {
           resolve(mockConnections());
         }));
         // Get something we can call directly
         f = fetchConnectedQualities();
         // Mock the dispatch function
-        dispatch = jest.fn(({ type, payload } ) => payload);
+        dispatch = jest.fn(({ payload }) => payload);
       });
 
       it('calls its param', (done) => {
@@ -49,7 +49,7 @@ describe('factions/actions', () => {
       });
 
       it('returns the expected top-level keys', (done) => {
-        f(dispatch).then(res => {
+        f(dispatch).then((res) => {
           const expected = ['favours', 'renown'].sort();
           expect(Object.keys(res).sort()).toEqual(expected.sort());
           done();
@@ -57,14 +57,14 @@ describe('factions/actions', () => {
       });
 
       it('returns the expected renown keys', (done) => {
-        f(dispatch).then(res => {
+        f(dispatch).then((res) => {
           expect(Object.keys(res.renown).sort()).toEqual(factionKeys);
           done();
         });
       });
 
       it('returns the expected favours keys', (done) => {
-        f(dispatch).then(res => {
+        f(dispatch).then((res) => {
           expect(Object.keys(res.favours).sort()).toEqual(factionKeys);
           done();
         });

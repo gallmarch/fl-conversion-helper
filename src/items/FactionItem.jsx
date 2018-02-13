@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { items } from '../factions';
 import {
-  attributeRequired,
   createFailureMessage,
   favoursRequired,
   meetsAttributeRequirement,
@@ -13,7 +12,6 @@ import { getInventoryMatch } from './Item';
 import BlankItem from './BlankItem';
 import UsableItem from './UsableItem';
 import DummiedItem from './DummiedItem';
-import { attributeName } from '../attributes/names';
 
 export {
   isConvertible,

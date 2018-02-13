@@ -42,7 +42,6 @@ class Extension extends Component {
         {visibilities.tier2 && (
           <Category category="tier2" categoryName="Tier 2">
             {tier2.map(id => (<Item
-              isLegacy={isLegacy}
               key={id}
               id={id}
               enablementPreference={enablements.tiers}

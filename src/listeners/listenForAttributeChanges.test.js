@@ -1,4 +1,4 @@
-import { callback, getAttributeValueFromDOM, getRootNodeSelector } from './listenForAttributeChanges';
+import { getAttributeValueFromDOM, getRootNodeSelector } from './listenForAttributeChanges';
 
 
 describe('getAttributeValueFromDOM', () => {
@@ -40,5 +40,5 @@ describe('getRootNodeSelector', () => {
 
   it('throws an error if isLegacy is false', () => {
     expect(() => getRootNodeSelector({ isLegacy: false })).toThrow();
-  })
+  });
 });

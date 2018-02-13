@@ -1,5 +1,6 @@
+/* eslint-disable import/prefer-default-export */
 
-export function mockConnections() { 
+export function mockConnections() {
   return `
 
     <div class="qualities clearfix">

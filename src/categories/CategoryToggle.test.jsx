@@ -5,7 +5,7 @@ import CategoryToggle from './CategoryToggle';
 
 describe('CategoryToggle', () => {
   it('matches its snapshot', () => {
-    const componentTrue = renderer.create(<CategoryToggle state={true} />);
+    const componentTrue = renderer.create(<CategoryToggle state />);
     expect(componentTrue).toMatchSnapshot();
 
     const componentFalse = renderer.create(<CategoryToggle state={false} />);

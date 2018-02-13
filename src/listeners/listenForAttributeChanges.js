@@ -17,7 +17,7 @@ import {
 // requirements for Favour -> Renown conversions, and we want the faction
 // item category to update itself to reflect this without forcing the user
 // to tab away and back.
-export default function listenForAttributeChanges({ store, isLegacy=true }) {
+export default function listenForAttributeChanges({ store, isLegacy = true }) {
   const rootNode = document.querySelector(getRootNodeSelector({ isLegacy }));
   const queries = [{ element: 'ul.you_icon' }];
   return new MutationSummary({
@@ -44,7 +44,7 @@ export function callback({ document, store }) {
   };
 }
 
-export function getAttributeValueFromDOM({attributeID, document, isLegacy=true }) {
+export function getAttributeValueFromDOM({ attributeID, document, isLegacy = true }) {
   if (isLegacy) {
     // The *modified* attribute is only found inside the tooltip that we get when
     // hovering over the attribute's icon, so we'll do a regexp search for a numeric

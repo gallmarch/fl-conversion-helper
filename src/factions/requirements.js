@@ -51,8 +51,14 @@ function createFailureMessage({ attributes, favours, id, renown }) {
 
   // Add an attribute-too-low explanation
   if (!hasAttributeLevel) {
-    const { attribute: relevantAttribute, level: necessaryLevel } = attributeRequired(faction, renown[faction]);
+    // Get the attribute and required level for upconverting this faction at this Renown
+    const {
+      attribute: relevantAttribute,
+      level: necessaryLevel,
+    } = attributeRequired(faction, renown[faction]);
+    // Get the current attribute
     const actualAttributeLevel = attributes[relevantAttribute];
+    // Build the string
     const insufficientAttributeMessage = `${attributeName(relevantAttribute)} ${necessaryLevel} (you have ${actualAttributeLevel})`;
     failureReasons.push(insufficientAttributeMessage);
   }

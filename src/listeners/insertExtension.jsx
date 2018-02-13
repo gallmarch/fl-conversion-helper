@@ -38,7 +38,6 @@ function createContainer(isLegacy) {
 
 function insertContainer(container, isLegacy = true) {
   if (isLegacy) {
-
     // Get the parent element for our outer container
     const parent = document.querySelector(getParentSelector({ isLegacy }));
 

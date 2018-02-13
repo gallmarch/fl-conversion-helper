@@ -11,9 +11,9 @@ import { validateDOMElement } from '../util';
 // our category list with the original element. Rather than write our own
 // onclick handler, we can simply script a click on the linked element.
 export default function UsableItem(props) {
-  const { inventoryMatch, isLegacy, isDisabled, quantity } = props;
+  const { isLegacy } = props;
   if (isLegacy) {
-    return <LegacyUsableItem {...props} />
+    return <LegacyUsableItem {...props} />;
   }
 }
 
@@ -24,6 +24,7 @@ UsableItem.propTypes = {
   ]),
   inventoryMatch: validateDOMElement.isRequired,
   isDisabled: PropTypes.bool,
+  isLegacy: PropTypes.bool.isRequired,
   quantity: PropTypes.number,
 };
 
