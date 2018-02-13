@@ -1,4 +1,4 @@
-import listenForInventorySectionAddition from './listenForInventorySectionAddition';
+import listenForInventorySectionAddition, { callback } from './listenForInventorySectionAddition';
 
 describe('listenForInventorySection', () => {
   const store = {};
@@ -14,5 +14,11 @@ describe('listenForInventorySection', () => {
       store,
       isLegacy,
     })).toBe('object');
+  });
+});
+
+describe('callback', () => {
+  it('returns a function', () => {
+    expect(typeof callback({})).toBe('function');
   });
 });

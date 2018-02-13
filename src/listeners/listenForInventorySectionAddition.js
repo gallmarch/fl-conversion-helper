@@ -1,5 +1,6 @@
 import MutationSummary from 'mutation-summary';
 import insertExtension from './insertExtension';
+import { UnsupportedError } from '../errors';
 
 // Insert the conversion-helper elements when we detect that the
 // Myself tab has just been loaded. Our only clue to this is that
@@ -14,17 +15,19 @@ export default function listenForInventorySectionAddition({ store, isLegacy = tr
     return new MutationSummary({
       rootNode,
       queries,
-      callback,
+      callback: callback({ store, isLegacy }),
     });
-
-    function callback(summaries) {
-      const summary = summaries[0];
-      // Only proceed if the element has been added: this is our cue that
-      // we're entering the tab
-      if (summary.added.length) {
-        insertExtension({ store });
-      }
-    }
   }
-  throw new Error({ message: 'Not ready for non-legacy yet' });
+  throw new UnsupportedError();
+}
+
+export function callback({ store, isLegacy }) {
+  return function generatedCallback(summaries) {
+    const summary = summaries[0];
+    // Only proceed if the element has been added: this is our cue that
+    // we're entering the tab
+    if (summary.added.length) {
+      insertExtension({ store, isLegacy });
+    }
+  };
 }

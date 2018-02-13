@@ -37,6 +37,7 @@ describe('getRootNodeSelector', () => {
   it('returns a string if isLegacy is true', () => {
     expect(typeof getRootNodeSelector({ isLegacy: true })).toBe('string');
   });
+
   it('throws an error if isLegacy is false', () => {
     expect(() => getRootNodeSelector({ isLegacy: false })).toThrow();
   })

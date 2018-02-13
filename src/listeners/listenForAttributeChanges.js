@@ -28,7 +28,7 @@ export default function listenForAttributeChanges({ store, isLegacy=true }) {
 }
 
 export function callback({ document, store }) {
-  return () => {
+  return function generatedCallback() {
     // Retrieve modified WSDP attribute values (i.e., gear effects included) and build a
     // dictionary
     const attributes = [WATCHFUL, SHADOWY, DANGEROUS, PERSUASIVE].reduce((acc, attributeID) => {
