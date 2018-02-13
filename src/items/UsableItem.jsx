@@ -11,22 +11,10 @@ import { validateDOMElement } from '../util';
 // our category list with the original element. Rather than write our own
 // onclick handler, we can simply script a click on the linked element.
 export default function UsableItem(props) {
-  const { inventoryMatch, isDisabled, quantity } = props;
-  return (
-    <li>
-      <a
-        className={classNames('tooltip', 'usableitem', { disabled: isDisabled })}
-        onClick={() => inventoryMatch.parentNode.click()}
-      >
-        <div className="qq">{quantity}</div>
-        <div>
-          {cloneImage(inventoryMatch.querySelector('img'))}
-        </div>
-        {cloneTooltip(inventoryMatch)}
-        {props.children}
-      </a>
-    </li>
-  );
+  const { inventoryMatch, isLegacy, isDisabled, quantity } = props;
+  if (isLegacy) {
+    return <LegacyUsableItem {...props} />
+  }
 }
 
 UsableItem.propTypes = {
@@ -45,3 +33,39 @@ UsableItem.defaultProps = {
   quantity: 0,
 };
 
+export function LegacyUsableItem({
+  children,
+  inventoryMatch,
+  isDisabled,
+  quantity,
+}) {
+  return (
+    <li>
+      <a
+        className={classNames('tooltip', 'usableitem', { disabled: isDisabled })}
+        onClick={() => inventoryMatch.parentNode.click()}
+      >
+        <div className="qq">{quantity}</div>
+        <div>
+          {cloneImage(inventoryMatch.querySelector('img'))}
+        </div>
+        {cloneTooltip(inventoryMatch)}
+        {children}
+      </a>
+    </li>
+  );
+}
+
+LegacyUsableItem.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.arrayOf(PropTypes.node),
+  ]),
+  inventoryMatch: validateDOMElement.isRequired,
+  isDisabled: PropTypes.bool.isRequired,
+  quantity: PropTypes.number.isRequired,
+};
+
+LegacyUsableItem.defaultProps = {
+  children: null,
+};
