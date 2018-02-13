@@ -55,13 +55,14 @@ function FactionItem(props) {
     enablementPreference,
     factions: { favours, renown },
     id,
+    isLegacy,
   } = props;
   // Look for the faction's item in our inventory
   const inventoryMatch = getInventoryMatch(id);
 
   // If we don't have the item, then return a blank
   if (!inventoryMatch) {
-    return <BlankItem />;
+    return <BlankItem isLegacy={isLegacy} />;
   }
 
   const faction = items[id];
@@ -79,7 +80,7 @@ function FactionItem(props) {
 
   // If we are enabled, then display an enabled item
   if (convertible) {
-    return <UsableItem inventoryMatch={inventoryMatch} quantity={factionFavours} />;
+    return <UsableItem inventoryMatch={inventoryMatch} quantity={factionFavours} isLegacy={isLegacy} />;
   }
 
   // If, for some reason, we shouldn't be enabled, display a dummied-out item
@@ -93,6 +94,7 @@ function FactionItem(props) {
 
   return (<DummiedItem
     inventoryMatch={inventoryMatch}
+    isLegacy={isLegacy}
     quantity={factionFavours}
     message={message}
   />);
