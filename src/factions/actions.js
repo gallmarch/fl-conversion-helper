@@ -6,9 +6,9 @@ export const FAVOURS_AND_RENOWN = 'FAVOURS_AND_RENOWN';
 
 // Retrieve the Favours and Renown qualities from the server,
 // parse them, and dispatch an action
-function fetchConnectedQualities() {
-  return dispatch => baseFetchConnectedQualities()
-    .then(parseConnectedQualities)
+function fetchConnectedQualities(isLegacy) {
+  return dispatch => baseFetchConnectedQualities(isLegacy)
+    .then(response => parseConnectedQualities(response))
     .then(({ favours, renown }) =>
       // console.info('favours are');
       // console.info(favours);

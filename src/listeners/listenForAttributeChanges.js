@@ -5,6 +5,7 @@ import {
   WATCHFUL,
   SHADOWY,
 } from '../attributes';
+import { log } from '../util';
 
 // Here we're adding a MutationSummary that listens the left-hand column for
 // changes. These happen quite frequently (largely because the timer, which
@@ -19,32 +20,39 @@ import {
 // to tab away and back.
 export default function listenForAttributeChanges({ store, isLegacy = true }) {
   const rootNode = document.querySelector(getRootNodeSelector({ isLegacy }));
-  const queries = [{ element: 'ul.you_icon' }];
+  const queries = [{ element: getElementQueries({ isLegacy }) }];
   return new MutationSummary({
     rootNode,
     queries,
-    callback: callback({ document, store }),
+    callback: createCallback({ document, isLegacy, store }),
   });
 }
 
-export function callback({ document, store }) {
-  return function generatedCallback() {
-    // Retrieve modified WSDP attribute values (i.e., gear effects included) and build a
-    // dictionary
-    const attributes = [WATCHFUL, SHADOWY, DANGEROUS, PERSUASIVE].reduce((acc, attributeID) => {
-      const attributeValue = getAttributeValueFromDOM({ attributeID, document });
-      if (attributeValue) {
-        return { ...acc, [attributeID]: attributeValue };
-      }
-      return acc;
-    }, {});
-    // We have our dict; dispatch an action so that the faction item category can
-    // update itself
-    store.dispatch({ type: 'ATTRIBUTES', payload: attributes });
+export function createCallback({ document, isLegacy, store }) {
+  log(`Creating callback with isLegacy=${isLegacy}`);
+  if (isLegacy) {
+    return () => {
+      // Retrieve modified WSDP attribute values (i.e., gear effects included) and build a
+      // dictionary
+      const attributes = [WATCHFUL, SHADOWY, DANGEROUS, PERSUASIVE].reduce((acc, attributeID) => {
+        const attributeValue = getAttributeValueFromDOM({ attributeID, document });
+        if (attributeValue) {
+          return { ...acc, [attributeID]: attributeValue };
+        }
+        return acc;
+      }, {});
+      // We have our dict; dispatch an action so that the faction item category can
+      // update itself
+      store.dispatch({ type: 'ATTRIBUTES', payload: attributes });
+    };
+  }
+  return () => {
+    log('Running new callback');
   };
 }
 
-export function getAttributeValueFromDOM({ attributeID, document, isLegacy = true }) {
+
+export function getAttributeValueFromDOM({ attributeID, document, isLegacy }) {
   if (isLegacy) {
     // The *modified* attribute is only found inside the tooltip that we get when
     // hovering over the attribute's icon, so we'll do a regexp search for a numeric
@@ -59,13 +67,20 @@ export function getAttributeValueFromDOM({ attributeID, document, isLegacy = tru
     }
     return undefined;
   }
-  throw new Error({ message: 'Not implemented for non-legacy; waiting for beta' });
+  throw new Error('Not implemented for non-legacy; waiting for beta');
 }
 
-export function getRootNodeSelector({ isLegacy = true }) {
+function getElementQueries({ isLegacy }) {
+  if (isLegacy) {
+    return 'ul.you_icon';
+  }
+  return '*';
+}
+
+// Get the CSS selector for the root node that we should be watching for changes
+export function getRootNodeSelector({ isLegacy  }) {
   if (isLegacy) {
     return 'div#lhs_col';
   }
-  // TODO: Check the new front-end for a selector
-  throw new Error({ message: 'The new front-end isn\'t supported yet.' });
+  return '.content.container .col-secondary';
 }

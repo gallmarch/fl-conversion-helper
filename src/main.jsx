@@ -12,19 +12,47 @@ import {
   listenForInventorySectionAddition,
   listenForStorageChanges,
 } from './listeners';
+import { isLegacy, log } from './util';
 
+log('Checking for version');
+if (isLegacy()) {
+  log('This is the legacy version');
+} else {
+  log('This is the new version');
+}
 
+// Get a reference to localStorage
 const storage = chrome.storage.local;
 
 // Create the store
 const store = applyMiddleware(reduxThunk)(createStore)(reducer);
 
+// Listen for info from our background script
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  log(`request incoming`);
+  console.info(request);
+  const { page } = request;
+  if (!page) {
+    return;
+  }
+  switch (page) {
+    case 'possessions':
+      onPossessionsLoaded();
+  }
+});
+
+function onPossessionsLoaded() {
+  console.info(document.querySelectorAll('.stack-content'));
+}
+
+// log(chrome.webRequest);
+
 // Set up MutationSummaries that dispatch actions
-listenForAttributeChanges({ store });
-listenForInventorySectionAddition({ store });
+// listenForAttributeChanges({ store, isLegacy: isLegacy() });
+// listenForInventorySectionAddition({ store, isLegacy: isLegacy() });
 
 // Listen for storage changes
-listenForStorageChanges({ store });
+// listenForStorageChanges({ store });
 
 // Load expansion preferences
 loadPreferences({ storage, store });

@@ -6,6 +6,7 @@ import Item from './items/Item';
 import FactionItem from './items/FactionItem';
 import { tier1, tier2, tier3, tier4, factionItems, fidgetingWriter } from './items';
 import { fetchConnectedQualities } from './factions/actions';
+import { log } from './util';
 
 class Extension extends Component {
   componentDidMount() {
@@ -13,7 +14,9 @@ class Extension extends Component {
     // the Extension mounts when the 'Myself' tab loads, and it's not
     // possible to change Renown/Favours directly from this tab, so
     // the qualities are static throughout the component's lifetime.
-    this.props.fetchConnectedQualities();
+    const { isLegacy } = this.props;
+    log(`Calling componentDidMount() with isLegacy=${isLegacy}`);
+    this.props.fetchConnectedQualities(isLegacy);
   }
 
   render() {

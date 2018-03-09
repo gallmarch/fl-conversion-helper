@@ -1,6 +1,6 @@
 {
   "name": "fl-conversion-helper",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "description": "Add new categories of convertible items to the inventory",
   "author": "sdobuadhachain@gmail.com",
   "jest": {
@@ -13,6 +13,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.18.0",
     "babel-core": "^6.24.0",
     "babel-loader": "7",
     "babel-preset-es2015": "^6.24.0",

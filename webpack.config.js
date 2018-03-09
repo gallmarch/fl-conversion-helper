@@ -33,6 +33,7 @@ module.exports = {
   entry: {
     'content-script.js': './src/main.jsx',
     'popup/popup.js': './src/popup/main.jsx',
+    'background.js': './src/background.js',
   },
   output: {
     path: './build/',
