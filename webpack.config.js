@@ -32,6 +32,7 @@ const zip = new ZipPlugin({
 module.exports = {
   entry: {
     'content-script.js': './src/main.jsx',
+    'inject.js': './src/inject.js',
     'popup/popup.js': './src/popup/main.jsx',
     'background.js': './src/background.js',
   },
@@ -49,7 +50,7 @@ module.exports = {
       },
       {
         test: /\.jsx?$/,
-        exclude: /node_modules/,
+        exclude: /node_modules\/(?!react-devtools\/).*/,
         loader: 'babel-loader',
         query: {
           presets: ['es2015', 'stage-0', 'react']

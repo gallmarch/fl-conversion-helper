@@ -1,6 +1,8 @@
 import $ from 'jquery';
 
+import { log } from '../util';
 import * as factions from '../factions';
+import factionNames from './factionNames';
 import renownIDs from '../factions/renown';
 import favourIDs from '../factions/favours';
 
@@ -9,13 +11,47 @@ import favourIDs from '../factions/favours';
 export default function parseConnectedQualities(response) {
   // JQuery lets us find elements by children's IDs, which is a pain
   // otherwise.
-  const $el = $(response);
+  // const $el = $(response);
 
   // Get the Renown and Favours values for each faction
-  const renown = findMatches(renownIDs);
-  const favours = findMatches(favourIDs);
+  // const renown = findMatches(renownIDs);
+  // const favours = findMatches(favourIDs);
+
+  log('Response being parsed:');
+  console.info(response);
+
+  const { Possessions: possessions } = response;
+
+  const social = possessions.find(_ => _.Name && _.Name === "Social: Contacts & Acquaintances");
+  if (!social) {
+    log('Couldn\'t find contacts and acquaintances');
+    return;
+  }
+
+  const { Possessions: qualities } = social;
+
+  console.info('factionNames');
+  console.info(factionNames);
+
+  console.info(qualities);
+
+  // const renown = findRenown(response);
+  const favours = findMatches(qualities, 'Favours');
+  const renown = findMatches(qualities, 'Renown');
+
   return { renown, favours };
 
+  function findMatches(social, prefix) {
+    return Object.keys(factionNames).reduce((acc, faction) => {
+      const factionName = factionNames[faction];
+      const match = social.find(_ => _.name === `${prefix}: ${factionName}`);
+      if (match ) {
+        return { ...acc, [faction]: match.Level };
+      }
+    }, {});
+  }
+
+  /*
   function findMatches(ids) {
     const { items, ...rest } = factions;
     return Object.keys(rest).reduce((acc, faction) => {
@@ -35,4 +71,5 @@ export default function parseConnectedQualities(response) {
       return { ...acc, [factions[faction]]: 0 };
     }, {});
   }
+  */
 }

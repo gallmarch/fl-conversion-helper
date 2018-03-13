@@ -10,9 +10,45 @@ function getInventoryMatch(id) {
   return document.querySelector(`div#infoBarQImage${id}`);
 }
 
-export { getInventoryMatch, cloneImage, cloneTooltip, renderCustomTooltip };
+export {
+  getInventoryMatch,
+  // cloneImage,
+  // cloneTooltip,
+  // renderCustomTooltip,
+};
 
 export default function Item({ id, message, alwaysConvertible, enablementPreference, ...rest }) {
+  console.info(`Looking for ${id}`);
+  const inventoryMatch = document.querySelector(`img[alt="${id}"]`);
+  if (!inventoryMatch) {
+    return null;
+  }
+  console.info(`Found inventory match for ${id}`);
+
+  const quantity = Number(inventoryMatch.nextElementSibling.innerText.trim());
+
+  const canConvert = alwaysConvertible
+    || enablementPreference === TIERS.ALWAYS
+    || quantity >= conversionCost(id, (enablementPreference === TIERS.SMALL));
+
+  if (canConvert) {
+    // TODO: check whether item use is disabled
+    const isDisabled = false;
+
+    return (
+      <UsableItem
+        {...rest}
+        inventoryMatch={inventoryMatch}
+      />
+    );
+
+  }
+
+  return null;
+}
+
+
+function OldItem({ id, message, alwaysConvertible, enablementPreference, ...rest }) {
   // Look for a DOM element in the inventory that has this item ID. This tells
   // us whether we have any of the item at all.
   const inventoryMatch = document.querySelector(`div#infoBarQImage${id}`);
@@ -78,7 +114,7 @@ Item.defaultProps = {
 // Given an image node, return a React-controllable clone of the image.
 // The existence (or otherwise) of alt-text is determined entirely by the
 // image we're cloning (which we can't change), so we'll hush ESLint.
-function cloneImage(node) {
+function _cloneImage(node) {
   const attributes = [
     'height',
     'width',
@@ -92,7 +128,7 @@ function cloneImage(node) {
 // If we just want an exact copy of a tooltip, we can go ahead and clone it
 // like this. If there's malicious code in the tooltip HTML, then it's already
 // on the page, and there's nothing we can do about it, so we'll hush ESLint.
-function cloneTooltip(node) {
+function _cloneTooltip(node) {
   // Find the node's tooltip; fail gracefully if not found
   const ttNode = node.parentNode && node.parentNode.querySelector('span.tt');
   if (!ttNode) {
@@ -107,7 +143,7 @@ function cloneTooltip(node) {
 // amend the clone's tooltip text, and return it in a span. Again, if there's
 // anything malicious in the tooltip, then it's already on the page, so we'll
 // hush ESLint.
-function renderCustomTooltip(node, message) {
+function _renderCustomTooltip(node, message) {
   // Find the node's tooltip; fail gracefully if not found
   const ttNode = node.parentNode && node.parentNode.querySelector('span.tt');
   if (!ttNode) {

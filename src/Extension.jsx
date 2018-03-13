@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Category from './categories/Category';
@@ -8,15 +8,13 @@ import { tier1, tier2, tier3, tier4, factionItems, fidgetingWriter } from './ite
 import { fetchConnectedQualities } from './factions/actions';
 import { log } from './util';
 
-class Extension extends Component {
+class OldExtension extends Component {
   componentDidMount() {
     // Only fetch the Renown/Favours qualities when the component mounts;
     // the Extension mounts when the 'Myself' tab loads, and it's not
     // possible to change Renown/Favours directly from this tab, so
     // the qualities are static throughout the component's lifetime.
-    const { isLegacy } = this.props;
-    log(`Calling componentDidMount() with isLegacy=${isLegacy}`);
-    this.props.fetchConnectedQualities(isLegacy);
+    this.props.fetchConnectedQualities();
   }
 
   render() {
@@ -98,6 +96,29 @@ class Extension extends Component {
         )}
       </div>
     );
+  }
+}
+
+class Extension extends Component {
+  componentDidMount() {
+    this.props.fetchConnectedQualities();
+  }
+
+  render() {
+    const { preferences: { enablements, visibilities } } = this.props;
+    console.info('Rendering Extension');
+    console.info(visibilities);
+    return (<Fragment>
+      {visibilities.tier1 && (
+        <Category category="tier1" categoryName="Tier 1">
+          {tier1.map(id => (<Item
+            key={id}
+            enablementPreference={enablements.tiers}
+            id={id}
+          />))}
+        </Category>
+      )}
+    </Fragment>);
   }
 }
 

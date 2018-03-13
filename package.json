@@ -29,6 +29,7 @@
     "node-sass": "^4.5.0",
     "prop-types": "^15.5.10",
     "react": "^16.2",
+    "react-devtools": "https://github.com/sdob/react-devtools.git",
     "react-dom": "^16.2",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
@@ -36,6 +37,7 @@
     "redux-thunk": "^2.2.0",
     "rimraf": "^2.6.1",
     "sass-loader": "^6.0.3",
+    "utf-8-validate": "^4.0.0",
     "webpack": "2.2",
     "zip-webpack-plugin": "^1.0.0"
   },

@@ -24,5 +24,5 @@ function getUrl(isLegacy) {
   if (isLegacy) {
     return '//fallenlondon.storynexus.com/Me/StatusesForCategory?category=Contacts';
   }
-  return '//beta.fallenlondon.com/myself';
+  return '//api.fallenlondon.com/api/character/myself';
 }

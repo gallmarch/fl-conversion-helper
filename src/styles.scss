@@ -21,3 +21,9 @@
 ul.flch-contracted.flch-contracted {
   display: none;
 }
+
+#flch-nav-root {
+  .nav__item:last-child {
+    border-bottom: 2px solid #a89e8c;
+  }
+}
