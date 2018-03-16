@@ -15,6 +15,7 @@ import {
 } from './listeners';
 import { isLegacy, log } from './util';
 import addAuthListener from './auth/addAuthListener';
+import addSidebarListener, { readAttributes } from './sidebar/addSidebarListener';
 
 log('Checking for version');
 if (isLegacy()) {
@@ -26,19 +27,13 @@ if (isLegacy()) {
 // Create the store
 const store = applyMiddleware(reduxThunk)(createStore)(reducer);
 
+// Try and load things available on page load
+readAttributes()(store.dispatch);
+
 addAuthListener({ store });
+addSidebarListener({ store });
 
 // Get a reference to (our) localStorage
 const storage = chrome.storage.local;
-
-// log(chrome.webRequest);
-
-// Set up MutationSummaries that dispatch actions
-// listenForAttributeChanges({ store, isLegacy: isLegacy() });
-// listenForInventorySectionAddition({ store, isLegacy: isLegacy() });
-
-// Listen for storage changes
-// listenForStorageChanges({ store });
-
 // Load expansion preferences
 loadPreferences({ storage, store });

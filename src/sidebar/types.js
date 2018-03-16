@@ -1,0 +1,1 @@
+export const ATTRIBUTES_UPDATED = 'sidebar/ATTRIBUTES_UPDATED';
