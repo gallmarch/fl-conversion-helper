@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import $ from 'jquery';
+import axios from 'axios';
 import { createStore, applyMiddleware } from 'redux';
 import reduxThunk from 'redux-thunk';
 
@@ -13,6 +14,7 @@ import {
   listenForStorageChanges,
 } from './listeners';
 import { isLegacy, log } from './util';
+import addAuthListener from './auth/addAuthListener';
 
 log('Checking for version');
 if (isLegacy()) {
@@ -21,29 +23,13 @@ if (isLegacy()) {
   log('This is the new version');
 }
 
-// Get a reference to localStorage
-const storage = chrome.storage.local;
-
 // Create the store
 const store = applyMiddleware(reduxThunk)(createStore)(reducer);
 
-// Listen for info from our background script
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  log(`request incoming`);
-  console.info(request);
-  const { page } = request;
-  if (!page) {
-    return;
-  }
-  switch (page) {
-    case 'possessions':
-      onPossessionsLoaded();
-  }
-});
+addAuthListener({ store });
 
-function onPossessionsLoaded() {
-  console.info(document.querySelectorAll('.stack-content'));
-}
+// Get a reference to (our) localStorage
+const storage = chrome.storage.local;
 
 // log(chrome.webRequest);
 

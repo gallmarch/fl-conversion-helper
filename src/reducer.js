@@ -1,3 +1,4 @@
+import auth from './auth/reducer';
 import { combineReducers } from 'redux';
 import preferencesReducer from './preferences/reducer';
 
@@ -37,6 +38,6 @@ function factionReducer(state = INITIAL_FACTION_STATE, { type, payload }) {
 export default combineReducers({
   attributes: attributesReducer,
   factions: factionReducer,
-  mainReducer,
+  auth,
   preferences: preferencesReducer,
 });
