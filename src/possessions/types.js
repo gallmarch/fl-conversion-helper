@@ -1,0 +1,2 @@
+export const FETCHING_POSSESSIONS = 'possessions/FETCHING_POSSESSIONS';
+export const POSSESSIONS_FETCHED = 'possessions/POSSESSIONS_FETCHED';

@@ -4600,6 +4600,10 @@ react-dom@^16.2:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
+react-portal-tooltip@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/react-portal-tooltip/-/react-portal-tooltip-2.3.0.tgz#c6f42b36c1a6de8d3f653351594d1420e643426d"
+
 react-redux@^5.0.6:
   version "5.0.6"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-5.0.6.tgz#23ed3a4f986359d68b5212eaaa681e60d6574946"

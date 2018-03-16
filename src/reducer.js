@@ -1,6 +1,7 @@
 import auth from './auth/reducer';
 import { combineReducers } from 'redux';
-import preferencesReducer from './preferences/reducer';
+import possessions from './possessions/reducer';
+import preferences from './preferences/reducer';
 import sidebar from './sidebar/reducer';
 
 import { FAVOURS_AND_RENOWN } from './factions/actions';
@@ -40,6 +41,7 @@ export default combineReducers({
   attributes: attributesReducer,
   factions: factionReducer,
   auth,
-  preferences: preferencesReducer,
+  possessions,
+  preferences,
   sidebar,
 });

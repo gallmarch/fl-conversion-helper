@@ -1,6 +1,6 @@
 {
   "name": "fl-conversion-helper",
-  "version": "1.5.0",
+  "version": "2.0.0",
   "description": "Add new categories of convertible items to the inventory",
   "author": "sdobuadhachain@gmail.com",
   "jest": {
@@ -30,6 +30,7 @@
     "prop-types": "^15.5.10",
     "react": "^16.2",
     "react-dom": "^16.2",
+    "react-portal-tooltip": "^2.3.0",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-localstorage": "^0.4.1",

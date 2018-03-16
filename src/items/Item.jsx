@@ -1,127 +1,92 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { TIERS } from '../preferences/constants';
-import { conversionCost } from '.';
-import BlankItem from './BlankItem';
-import UsableItem from './UsableItem';
-import DummiedItem from './DummiedItem';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import ToolTip from '../tooltips/ToolTip';
 
-function getInventoryMatch(id) {
-  return document.querySelector(`div#infoBarQImage${id}`);
-}
+import { useQuality } from './actions';
 
-export { getInventoryMatch, cloneImage, cloneTooltip, renderCustomTooltip };
+const IMAGE_ROOT = '//images.fallenlondon.com/images/icons_small';
 
-export default function Item({ id, message, alwaysConvertible, enablementPreference, ...rest }) {
-  // Look for a DOM element in the inventory that has this item ID. This tells
-  // us whether we have any of the item at all.
-  const inventoryMatch = document.querySelector(`div#infoBarQImage${id}`);
+class Item extends Component {
 
-  // If we have a non-zero amount of the item, decide whether to show it as
-  // convertible or non-convertible
-  if (inventoryMatch) {
-    const quantity = Number(inventoryMatch.parentNode.querySelector('div.qq').innerText);
-    // Tales of Terror live in two categories --- in Tier 3, it only makes
-    // sense to convert if you have 50 or more, but as the start of the Fidgeting
-    // Writer you probably want to be able to convert any ToT you have --- so
-    // we'll check for a prop that overrides checking the usual conversion 
-    // requirements.
-    //
-    // We now also support user-defined preferences for forcing enablement.
-    // To check this, we do a comparison
-    const canConvert = alwaysConvertible
-      || enablementPreference === TIERS.ALWAYS
-      || quantity >= conversionCost(id, (enablementPreference === TIERS.SMALL));
+  constructor(props) {
+    super(props);
+    this.findMatch = this.findMatch.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.handleMouseEnter = this.handleMouseEnter.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
+    this.handleMouseMove = this.handleMouseMove.bind(this);
+    this.state = { showToolTip: false };
+  }
 
-    // If we can convert this item, then display it as clickable
-    if (canConvert) {
-      // In areas where we can't use items (e.g., Menace areas), we might as well
-      // add the standard red border to indicate this
-      const isDisabled = inventoryMatch.parentElement.classList.contains('disabled');
+  findMatch() {
+    // Delegate the onclick behaviour to the real item (which is wired up to the React app)
+    const { id, possessions } = this.props;
+    const match = possessions.find(el => el.Id === Number(id));
+    if (!match) {
+      return null;
+    }
+    const { Name: name } = match;
+    const selector = `.stack-content > div:not(.flch-content-container) img[alt="${name}"]`;
+    return {
+      data: match,
+      element: document.querySelector(selector),
+    };
+  }
+
+  handleClick() {
+    this.findMatch().element.click();
+    // TODO: We probably only want to hide the tooltip if we are successfully using the item
+    this.setState({ showToolTip: false });
+  }
+
+  handleMouseEnter() {
+    console.info(this.findMatch().data);
+  }
+
+  handleMouseLeave() {
+    this.setState({ showToolTip: false });
+  }
+
+  handleMouseMove() {
+    this.setState({ showToolTip: true });
+  }
+
+  render() {
+    // const { id, possessions } = this.props;I
+    const { element, showToolTip } = this.state;
+    // const match = possessions.find(el => el.Id === Number(id));
+    const match = this.findMatch();
+
+    if (match) {
+      const { data } = match;
       return (
-        <UsableItem
-          {...rest}
-          inventoryMatch={inventoryMatch}
-          quantity={quantity}
-          isDisabled={isDisabled}
-        />
+        <li className="item items--emphasise">
+          <div className="icon icon--inventory icon--emphasize">
+            <img
+              onClick={this.handleClick}
+              onMouseEnter={this.handleMouseEnter}
+              onMouseLeave={this.handleMouseLeave}
+              onMouseMove={this.handleMouseMove}
+              ref={(element) => this.element = element}
+              src={`${IMAGE_ROOT}/${data.Image}.png`}
+            />
+            <span className="js-item-value icon__value">{data.Level}</span>
+          </div>
+          {showToolTip && (<ToolTip data={data} parent={this.element} active={showToolTip} />)}
+        </li>
       );
     }
 
-    // If we can't convert the item, show it as disabled and unclickable
     return (
-      <DummiedItem {...rest} inventoryMatch={inventoryMatch} quantity={quantity}>
-        <div className="qq">{quantity}</div>
-        <div>
-          {cloneImage(inventoryMatch.querySelector('img'))}
-        </div>
-      </DummiedItem>
+      <li className="item items--emphasize">
+        <div style={{ height: '40px', width: '40px', backgroundColor: 'rgba(0, 0, 0, 0.15)', filter: 'blur(2px)' }} />
+      </li>
     );
   }
-
-  // If we don't have the item *at all*, show a blank
-  return <BlankItem id={id} />;
 }
 
-Item.propTypes = {
-  alwaysConvertible: PropTypes.bool,
-  enablementPreference: PropTypes.number.isRequired,
-  id: PropTypes.string.isRequired,
-  message: PropTypes.string,
-};
-
-Item.defaultProps = {
-  alwaysConvertible: false,
-  message: undefined,
-};
-
-// Given an image node, return a React-controllable clone of the image.
-// The existence (or otherwise) of alt-text is determined entirely by the
-// image we're cloning (which we can't change), so we'll hush ESLint.
-function cloneImage(node) {
-  const attributes = [
-    'height',
-    'width',
-    'src',
-    'alt',
-  ].reduce((acc, attr) => ({ ...acc, [attr]: node.getAttribute(attr) }), {});
-  // eslint-disable-next-line jsx-a11y/alt-text
-  return <img {...attributes} />;
+function mapState({ possessions }) {
+  return { possessions: possessions.possessions };
 }
 
-// If we just want an exact copy of a tooltip, we can go ahead and clone it
-// like this. If there's malicious code in the tooltip HTML, then it's already
-// on the page, and there's nothing we can do about it, so we'll hush ESLint.
-function cloneTooltip(node) {
-  // Find the node's tooltip; fail gracefully if not found
-  const ttNode = node.parentNode && node.parentNode.querySelector('span.tt');
-  if (!ttNode) {
-    return <span className="tt" />;
-  }
-  // eslint-disable-next-line react/no-danger
-  return <span className="tt" dangerouslySetInnerHTML={{ __html: ttNode.innerHTML }} />;
-}
-
-// If we want to amend the tooltip --- e.g., to explain why we're not letting
-// the user click on a faction item --- then we can just clone the DOM node,
-// amend the clone's tooltip text, and return it in a span. Again, if there's
-// anything malicious in the tooltip, then it's already on the page, so we'll
-// hush ESLint.
-function renderCustomTooltip(node, message) {
-  // Find the node's tooltip; fail gracefully if not found
-  const ttNode = node.parentNode && node.parentNode.querySelector('span.tt');
-  if (!ttNode) {
-    return <span className="tt" />;
-  }
-
-  // Clone the tooltip
-  const clone = ttNode.cloneNode(true);
-  // If we have two <strong> elements, then the second is
-  // the message that we're replacing.
-  const strongs = clone.querySelectorAll('strong');
-  if (strongs.length >= 2) {
-    strongs[1].textContent = message;
-  }
-  // eslint-disable-next-line react/no-danger
-  return <span className="tt" dangerouslySetInnerHTML={{ __html: clone.innerHTML }} />;
-}
+export default connect(mapState, { useQuality })(Item);
