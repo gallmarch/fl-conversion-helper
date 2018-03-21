@@ -1,111 +1,105 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { items } from '../factions';
-import {
-  createFailureMessage,
-  favoursRequired,
-  meetsAttributeRequirement,
-} from '../factions/requirements';
+
 import { FACTIONS } from '../preferences/constants';
-import { getInventoryMatch } from './Item';
+
+import factionAttributes from '../factions/attributes';
+import { getFaction } from '../factions/items';
+import { attributeLevelRequired, favoursRequired } from '../factions/requirements';
 import BlankItem from './BlankItem';
-import UsableItem from './UsableItem';
 import DummiedItem from './DummiedItem';
+import UsableItem from './UsableItem';
+import { findMatch } from './util';
 
-export {
-  isConvertible,
-  FactionItem,
-};
-
-FactionItem.propTypes = {
-  attributes: PropTypes.objectOf(PropTypes.number).isRequired,
-  enablementPreference: PropTypes.number.isRequired,
-  factions: PropTypes.objectOf(PropTypes.object).isRequired,
-  id: PropTypes.string.isRequired,
-};
-
-// Faction items are enabled either if
-// (a) the user wants them always to be enabled, or
-// (b) the user has enough Favours and a high enough level in the relevant
-//     attribute.
-function isConvertible({
-  attributes,
-  enablementPreference,
-  faction,
-  factionFavours,
-  factionRenown,
-  renown,
-}) {
-  // If the user always wants to convert, then return true
-  if (enablementPreference === FACTIONS.ALWAYS) {
-    return true;
+class FactionItem extends Component {
+  constructor(props) {
+    super(props);
+    this.makeFailureExplanation = this.makeFailureExplanation.bind(this);
+    this.isUsable = this.isUsable.bind(this);
   }
 
-  // Check whether we meet the attribute requirement and have enough
-  // Favours to perform a conversion
-  const hasEnoughFavours = factionFavours >= favoursRequired(factionRenown);
-  const hasAttributeLevel = meetsAttributeRequirement({ attributes, faction, renown });
-  return hasEnoughFavours && hasAttributeLevel;
-}
+  isUsable() {
+    const {
+      // attributes,
+      // id,
+      // myself: { renown, favours },
+      preferences: { enablements },
+      // sidebar,
+    } = this.props;
 
-function FactionItem(props) {
-  const {
-    attributes,
-    enablementPreference,
-    factions: { favours, renown },
-    id,
-    isLegacy,
-  } = props;
-  // Look for the faction's item in our inventory
-  const inventoryMatch = getInventoryMatch(id);
+    if (enablements.factions === FACTIONS.ALWAYS) {
+      return true;
+    }
 
-  // If we don't have the item, then return a blank
-  if (!inventoryMatch) {
-    return <BlankItem isLegacy={isLegacy} />;
+    const failureExplanation = this.makeFailureExplanation();
+    return !failureExplanation;
   }
 
-  const faction = items[id];
-  const factionFavours = favours[faction];
-  const factionRenown = renown[faction];
-
-  const convertible = isConvertible({
-    attributes,
-    enablementPreference,
-    faction,
-    factionFavours,
-    factionRenown,
-    renown,
-  });
-
-  // If we are enabled, then display an enabled item
-  if (convertible) {
-    return <UsableItem inventoryMatch={inventoryMatch} quantity={factionFavours} isLegacy={isLegacy} />;
+  componentDidMount() {
   }
 
-  // If, for some reason, we shouldn't be enabled, display a dummied-out item
-  // with an explanation in the tooltip
-  const message = createFailureMessage({
-    attributes,
-    favours,
-    id,
-    renown,
-  });
+  makeFailureExplanation() {
+    const { attributes, id, myself: { favours, renown } } = this.props;
 
-  return (<DummiedItem
-    inventoryMatch={inventoryMatch}
-    isLegacy={isLegacy}
-    quantity={factionFavours}
-    message={message}
-  />);
+    // Get this faction's attribute, Renown level, and Favours
+    const faction = getFaction(id);
+    const factionAttribute = factionAttributes[faction];
+    const factionRenown = renown[faction];
+    const factionFavours = favours[faction];
+
+    // Check whether we meet the Favour and attribute requirements to convert at
+    // this Renown level
+    const hasEnoughFavours = factionFavours >= favoursRequired(factionRenown);
+    const hasAttributeLevel = attributes[factionAttribute] >= attributeLevelRequired(factionRenown);
+
+    // If we meet the requirements, then return null
+    if (hasEnoughFavours && hasAttributeLevel) {
+      return null;
+    }
+
+    // Otherwise, build a string to explain why the item is disabled
+    const failureReasons = [];
+    if (!hasEnoughFavours) {
+      failureReasons.push(`${favoursRequired(factionRenown)} Favours (you have ${factionFavours})`);
+    }
+    if (!hasAttributeLevel) {
+      failureReasons.push(`${factionAttribute} ${attributeLevelRequired(factionRenown)} (you have ${attributes[factionAttribute]})`);
+    }
+    return `You need ${failureReasons.join(' and ')}.`;
+  }
+
+  render() {
+    const { data: rawData, id, element, myself: { favours, renown } } = this.props;
+
+    const factionFavours = favours[getFaction(id)];
+
+    const data = {
+      ...rawData,
+      // Show 'X Favours' as the quantity
+      Level: factionFavours,
+      TextualLevel: `${factionFavours} Favour${factionFavours === 1 ? '' : 's'}`,
+    };
+
+    if (!this.isUsable()) {
+      const failureExplanation = this.makeFailureExplanation();
+      return <DummiedItem
+        data={{
+          ...data,
+          SecondaryDescription: `${data.SecondaryDescription ? data.SecondaryDescription : ''}<p><i>${failureExplanation}</i></p>`
+        }}
+        element={element}
+      />;
+    }
+
+    return (
+      <UsableItem data={{...data, Level: factionFavours }} element={element} />
+    );
+
+  }
 }
 
-
-function mapStateToProps(state) {
-  return {
-    factions: state.factions,
-    attributes: state.attributes,
-  };
+function mapState({ attributes, myself, possessions, preferences, sidebar }) {
+  return { attributes, myself, possessions, preferences };
 }
 
-export default connect(mapStateToProps)(FactionItem);
+export default connect(mapState)(FactionItem);

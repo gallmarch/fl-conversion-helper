@@ -3,15 +3,22 @@ import factionAttributes from './attributes';
 import { items } from './index';
 
 export {
-  attributeRequired,
+  attributeLevelRequired,
   createFailureMessage,
   favoursRequired,
   meetsAttributeRequirement,
 };
 
+function attributeLevelRequired(renown) {
+  if (renown < 15) {
+    return Number.NEGATIVE_INFINITY;
+  }
+  return renown * 6;
+}
+
 // Given a faction and a Renown value, return the attribute and the level
 // required to do conversion
-function attributeRequired(faction, renown) {
+function _attributeRequired(faction, renown) {
   // Get the attribute whose value determines whether we can perform
   // a Favours-to-Renown conversion
   const attribute = factionAttributes[faction];

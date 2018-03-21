@@ -1,5 +1,10 @@
 import * as factions from './index';
-import { WATCHFUL, SHADOWY, DANGEROUS, PERSUASIVE } from '../attributes';
+// import { WATCHFUL, SHADOWY, DANGEROUS, PERSUASIVE } from '../attributes';
+
+const WATCHFUL = 'Watchful';
+const SHADOWY = 'Shadowy';
+const PERSUASIVE = 'Persuasive';
+const DANGEROUS = 'Dangerous';
 
 // This maps each faction's ID to the attribute whose level determines
 // we can raise Renown

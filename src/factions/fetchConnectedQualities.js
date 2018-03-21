@@ -1,7 +1,19 @@
-import $ from 'jquery';
+import axios from 'axios';
 import { log } from '../util';
 
-export default function fetchConnectedQualities(isLegacy) {
+export function fetchConnectedQualities() {
+  return (dispatch) => {
+    const url = 'https://api.fallenlondon.com/api/character/myself';
+    return axios.get(url)
+      .then(({ data }) => {
+        const { Possessions } = data;
+        const social = Possessions.find(el => el.Name === 'Social: Contacts & Acquaintances');
+        console.info(social);
+      });
+  }
+}
+
+export function _fetchConnectedQualities(isLegacy) {
   log(`Calling fetchConnectedQualities with isLegacy=${isLegacy}`);
   // TODO: see if the Fetch API is actually up to the task of
   // handling this when we're calling from a web extension. It

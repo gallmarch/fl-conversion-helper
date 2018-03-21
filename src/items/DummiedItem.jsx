@@ -1,33 +1,42 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { cloneImage, cloneTooltip, renderCustomTooltip } from './Item';
-import { validateDOMElement } from '../util';
+import React, { Component } from 'react';
 
-export default function DummiedItem(props) {
-  const { quantity, inventoryMatch, message } = props;
-  return (
-    <li>
-      <a className="tooltip flch-unlock">
-        <div className="qq">{quantity}</div>
-        <div>
-          {cloneImage(inventoryMatch.querySelector('img'))}
+import ToolTip from '../tooltips/ToolTip';
+import { IMAGE_ROOT } from './Item';
+
+export default class DummiedItem extends Component {
+
+  constructor(props) {
+    super(props);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
+    this.handleMouseMove = this.handleMouseMove.bind(this);
+    this.state = { showToolTip: false };
+  }
+
+  handleMouseLeave() {
+    this.setState({ showToolTip: false });
+  }
+
+  handleMouseMove() {
+    this.setState({ showToolTip: true });
+  }
+
+  render() {
+    const { data } = this.props;
+    const { showToolTip } = this.state;
+
+    return (
+      <li className="item">
+        <div className="icon icon--inventory icon--flch-dummied">
+          <img
+            onMouseLeave={this.handleMouseLeave}
+            onMouseMove={this.handleMouseMove}
+            ref={(element) => this.element = element}
+            src={`${IMAGE_ROOT}/${data.Image}.png`}
+          />
+          <span className="js-item-value icon__value">{data.Level}</span>
         </div>
-        {
-          (!!message && renderCustomTooltip(inventoryMatch, message))
-          || cloneTooltip(inventoryMatch)
-        }
-      </a>
-    </li>
-  );
+        {showToolTip && (<ToolTip data={data} parent={this.element} active={showToolTip} />)}
+      </li>
+    );
+  }
 }
-
-DummiedItem.propTypes = {
-  message: PropTypes.string,
-  quantity: PropTypes.number,
-  inventoryMatch: validateDOMElement.isRequired,
-};
-
-DummiedItem.defaultProps = {
-  message: null,
-  quantity: undefined,
-};

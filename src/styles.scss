@@ -25,3 +25,8 @@ ul.flch-contracted.flch-contracted {
 .nav__item.nav__item.nav__item--flch:last-of-type {
   border-bottom: 2px solid #a89e8c;
 }
+
+.icon--flch-dummied {
+  filter: grayscale(50%);
+  opacity: 0.4;
+}

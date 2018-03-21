@@ -1,72 +1,50 @@
-/* eslint-disable jsx-a11y/href-no-hash jsx-a11y/no-static-element-interactions */
-// We're not going to try to fix the accessibility issues, so just disable the
-// ESLint warnings
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { cloneImage, cloneTooltip } from './Item';
-import { validateDOMElement } from '../util';
+import React, { Component } from 'react';
 
-// To create a usable item, we couple the React-controlled element in
-// our category list with the original element. Rather than write our own
-// onclick handler, we can simply script a click on the linked element.
-export default function UsableItem(props) {
-  const { isLegacy } = props;
-  if (isLegacy) {
-    return <LegacyUsableItem {...props} />;
+import ToolTip from '../tooltips/ToolTip';
+import { IMAGE_ROOT } from './Item';
+
+export default class UsableItem extends Component {
+
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
+    this.handleMouseMove = this.handleMouseMove.bind(this);
+    this.state = { showToolTip: false };
+  }
+
+  handleClick() {
+    // TODO: We probably only want to hide the tooltip if we are successfully using the item
+    this.setState({ showToolTip: false });
+    this.props.element.click();
+  }
+
+  handleMouseLeave() {
+    this.setState({ showToolTip: false });
+  }
+
+  handleMouseMove() {
+    this.setState({ showToolTip: true });
+  }
+  render() {
+    const { data, element } = this.props;
+    const { showToolTip } = this.state;
+
+    return (
+      <li className="item items--emphasise">
+        <div className="icon icon--inventory icon--emphasize">
+          <img
+            onClick={this.handleClick}
+            onMouseEnter={this.handleMouseEnter}
+            onMouseLeave={this.handleMouseLeave}
+            onMouseMove={this.handleMouseMove}
+            ref={(element) => this.element = element}
+            src={`${IMAGE_ROOT}/${data.Image}.png`}
+          />
+          <span className="js-item-value icon__value">{data.Level}</span>
+        </div>
+        {showToolTip && (<ToolTip data={data} parent={this.element} active={showToolTip} />)}
+      </li>
+    );
   }
 }
-
-UsableItem.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.arrayOf(PropTypes.node),
-  ]),
-  inventoryMatch: validateDOMElement.isRequired,
-  isDisabled: PropTypes.bool,
-  isLegacy: PropTypes.bool.isRequired,
-  quantity: PropTypes.number,
-};
-
-UsableItem.defaultProps = {
-  children: null,
-  isDisabled: false,
-  quantity: 0,
-};
-
-export function LegacyUsableItem({
-  children,
-  inventoryMatch,
-  isDisabled,
-  quantity,
-}) {
-  return (
-    <li>
-      <a
-        className={classNames('tooltip', 'usableitem', { disabled: isDisabled })}
-        onClick={() => inventoryMatch.parentNode.click()}
-      >
-        <div className="qq">{quantity}</div>
-        <div>
-          {cloneImage(inventoryMatch.querySelector('img'))}
-        </div>
-        {cloneTooltip(inventoryMatch)}
-        {children}
-      </a>
-    </li>
-  );
-}
-
-LegacyUsableItem.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.arrayOf(PropTypes.node),
-  ]),
-  inventoryMatch: validateDOMElement.isRequired,
-  isDisabled: PropTypes.bool.isRequired,
-  quantity: PropTypes.number.isRequired,
-};
-
-LegacyUsableItem.defaultProps = {
-  children: null,
-};

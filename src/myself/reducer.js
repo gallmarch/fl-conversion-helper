@@ -1,10 +1,13 @@
-import { ATTRIBUTES_UPDATED } from './types';
+import { MYSELF_RECEIVED } from './types';
 
-const INITIAL_STATE = {};
+const INITIAL_STATE = {
+  renown: {},
+  favours: {},
+};
 
 export default function reducer(state=INITIAL_STATE, action) {
   switch (action.type) {
-    case ATTRIBUTES_UPDATED:
+    case MYSELF_RECEIVED:
       return { ...action.payload };
     default:
       return state;

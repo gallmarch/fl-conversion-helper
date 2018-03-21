@@ -1,4 +1,4 @@
-import * as factions from './index';
+import * as factions from './names';
 
 // Quality IDs for faction Favours; we use these when parsing the HTML
 // returned from the call to get 'Contacts'

@@ -8,11 +8,6 @@ import reduxThunk from 'redux-thunk';
 import styles from './styles.scss';
 import reducer from './reducer';
 import { loadPreferences } from './preferences/utils';
-import {
-  listenForAttributeChanges,
-  listenForInventorySectionAddition,
-  listenForStorageChanges,
-} from './listeners';
 import { isLegacy, log } from './util';
 import addAuthListener from './auth/addAuthListener';
 import addPossessionsListener, { onBodyChange } from './possessions/addPossessionsListener';
@@ -26,11 +21,20 @@ if (isLegacy()) {
   log('This is the new version');
 }
 
+// Hey, have we got the React global?
+console.info('Checking window');
+// chrome.windows.getCurrent({ populate: true }).then(() => console.log('booya'));
+//console.info(chrome.windows.getCurrent());
+// console.info(window);
+// console.info(window.__REACT_DEVTOOLS_GLOBAL_HOOK);
+// console.info(Object.keys(window.__REACT_DEVTOOLS_GLOBAL_HOOK__._renderers));
+
 // Create the store
 const store = applyMiddleware(reduxThunk)(createStore)(reducer);
 
 // Get a reference to (our) localStorage
 const storage = chrome.storage.local;
+
 // Load expansion preferences
 loadPreferences({ storage, store });
 
@@ -38,6 +42,7 @@ loadPreferences({ storage, store });
 readAttributes()(store.dispatch);
 onBodyChange({ store });
 
+// Add listeners
 addAuthListener({ store });
 addPossessionsListener({ store });
 addSidebarListener({ store });

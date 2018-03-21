@@ -2,8 +2,10 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import { fetchPossessions } from '../possessions/actions';
+import { fetchConnectedQualities } from '../myself/actions';
 import * as items from '../items/constants';
 import Item from '../items/Item';
+import FactionItem from '../items/FactionItem';
 import Category from './Category';
 
 class Categories extends Component {
@@ -12,6 +14,7 @@ class Categories extends Component {
   }
   componentDidMount() {
     this.props.fetchPossessions();
+    this.props.fetchConnectedQualities();
   }
 
   render() {
@@ -80,6 +83,7 @@ class Categories extends Component {
                 key={id}
                 id={id}
                 enablementPreference={enablements.tiers}
+                alwaysConvertible
               />
             ))}
           </Category>
@@ -93,4 +97,4 @@ function mapState({ possessions, preferences }) {
   return { possessions, preferences };
 }
 
-export default connect(mapState, { fetchPossessions })(Categories);
+export default connect(mapState, { fetchPossessions, fetchConnectedQualities })(Categories);

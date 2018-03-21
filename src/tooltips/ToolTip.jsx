@@ -8,6 +8,7 @@ export default function ToolTip({
   data,
   parent,
 }) {
+  const { Description, Image, Level, Name, SecondaryDescription, TextualLevel } = data;
   return (
     <BaseToolTip
       active={active}
@@ -18,12 +19,14 @@ export default function ToolTip({
     >
       <div className="tooltip">
         <div className="icon icon--circular">
-          <img src={`${IMAGE_ROOT}/${data.Image}.png`} />
+          <img src={`${IMAGE_ROOT}/${Image}.png`} />
         </div>
         <div className="tooltip__desc">
-          <span className="item__name">{data.Name}</span> <span className="item__value">{data.Level}</span>
-          <p dangerouslySetInnerHTML={{ __html: data.Description }} />
-          <i dangerouslySetInnerHTML={{ __html: data.SecondaryDescription }} />
+          <span className="item__name">{Name}</span>
+          {' '}
+          <span className="item__value">{TextualLevel === undefined ? Level : TextualLevel}</span>
+          <p dangerouslySetInnerHTML={{ __html: Description }} />
+          <i dangerouslySetInnerHTML={{ __html: SecondaryDescription }} />
         </div>
       </div>
     </BaseToolTip>
