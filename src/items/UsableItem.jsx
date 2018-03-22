@@ -34,6 +34,7 @@ export default class UsableItem extends Component {
       <li className="item items--emphasise">
         <div className="icon icon--inventory icon--emphasize">
           <img
+            alt={data.Name}
             onClick={this.handleClick}
             onMouseEnter={this.handleMouseEnter}
             onMouseLeave={this.handleMouseLeave}

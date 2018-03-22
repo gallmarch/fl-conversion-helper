@@ -35,7 +35,7 @@ export function insertCategories({ preferences, store }) {
   }
   const container = document.createElement('div');
   container.classList.add('flch-content-container');
-  parent.insertBefore(container, parent.firstChild);
+  parent.insertBefore(container, parent.querySelector('div'));
   ReactDOM.render(
     <Provider store={store}>
       <Categories />

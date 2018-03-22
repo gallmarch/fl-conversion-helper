@@ -28,6 +28,7 @@ export default class DummiedItem extends Component {
       <li className="item">
         <div className="icon icon--inventory icon--flch-dummied">
           <img
+            alt={data.Name}
             onMouseLeave={this.handleMouseLeave}
             onMouseMove={this.handleMouseMove}
             ref={(element) => this.element = element}
