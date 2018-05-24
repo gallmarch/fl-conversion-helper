@@ -9,6 +9,7 @@ import { log } from '../util';
 // has, so we'll watch for when a matching element is *added* to
 // the page and load our UI.
 export default function listenForInventorySectionAddition({ store, isLegacy  }) {
+  console.info('listening for possessions section');
   const rootNode = document.querySelector(getRootNodeSelector());
   const queries = [{ element: getElementSelector() }];
 
@@ -21,6 +22,7 @@ export default function listenForInventorySectionAddition({ store, isLegacy  }) 
 
 export function callback({ store }) {
   return function generatedCallback(summaries) {
+    console.info('mutation summary callback');
     const summary = summaries[0];
     // Only proceed if the element has been added: this is our cue that
     // we're entering the tab
