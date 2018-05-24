@@ -21,14 +21,6 @@ if (isLegacy()) {
   log('This is the new version');
 }
 
-// Hey, have we got the React global?
-console.info('Checking window');
-// chrome.windows.getCurrent({ populate: true }).then(() => console.log('booya'));
-//console.info(chrome.windows.getCurrent());
-// console.info(window);
-// console.info(window.__REACT_DEVTOOLS_GLOBAL_HOOK);
-// console.info(Object.keys(window.__REACT_DEVTOOLS_GLOBAL_HOOK__._renderers));
-
 // Create the store
 const store = applyMiddleware(reduxThunk)(createStore)(reducer);
 
