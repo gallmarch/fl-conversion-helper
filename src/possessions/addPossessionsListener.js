@@ -15,7 +15,7 @@ export default function addPossessionsListener({ store }) {
 
 export function onBodyChange({ store }) {
   // If we're not on the possessions page (or not there yet), then return
-  if (!document.querySelector('ul.equipped_group_list')) {
+  if (!document.querySelector('.possessions__lodgings-and-equipped')) {
     return;
   }
   // If we've already inserted the container, then return
