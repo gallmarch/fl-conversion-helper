@@ -22,7 +22,6 @@ export function onBodyChange({ store }) {
   if (document.querySelector('.flch-sidebar-container')) {
     return;
   }
-  // console.info('Inserting menu items');
   if (document.querySelector('main nav')) {
     insertMenuItems({ store });
   }
