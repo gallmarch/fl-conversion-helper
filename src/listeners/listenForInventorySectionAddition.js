@@ -9,37 +9,31 @@ import { log } from '../util';
 // has, so we'll watch for when a matching element is *added* to
 // the page and load our UI.
 export default function listenForInventorySectionAddition({ store, isLegacy  }) {
-  const rootNode = document.querySelector(getRootNodeSelector(isLegacy));
-  const queries = [{ element: getElementSelector(isLegacy) }];
+  const rootNode = document.querySelector(getRootNodeSelector());
+  const queries = [{ element: getElementSelector() }];
 
   return new MutationSummary({
     rootNode,
     queries,
-    callback: callback({ store, isLegacy }),
+    callback: callback({ store }),
   });
 }
 
-export function callback({ store, isLegacy }) {
+export function callback({ store }) {
   return function generatedCallback(summaries) {
     const summary = summaries[0];
     // Only proceed if the element has been added: this is our cue that
     // we're entering the tab
     if (summary.added.length) {
-      insertExtension({ store, isLegacy });
+      insertExtension({ store });
     }
   };
 }
 
-function getRootNodeSelector(isLegacy) {
-  if (isLegacy) {
-    return 'div.tab_content';
-  }
+function getRootNodeSelector() {
   return '.content .col-primary';
 }
 
-function getElementSelector(isLegacy) {
-  if (isLegacy) {
-    return 'div.you_bottom_rhs';
-  }
+function getElementSelector() {
   return '.stack-content';
 }
