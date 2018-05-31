@@ -18,7 +18,7 @@ export default function ToolTip({
       tooltipTimeout={100}
     >
       <div className="tooltip">
-        <div className="icon icon--circular">
+        <div className="icon tooltip__icon">
           <img src={`${IMAGE_ROOT}/${Image}.png`} />
         </div>
         <div className="tooltip__desc">
