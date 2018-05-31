@@ -8,10 +8,10 @@ export function fetchConnectedQualities() {
   return (dispatch) => {
     const url = 'https://api.fallenlondon.com/api/character/myself';
     return axios.get(url)
-      .then(({ data }) => {
+      .then( ({ data }) => {
         // Destructure the incoming JSON
         const { Possessions } = data;
-        const social = Possessions.find(el => el.Name === 'Social: Contacts & Acquaintances').Possessions;
+        const social = Possessions.find(el => el.Name === 'Contacts').Possessions;
         // Build the Renown and Favours object
         const payload = { renown: reduce(renownIDs), favours: reduce(favourIDs) };
         // Dispatch the action
