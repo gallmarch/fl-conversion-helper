@@ -15,17 +15,28 @@ import { findMatch } from './util';
 export const IMAGE_ROOT = '//images.fallenlondon.com/images/icons_small';
 
 class Item extends Component {
-  
+
   constructor(props) {
     super(props);
     this.findMatch = findMatch.bind(this);
   }
 
   render() {
+    const { filterString } = this.props;
+
     const match = this.findMatch();
 
     if (!match) {
+      // If the user is filtering, they don't want blank items
+      if (filterString.length) {
+        return null;
+      }
       return <BlankItem />;
+    }
+
+    const { data: { Name: name } } = match;
+    if (!name.toLowerCase().includes(filterString.toLowerCase())) {
+      return null;
     }
 
     const { id } = this.props;
@@ -56,7 +67,11 @@ class Item extends Component {
 }
 
 function mapState({ possessions, preferences }) {
-  return { possessions: possessions.possessions, preferences };
+  return {
+    filterString: possessions.filterString,
+    possessions: possessions.possessions,
+    preferences,
+  };
 }
 
 export default connect(mapState, { useQuality })(Item);

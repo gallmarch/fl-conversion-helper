@@ -1,2 +1,3 @@
 export const FETCHING_POSSESSIONS = 'possessions/FETCHING_POSSESSIONS';
+export const FILTER_STRING_CHANGED = 'possessions/FILTER_STRING_CHANGED';
 export const POSSESSIONS_FETCHED = 'possessions/POSSESSIONS_FETCHED';

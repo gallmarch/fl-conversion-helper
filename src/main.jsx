@@ -10,6 +10,7 @@ import reducer from './reducer';
 import { loadPreferences } from './preferences/utils';
 import { isLegacy, log } from './util';
 import addAuthListener from './auth/addAuthListener';
+import { listenForFilterStringChange } from './listeners';
 import addPossessionsListener, { onBodyChange } from './possessions/addPossessionsListener';
 import addSidebarListener, { readAttributes } from './sidebar/addSidebarListener';
 import addStorageListener from './preferences/addStorageListener';
@@ -39,3 +40,5 @@ addAuthListener({ store });
 addPossessionsListener({ store });
 addSidebarListener({ store });
 addStorageListener({ store });
+
+listenForFilterStringChange({ store });
