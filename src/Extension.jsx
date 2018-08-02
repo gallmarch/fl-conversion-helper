@@ -20,7 +20,11 @@ class Extension extends Component {
   }
 
   render() {
-    const { isLegacy, preferences: { enablements, visibilities } } = this.props;
+    const {
+      filterString,
+      isLegacy,
+      preferences: { enablements, visibilities },
+    } = this.props;
 
     if (!visibilities) {
       return <div>Loading...</div>;
@@ -103,6 +107,7 @@ class Extension extends Component {
 
 Extension.propTypes = {
   fetchConnectedQualities: PropTypes.func.isRequired,
+  filterString: PropTypes.string,
   isLegacy: PropTypes.bool.isRequired,
   preferences: PropTypes.shape({
     extensions: PropTypes.object,
@@ -110,8 +115,15 @@ Extension.propTypes = {
   }).isRequired,
 };
 
+Extension.defaultProps = {
+  filterString: '',
+};
+
 function mapStateToProps(state) {
-  return { preferences: state.preferences };
+  return {
+    filterString: state.possessions.filterString,
+    preferences: state.preferences,
+  };
 }
 
 export default connect(mapStateToProps, { fetchConnectedQualities })(Extension);
