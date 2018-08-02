@@ -17,6 +17,9 @@ export default function listenForFilterStringChange({ store }) {
 function callback({ store }) {
   return (summaries) => {
     if (summaries[0].added.length) {
+      // Reset our internal record of the filter string, so that it isn't
+      // preserved between tab switches
+      store.dispatch({ type: FILTER_STRING_CHANGED, payload: '' });
       const el = document.querySelector('.input--item-search');
       el.addEventListener('input', (e) => {
         store.dispatch({ type: FILTER_STRING_CHANGED, payload: e.target.value });
