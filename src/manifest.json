@@ -20,7 +20,8 @@
     {
       "matches": [
         "http://fallenlondon.storynexus.com/Gap/Load*",
-        "https://*.fallenlondon.com/*"
+        "https://*.fallenlondon.com/*",
+        "http://localhost:3000/*"
       ],
       "css": [
         "styles.css"
