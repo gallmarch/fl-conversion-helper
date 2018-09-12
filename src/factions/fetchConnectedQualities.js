@@ -1,13 +1,15 @@
 import axios from 'axios';
 import { log } from '../util';
 
+import { API_URL_BASE } from '../constants';
+
 export function fetchConnectedQualities() {
   return (dispatch) => {
-    const url = 'https://api.fallenlondon.com/api/character/myself';
+    const url = `${API_URL_BASE}/api/character/myself`;
     return axios.get(url)
       .then(({ data }) => {
-        const { Possessions } = data;
-        const social = Possessions.find(el => el.Name === 'Social: Contacts & Acquaintances');
+        const { possessions } = data;
+        const social = possessions.find(el => el.name === 'Social: Contacts & Acquaintances');
         console.info(social);
       });
   }
@@ -32,9 +34,6 @@ export function _fetchConnectedQualities(isLegacy) {
   return $.ajax(params);
 }
 
-function getUrl(isLegacy) {
-  if (isLegacy) {
-    return '//fallenlondon.storynexus.com/Me/StatusesForCategory?category=Contacts';
-  }
+function getUrl() {
   return '//beta.fallenlondon.com/myself';
 }

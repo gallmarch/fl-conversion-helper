@@ -1,11 +1,12 @@
 import axios from 'axios';
 
 import { FETCHING_POSSESSIONS, POSSESSIONS_FETCHED } from './types';
+import { API_URL_BASE } from '../constants';
 
 export function fetchPossessions() {
   return (dispatch) => {
     dispatch({ type: FETCHING_POSSESSIONS });
-    return axios.get('https://api.fallenlondon.com/api/character/possessions')
+    return axios.get(`${API_URL_BASE}/api/character/possessions`)
       .then(({ data }) => {
         /*
         const { Possessions } = data;

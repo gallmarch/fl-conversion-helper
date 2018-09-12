@@ -32,6 +32,10 @@ class FactionItem extends Component {
     }
 
     const failureExplanation = this.makeFailureExplanation();
+
+    // console.info('failureExplanation?');
+    // console.info(failureExplanation);
+
     return !failureExplanation;
   }
 
@@ -73,11 +77,13 @@ class FactionItem extends Component {
 
     const factionFavours = favours[getFaction(id)];
 
+    // console.info(`factionFavours: ${factionFavours}`);
+
     const data = {
       ...rawData,
       // Show 'X Favours' as the quantity
-      Level: factionFavours,
-      TextualLevel: `${factionFavours} Favour${factionFavours === 1 ? '' : 's'}`,
+      level: factionFavours,
+      textualLevel: `${factionFavours} Favour${factionFavours === 1 ? '' : 's'}`,
     };
 
     if (!this.isUsable()) {
@@ -85,14 +91,14 @@ class FactionItem extends Component {
       return <DummiedItem
         data={{
           ...data,
-          SecondaryDescription: `${data.SecondaryDescription ? data.SecondaryDescription : ''}<p><i>${failureExplanation}</i></p>`
+          secondaryDescription: `${data.secondaryDescription ? data.secondaryDescription : ''}<p><i>${failureExplanation}</i></p>`
         }}
         element={element}
       />;
     }
 
     return (
-      <UsableItem data={{...data, Level: factionFavours }} element={element} />
+      <UsableItem data={{...data, level: factionFavours }} element={element} />
     );
 
   }
