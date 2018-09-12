@@ -29,7 +29,8 @@ export function insertMenuItems({ preferences, store }) {
 }
 
 export function insertCategories({ preferences, store }) {
-  const parent = document.querySelector('main .stack-content');
+
+  const parent = document.querySelector('.stack-content');
   if (!parent) {
     return;
   }
