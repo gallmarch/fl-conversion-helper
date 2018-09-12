@@ -7,7 +7,8 @@ export default function addAuthListener({ store }) {
 
   function checkLocalStorage() {
     // Check for an access token
-    const { access_token } = window.localStorage;
+    // const { access_token } = window.localStorage;
+    const access_token = window.localStorage.access_token || window.sessionStorage.access_token;
 
     // If we have one, set the Authorization header
     if (access_token) {
@@ -19,6 +20,24 @@ export default function addAuthListener({ store }) {
     unsetAuthHeader();
     return logout()(store.dispatch);
   }
+}
+
+export function makeCheckLocalStorage({ store }) {
+  return function checkLocalStorage() {
+    // Check for an access token
+    // const { access_token } = window.localStorage;
+    const access_token = window.localStorage.access_token || window.sessionStorage.access_token;
+
+    // If we have one, set the Authorization header
+    if (access_token) {
+      setAuthHeader({ access_token });
+      return login()(store.dispatch);
+    }
+
+    // Otherwise, ensure that the Authorization header is unset
+    unsetAuthHeader();
+    return logout()(store.dispatch);
+  };
 }
 
 function unsetAuthHeader() {

@@ -22,7 +22,7 @@ class Item extends Component {
   }
 
   render() {
-    const { filterString } = this.props;
+    const { filterString, possessions } = this.props;
 
     const match = this.findMatch();
 
@@ -34,7 +34,7 @@ class Item extends Component {
       return <BlankItem />;
     }
 
-    const { data: { Name: name } } = match;
+    const { data: { name } } = match;
     if (!name.toLowerCase().includes(filterString.toLowerCase())) {
       return null;
     }
@@ -46,7 +46,7 @@ class Item extends Component {
 
     // Do we have enough of this item to do a conversion?
     const { enablementPreference } = this.props;
-    const { data: { Level: quantity } } = match;
+    const { data: { level: quantity } } = match;
 
     if (this.isConvertible({ id, quantity })) {
       return <UsableItem {...match} />;

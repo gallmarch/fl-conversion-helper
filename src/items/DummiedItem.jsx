@@ -24,17 +24,23 @@ export default class DummiedItem extends Component {
     const { data } = this.props;
     const { showToolTip } = this.state;
 
+    const {
+      name,
+      image,
+      level,
+    } = data;
+
     return (
       <li className="item">
         <div className="icon icon--inventory icon--flch-dummied">
           <img
-            alt={data.Name}
+            alt={name}
             onMouseLeave={this.handleMouseLeave}
             onMouseMove={this.handleMouseMove}
             ref={(element) => this.element = element}
-            src={`${IMAGE_ROOT}/${data.Image}.png`}
+            src={`${IMAGE_ROOT}/${image}.png`}
           />
-          <span className="js-item-value icon__value">{data.Level}</span>
+          <span className="js-item-value icon__value">{level}</span>
         </div>
         {showToolTip && (<ToolTip data={data} parent={this.element} active={showToolTip} />)}
       </li>

@@ -34,31 +34,25 @@ function createContainer(isLegacy) {
   return document.createElement('div');
 }
 
-function insertContainer(container, isLegacy = true) {
+function insertContainer(container) {
   // Get the parent element for our outer container
-  const parentSelector = getParentSelector(isLegacy);
+  const parentSelector = getParentSelector();
   log(`Using parentSelector: ${parentSelector}`);
   const parent = document.querySelector(parentSelector);
 
   // Find the element before which we should insert our container
   // element: in this case it's the first <h3> element
   // (FL categories aren't in containers of their own)
-  const referenceNode = parent.querySelector(getReferenceNodeSelector(isLegacy));
+  const referenceNode = parent.querySelector(getReferenceNodeSelector());
 
   // Insert and return the element
   return parent.insertBefore(container, referenceNode);
 }
 
-function getParentSelector(isLegacy) {
-  if (isLegacy) {
-    return 'div.you_bottom_rhs';
-  }
+function getParentSelector() {
   return 'div.stack-content';
 }
 
-function getReferenceNodeSelector(isLegacy) {
-  if (isLegacy) {
-    return 'h3:first-of-type';
-  }
+function getReferenceNodeSelector() {
   return 'div:first-of-type';
 }

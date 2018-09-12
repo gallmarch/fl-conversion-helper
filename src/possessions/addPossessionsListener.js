@@ -22,7 +22,7 @@ export function onBodyChange({ store }) {
   if (document.querySelector('.flch-sidebar-container')) {
     return;
   }
-  if (document.querySelector('main nav')) {
+  if (document.querySelector('.possessions__menu')) {
     insertMenuItems({ store });
   }
   if (document.querySelector('.flch-content-container')) {

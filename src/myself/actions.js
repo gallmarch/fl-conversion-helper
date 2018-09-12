@@ -10,8 +10,7 @@ export function fetchConnectedQualities() {
     return axios.get(url)
       .then( ({ data }) => {
         // Destructure the incoming JSON
-        const { Possessions } = data;
-        const social = Possessions.find(el => el.Name === 'Contacts').Possessions;
+        const social = data.possessions.find(el => el.name === 'Contacts').possessions;
         // Build the Renown and Favours object
         const payload = { renown: reduce(renownIDs), favours: reduce(favourIDs) };
         // Dispatch the action

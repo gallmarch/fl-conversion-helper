@@ -15,7 +15,7 @@ class Extension extends Component {
     // possible to change Renown/Favours directly from this tab, so
     // the qualities are static throughout the component's lifetime.
     const { isLegacy } = this.props;
-    log(`Calling componentDidMount() with isLegacy=${isLegacy}`);
+    console.info(`Calling componentDidMount() with isLegacy=${isLegacy}`);
     this.props.fetchConnectedQualities(isLegacy);
   }
 

@@ -6,14 +6,14 @@ export const FAVOURS_AND_RENOWN = 'FAVOURS_AND_RENOWN';
 
 // Retrieve the Favours and Renown qualities from the server,
 // parse them, and dispatch an action
-function fetchConnectedQualities(isLegacy) {
-  return dispatch => baseFetchConnectedQualities(isLegacy)
+function fetchConnectedQualities() {
+  return dispatch => baseFetchConnectedQualities()
     .then(response => parseConnectedQualities(response))
-    .then(({ favours, renown }) =>
-      // console.info('favours are');
-      // console.info(favours);
-      dispatch({ type: FAVOURS_AND_RENOWN, payload: { favours, renown } }),
-    );
+    .then(({ favours, renown }) => {
+      console.info('favours are');
+      console.info(favours);
+      return dispatch({ type: FAVOURS_AND_RENOWN, payload: { favours, renown } });
+    });
 }
 
 export { fetchConnectedQualities };

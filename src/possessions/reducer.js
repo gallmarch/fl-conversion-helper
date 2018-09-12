@@ -17,7 +17,11 @@ export default function reducer(state=INITIAL_STATE, action) {
     case FILTER_STRING_CHANGED:
       return { ...state, filterString: action.payload };
     case POSSESSIONS_FETCHED:
-      return { ...state, isFetching: false, possessions: action.payload };
+      return {
+        ...state,
+        isFetching: false,
+        possessions: action.payload,
+      };
     default:
       return state;
   }

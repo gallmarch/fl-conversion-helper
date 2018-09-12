@@ -6,9 +6,10 @@ import Categories from '../categories/Categories';
 import MenuItems from './MenuItems';
 
 export function insertMenuItems({ preferences, store }) {
+  console.info('inserting menu items');
   // NOTE: This selector currently finds the correct nav, but that
   // may change at any point
-  const parent = document.querySelector('main nav');
+  const parent = document.querySelector('.possessions nav');
   if (!parent) {
     return;
   }

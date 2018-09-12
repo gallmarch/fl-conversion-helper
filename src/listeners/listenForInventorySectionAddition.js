@@ -21,6 +21,7 @@ export default function listenForInventorySectionAddition({ store, isLegacy  }) 
 }
 
 export function callback({ store }) {
+  console.info('generating callback');
   return function generatedCallback(summaries) {
     console.info('mutation summary callback');
     const summary = summaries[0];
@@ -33,7 +34,7 @@ export function callback({ store }) {
 }
 
 function getRootNodeSelector() {
-  return '.content .col-primary';
+  return '.col-primary';
 }
 
 function getElementSelector() {

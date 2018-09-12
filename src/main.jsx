@@ -9,7 +9,7 @@ import styles from './styles.scss';
 import reducer from './reducer';
 import { loadPreferences } from './preferences/utils';
 import { isLegacy, log } from './util';
-import addAuthListener from './auth/addAuthListener';
+import addAuthListener, { makeCheckLocalStorage } from './auth/addAuthListener';
 import { listenForFilterStringChange } from './listeners';
 import addPossessionsListener, { onBodyChange } from './possessions/addPossessionsListener';
 import addSidebarListener, { readAttributes } from './sidebar/addSidebarListener';
@@ -24,6 +24,9 @@ if (isLegacy()) {
 
 // Create the store
 const store = applyMiddleware(reduxThunk)(createStore)(reducer);
+
+// Do an initial storage check for the auth token
+makeCheckLocalStorage({ store })();
 
 // Get a reference to (our) localStorage
 const storage = chrome.storage.local;

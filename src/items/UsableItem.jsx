@@ -14,8 +14,10 @@ export default class UsableItem extends Component {
   }
 
   handleClick() {
+    const { element } = this.props;
     // TODO: We probably only want to hide the tooltip if we are successfully using the item
     this.setState({ showToolTip: false });
+
     this.props.element.click();
   }
 
@@ -40,9 +42,9 @@ export default class UsableItem extends Component {
             onMouseLeave={this.handleMouseLeave}
             onMouseMove={this.handleMouseMove}
             ref={(element) => this.element = element}
-            src={`${IMAGE_ROOT}/${data.Image}.png`}
+            src={`${IMAGE_ROOT}/${data.image}.png`}
           />
-          <span className="js-item-value icon__value">{data.Level}</span>
+          <span className="js-item-value icon__value">{data.level}</span>
         </div>
         {showToolTip && (<ToolTip data={data} parent={this.element} active={showToolTip} />)}
       </li>
