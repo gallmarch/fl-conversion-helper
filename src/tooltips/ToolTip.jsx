@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import BaseToolTip from 'react-portal-tooltip';
 
 const IMAGE_ROOT = '//images.fallenlondon.com/images/icons_small';
@@ -29,7 +30,10 @@ export default function ToolTip({
     >
       <div className="tooltip">
         <div className="icon tooltip__icon">
-          <img src={`${IMAGE_ROOT}/${image}.png`} />
+          <img
+            alt={name}
+            src={`${IMAGE_ROOT}/${image}.png`}
+          />
         </div>
         <div className="tooltip__desc">
           <span className="item__name">{name}</span>
@@ -42,3 +46,13 @@ export default function ToolTip({
     </BaseToolTip>
   );
 }
+
+ToolTip.propTypes = {
+  active: PropTypes.bool,
+  data: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  parent: PropTypes.node.isRequired,
+};
+
+ToolTip.defaultProps = {
+  active: false,
+};

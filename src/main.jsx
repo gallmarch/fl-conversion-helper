@@ -1,6 +1,5 @@
 // eslint-disable-next-line no-unused-vars
 import $ from 'jquery';
-import axios from 'axios';
 import { createStore, applyMiddleware } from 'redux';
 import reduxThunk from 'redux-thunk';
 
@@ -21,8 +20,6 @@ if (isLegacy()) {
 } else {
   log('This is the new version');
 }
-
-log(`NODE_ENV: ${NODE_ENV}`);
 
 // Create the store
 const store = applyMiddleware(reduxThunk)(createStore)(reducer);

@@ -1,6 +1,7 @@
 import MutationSummary from 'mutation-summary';
 
-import { insertCategories, insertMenuItems } from './insertComponents';
+import { insertCategories } from './insertComponents';
+import insertMenuItems from './insertMenuItems';
 
 export default function addPossessionsListener({ store }) {
   const rootNode = document.querySelector('body');

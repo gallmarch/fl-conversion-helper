@@ -1,17 +1,14 @@
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { fetchPossessions } from '../possessions/actions';
 import { fetchConnectedQualities } from '../myself/actions';
 import * as items from '../items/constants';
 import Item from '../items/Item';
-import FactionItem from '../items/FactionItem';
 import Category from './Category';
 
 class Categories extends Component {
-  constructor(props) {
-    super(props);
-  }
   componentDidMount() {
     this.props.fetchPossessions();
     this.props.fetchConnectedQualities();
@@ -23,7 +20,7 @@ class Categories extends Component {
       <Fragment>
         {visibilities.tier1 && (
           <Category heading="Tier 1">
-            {items.tier1.map((id) => (
+            {items.tier1.map(id => (
               <Item
                 key={id}
                 id={id}
@@ -34,7 +31,7 @@ class Categories extends Component {
         )}
         {visibilities.tier2 && (
           <Category heading="Tier 2">
-            {items.tier2.map((id) => (
+            {items.tier2.map(id => (
               <Item
                 key={id}
                 id={id}
@@ -45,7 +42,7 @@ class Categories extends Component {
         )}
         {visibilities.tier3 && (
           <Category heading="Tier 3">
-            {items.tier3.map((id) => (
+            {items.tier3.map(id => (
               <Item
                 key={id}
                 id={id}
@@ -56,7 +53,7 @@ class Categories extends Component {
         )}
         {visibilities.tier4 && (
           <Category heading="Tier 4">
-            {items.tier4.map((id) => (
+            {items.tier4.map(id => (
               <Item
                 key={id}
                 id={id}
@@ -67,7 +64,7 @@ class Categories extends Component {
         )}
         {visibilities.faction && (
           <Category heading="Faction Items">
-            {items.factionItems.map((id) => (
+            {items.factionItems.map(id => (
               <Item
                 key={id}
                 id={id}
@@ -78,7 +75,7 @@ class Categories extends Component {
         )}
         {visibilities.fidgetingWriter && (
           <Category heading="Fidgeting Writer">
-            {items.fidgetingWriter.map((id) => (
+            {items.fidgetingWriter.map(id => (
               <Item
                 key={id}
                 id={id}
@@ -92,6 +89,12 @@ class Categories extends Component {
     );
   }
 }
+
+Categories.propTypes = {
+  fetchConnectedQualities: PropTypes.func.isRequired,
+  fetchPossessions: PropTypes.func.isRequired,
+  preferences: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+};
 
 function mapState({ possessions, preferences }) {
   return { possessions, preferences };

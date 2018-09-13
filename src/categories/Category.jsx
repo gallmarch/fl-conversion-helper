@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function Category(props) {
   return (
@@ -15,3 +16,8 @@ export default function Category(props) {
     </div>
   );
 }
+
+Category.propTypes = {
+  children: PropTypes.node.isRequired,
+  heading: PropTypes.string.isRequired,
+};
