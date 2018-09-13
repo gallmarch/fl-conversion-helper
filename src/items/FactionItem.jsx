@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { FACTIONS } from '../preferences/constants';
@@ -6,10 +7,8 @@ import { FACTIONS } from '../preferences/constants';
 import factionAttributes from '../factions/attributes';
 import { getFaction } from '../factions/items';
 import { attributeLevelRequired, favoursRequired } from '../factions/requirements';
-import BlankItem from './BlankItem';
 import DummiedItem from './DummiedItem';
 import UsableItem from './UsableItem';
-import { findMatch } from './util';
 
 class FactionItem extends Component {
   constructor(props) {
@@ -33,13 +32,7 @@ class FactionItem extends Component {
 
     const failureExplanation = this.makeFailureExplanation();
 
-    // console.info('failureExplanation?');
-    // console.info(failureExplanation);
-
     return !failureExplanation;
-  }
-
-  componentDidMount() {
   }
 
   makeFailureExplanation() {
@@ -73,7 +66,7 @@ class FactionItem extends Component {
   }
 
   render() {
-    const { data: rawData, id, element, myself: { favours, renown } } = this.props;
+    const { data: rawData, id, element, myself: { favours } } = this.props;
 
     const factionFavours = favours[getFaction(id)];
 
@@ -88,23 +81,33 @@ class FactionItem extends Component {
 
     if (!this.isUsable()) {
       const failureExplanation = this.makeFailureExplanation();
-      return <DummiedItem
-        data={{
-          ...data,
-          secondaryDescription: `${data.secondaryDescription ? data.secondaryDescription : ''}<p><i>${failureExplanation}</i></p>`
-        }}
-        element={element}
-      />;
+      return (
+        <DummiedItem
+          data={{
+            ...data,
+            secondaryDescription: `${data.secondaryDescription ? data.secondaryDescription : ''}<p><i>${failureExplanation}</i></p>`,
+          }}
+          element={element}
+        />
+      );
     }
 
     return (
-      <UsableItem data={{...data, level: factionFavours }} element={element} />
+      <UsableItem data={{ ...data, level: factionFavours }} element={element} />
     );
-
   }
 }
 
-function mapState({ attributes, myself, possessions, preferences, sidebar }) {
+FactionItem.propTypes = {
+  attributes: PropTypes.object.isRequired, // eslint-disable-line
+  data: PropTypes.object.isRequired, // eslint-disable-line
+  element: PropTypes.element.isRequired,
+  id: PropTypes.number.isRequired,
+  myself: PropTypes.object.isRequired, // eslint-disable-line
+  preferences: PropTypes.object.isRequired, // eslint-disable-line
+};
+
+function mapState({ attributes, myself, possessions, preferences }) {
   return { attributes, myself, possessions, preferences };
 }
 

@@ -1,0 +1,1 @@
+export { default as fetchConnectedQualities } from './fetchConnectedQualities'; // eslint-disable-line

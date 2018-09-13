@@ -50,7 +50,7 @@ export default function ToolTip({
 ToolTip.propTypes = {
   active: PropTypes.bool,
   data: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
-  parent: PropTypes.node.isRequired,
+  parent: PropTypes.element.isRequired,
 };
 
 ToolTip.defaultProps = {

@@ -59,7 +59,7 @@ export default class UsableItem extends Component {
 
 UsableItem.propTypes = {
   data: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-  element: PropTypes.node,
+  element: PropTypes.element.isRequired,
 };
 
 UsableItem.defaultProps = {

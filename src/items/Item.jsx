@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import ToolTip from '../tooltips/ToolTip';
 
 import { items as factionItems } from '../factions/items';
 import { TIERS } from '../preferences/constants';
@@ -15,14 +15,24 @@ import { findMatch } from './util';
 export const IMAGE_ROOT = '//images.fallenlondon.com/images/icons_small';
 
 class Item extends Component {
-
   constructor(props) {
     super(props);
     this.findMatch = findMatch.bind(this);
   }
 
+  isConvertible({ id, quantity }) {
+    const { alwaysConvertible, enablementPreference } = this.props;
+    if (alwaysConvertible) {
+      return true;
+    }
+    if (enablementPreference === TIERS.ALWAYS) {
+      return true;
+    }
+    return quantity >= conversionCost(id, enablementPreference === TIERS.SMALL);
+  }
+
   render() {
-    const { filterString, possessions } = this.props;
+    const { filterString } = this.props;
 
     const match = this.findMatch();
 
@@ -45,7 +55,6 @@ class Item extends Component {
     }
 
     // Do we have enough of this item to do a conversion?
-    const { enablementPreference } = this.props;
     const { data: { level: quantity } } = match;
 
     if (this.isConvertible({ id, quantity })) {
@@ -53,18 +62,18 @@ class Item extends Component {
     }
     return <DummiedItem {...match} />;
   }
-
-  isConvertible({ id, quantity }) {
-    const { alwaysConvertible, enablementPreference } = this.props;
-    if (alwaysConvertible) {
-      return true;
-    }
-    if (enablementPreference === TIERS.ALWAYS) {
-      return true;
-    }
-    return quantity >= conversionCost(id, enablementPreference === TIERS.SMALL);
-  }
 }
+
+Item.propTypes = {
+  alwaysConvertible: PropTypes.bool,
+  enablementPreference: PropTypes.number.isRequired,
+  filterString: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+};
+
+Item.defaultProps = {
+  alwaysConvertible: false,
+};
 
 function mapState({ possessions, preferences }) {
   return {

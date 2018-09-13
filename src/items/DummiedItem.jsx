@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import ToolTip from '../tooltips/ToolTip';
 import { IMAGE_ROOT } from './Item';
 
 export default class DummiedItem extends Component {
-
   constructor(props) {
     super(props);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
@@ -37,7 +37,7 @@ export default class DummiedItem extends Component {
             alt={name}
             onMouseLeave={this.handleMouseLeave}
             onMouseMove={this.handleMouseMove}
-            ref={(element) => this.element = element}
+            ref={(element) => { this.element = element; }}
             src={`${IMAGE_ROOT}/${image}.png`}
           />
           <span className="js-item-value icon__value">{level}</span>
@@ -47,3 +47,7 @@ export default class DummiedItem extends Component {
     );
   }
 }
+
+DummiedItem.propTypes = {
+  data: PropTypes.object.isRequired, // eslint-disable-line
+};

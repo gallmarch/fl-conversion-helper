@@ -5,7 +5,7 @@ const INITIAL_STATE = {
   favours: {},
 };
 
-export default function reducer(state=INITIAL_STATE, action) {
+export default function reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case MYSELF_RECEIVED:
       return { ...action.payload };
