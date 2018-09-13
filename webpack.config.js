@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
@@ -23,6 +24,12 @@ const copy = new CopyWebpackPlugin([
     },
   },
 ]);
+
+// Define constants at build time
+console.info(`NODE_ENV: ${process.env.NODE_ENV}`);
+const defineConstants = new webpack.DefinePlugin({
+  NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+});
 
 const zip = new ZipPlugin({
   path: path.join(__dirname, 'dist'),
@@ -60,6 +67,7 @@ module.exports = {
   },
   plugins: [
     copy,
+    defineConstants,
     zip,
     new ExtractTextWebpackPlugin('styles.css'),
   ],

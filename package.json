@@ -44,7 +44,7 @@
   "scripts": {
     "cleanup": "rimraf dist/ && rimraf build/",
     "build": "yarn cleanup && webpack",
-    "dist": "rimraf dist/ && webpack -p",
+    "dist": "rimraf dist/ && NODE_ENV=production webpack -p",
     "lint": "eslint 'src/**/*.@(js|jsx)'",
     "start": "yarn cleanup && webpack --progress --watch",
     "test": "jest"

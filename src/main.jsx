@@ -22,6 +22,8 @@ if (isLegacy()) {
   log('This is the new version');
 }
 
+log(`NODE_ENV: ${NODE_ENV}`);
+
 // Create the store
 const store = applyMiddleware(reduxThunk)(createStore)(reducer);
 
