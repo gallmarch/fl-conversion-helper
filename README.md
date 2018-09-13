@@ -27,3 +27,14 @@ You can hide sections completely by editing the options in the popup menu.
 You can change the behaviour of the 'Tier X' sections so that an item is enabled if you can perform the smaller conversion action, or so that tier items are always enabled.
 
 Similarly, you can change the default behaviour of faction items, so that they're always enabled. This might be useful if you want to change your Quirks.
+
+## Building the extension (for reviewers and other interested parties)
+
+You'll need up-to-date versions of Node (at least 8) and Yarn.
+The add-on only targets [Fallen London](https://beta.fallenlondon.com), so you'll need to create an
+account there if you want to see it in action (rather than simply verify that it's benign).
+
+1. Install dependencies: `yarn install`
+1. Create a build: `NODE_ENV=production yarn build` (the default development build targets a localhost partial replica of Fallen London's UI that I use for testing purposes)
+1. Alternatively, run a build that watches changes and recompiles on the fly: `NODE_ENV=production yarn start`
+1. Create a ZIP for distribution to the Chrome or Mozilla extension stores: `NODE_ENV=production yarn dist` (this should reproduce the submitted ZIP but may differ slightly if the bundled dependencies' versions themselves differ)
