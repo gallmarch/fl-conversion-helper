@@ -10,9 +10,20 @@ import getVisibleItems from '../shared/getVisibleItems';
 import Category from './Category';
 
 class Categories extends Component {
+  constructor(props) {
+    super(props);
+    this.isWaitingForData = this.isWaitingForData.bind(this);
+  }
   componentDidMount() {
     this.props.fetchPossessions();
     this.props.fetchMyself();
+  }
+
+  isWaitingForData() {
+    const { attributes, favours } = this.props;
+    const noAttributes = Object.keys(attributes).every(name => attributes[name] === undefined);
+    const favoursAreEmpty = !Object.keys(favours).length;
+    return noAttributes || favoursAreEmpty;
   }
 
   render() {
@@ -21,6 +32,11 @@ class Categories extends Component {
       visibleItems,
       preferences: { enablements, expansions, visibilities },
     } = this.props;
+
+    // If we're waiting for attributes to be read, then return null
+    if (this.isWaitingForData()) {
+      return null;
+    }
 
     const isVisible = id => (!filterString.length) || visibleItems[id];
 
@@ -123,14 +139,26 @@ class Categories extends Component {
 }
 
 Categories.propTypes = {
+  favours: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   fetchMyself: PropTypes.func.isRequired,
   fetchPossessions: PropTypes.func.isRequired,
   filterString: PropTypes.string.isRequired,
   preferences: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   visibleItems: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  attributes: PropTypes.shape({
+    Watchful: PropTypes.number,
+  }),
+};
+
+Categories.defaultProps = {
+  attributes: {
+    Watchful: undefined,
+  },
 };
 
 const mapStateToProps = state => ({
+  attributes: state.attributes,
+  favours: state.myself.favours,
   filterString: state.possessions.filterString,
   preferences: state.preferences,
   visibleItems: getVisibleItems(state),

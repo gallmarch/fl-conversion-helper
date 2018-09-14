@@ -28,8 +28,10 @@ const outputFunc = (attributes, enablements, id, myself) => {
   const { favours, renown } = myself;
   const factionKey = getFaction(id);
   const factionAttribute = factionAttributes[factionKey];
-  const factionFavours = favours[factionKey];
-  const factionRenown = renown[factionKey];
+  // If these levels are at 0, then the qualities won't be returned by the API,
+  // so we need to make sure that they're never undefined
+  const factionFavours = favours[factionKey] || 0;
+  const factionRenown = renown[factionKey] || 0;
 
   // Check whether we meet the Favour and attribute requirements to convert at
   // this Renown level

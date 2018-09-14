@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { useQuality } from './actions';
 import MatchingItem from './MatchingItem';
 import MissingItem from './MissingItem';
 import { findMatch } from './selectors';
@@ -32,4 +31,4 @@ const mapStateToProps = (state, props) => ({
   match: findMatch(state, props),
 });
 
-export default connect(mapStateToProps, { useQuality })(Item);
+export default connect(mapStateToProps)(Item);
