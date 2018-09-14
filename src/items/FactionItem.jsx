@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import DummiedItem from './DummiedItem';
 import UsableItem from './UsableItem';
 import getFailureExplanation from './getFailureExplanation';
-import isUsable from './isUsable';
+import isUsable from './isUsableFaction';
 
 // class FactionItem extends Component {
 

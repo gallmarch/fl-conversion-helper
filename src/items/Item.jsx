@@ -12,6 +12,8 @@ import UsableItem from './UsableItem';
 import conversionCost from './conversionCost';
 import { findMatch } from './util';
 
+import getIsConvertible from './isConvertible';
+
 export const IMAGE_ROOT = '//images.fallenlondon.com/images/icons_small';
 
 class Item extends Component {
@@ -34,8 +36,7 @@ class Item extends Component {
   }
 
   render() {
-    const { filterString } = this.props;
-
+    const { filterString, id, isConvertible } = this.props;
     const match = this.findMatch();
 
     if (!match) {
@@ -47,23 +48,19 @@ class Item extends Component {
     }
 
     const { data: { name } } = match;
+
     if (!name.toLowerCase().includes(filterString.toLowerCase())) {
       return null;
     }
 
-    const { id } = this.props;
     if (Object.keys(factionItems).includes(id)) {
       return <FactionItem id={id} {...match} />;
     }
 
-    // Do we have enough of this item to do a conversion?
-    const { data: { level: quantity } } = match;
-
-    console.info(`${name} x ${quantity} is convertible? ${this.isConvertible({ id, quantity })}`);
-
-    if (this.isConvertible({ id, quantity })) {
+    if (isConvertible) {
       return <UsableItem {...match} />;
     }
+
     return <DummiedItem {...match} />;
   }
 }
@@ -73,18 +70,20 @@ Item.propTypes = {
   enablementPreference: PropTypes.number.isRequired,
   filterString: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
+  isConvertible: PropTypes.bool.isRequired,
 };
 
 Item.defaultProps = {
   alwaysConvertible: false,
 };
 
-function mapState({ possessions, preferences }) {
+// function mapState({ possessions: { filterString }, preferences }) {
+const mapStateToProps = (state, props) => {
+  const { possessions: { filterString } } = state;
   return {
-    filterString: possessions.filterString,
-    possessions: possessions.possessions,
-    preferences,
+    filterString,
+    isConvertible: getIsConvertible(state, props),
   };
-}
+};
 
-export default connect(mapState, { useQuality })(Item);
+export default connect(mapStateToProps, { useQuality })(Item);

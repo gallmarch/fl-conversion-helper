@@ -1,8 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`BlankItem matches its snapshot 1`] = `
-<li
-  className="empty-icon flch-empty-icon"
-  id="expected-id"
-/>
-`;
