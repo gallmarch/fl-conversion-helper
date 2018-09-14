@@ -6,9 +6,10 @@ const INITIAL_STATE = {
 };
 
 export default function reducer(state = INITIAL_STATE, action) {
-  switch (action.type) {
+  const { type, payload } = action;
+  switch (type) {
     case MYSELF_RECEIVED:
-      return { ...action.payload };
+      return { ...payload };
     default:
       return state;
   }
