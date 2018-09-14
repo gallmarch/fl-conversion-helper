@@ -5,8 +5,6 @@ import { Provider } from 'react-redux';
 import MenuItems from './MenuItems';
 
 export default function insertMenuItems({ store }) {
-  console.info('inserting menu items');
-
   // NOTE: This selector currently finds the correct nav, but that
   // may change at any point
   const parent = document.querySelector('.possessions nav');
