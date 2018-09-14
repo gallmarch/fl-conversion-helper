@@ -6,6 +6,7 @@ import { fetchPossessions } from '../possessions/actions';
 import { fetchConnectedQualities } from '../myself/actions';
 import * as items from '../items/constants';
 import Item from '../items/Item';
+import getVisibleItems from './getVisibleItems';
 import Category from './Category';
 
 class Categories extends Component {
@@ -15,7 +16,13 @@ class Categories extends Component {
   }
 
   render() {
-    const { preferences: { enablements, expansions, visibilities } } = this.props;
+    const {
+      visibleItems,
+      preferences: { enablements, expansions, visibilities },
+    } = this.props;
+
+    const isVisible = id => visibleItems[id];
+
     return (
       <Fragment>
         {visibilities.tier1 && (
@@ -24,7 +31,7 @@ class Categories extends Component {
             expanded={expansions.tier1}
             name="tier1"
           >
-            {items.tier1.map(id => (
+            {items.tier1.filter(isVisible).map(id => (
               <Item
                 key={id}
                 id={Number(id)}
@@ -39,7 +46,7 @@ class Categories extends Component {
             heading="Tier 2"
             name="tier2"
           >
-            {items.tier2.map(id => (
+            {items.tier2.filter(isVisible).map(id => (
               <Item
                 key={id}
                 id={Number(id)}
@@ -54,7 +61,7 @@ class Categories extends Component {
             heading="Tier 3"
             name="tier3"
           >
-            {items.tier3.map(id => (
+            {items.tier3.filter(isVisible).map(id => (
               <Item
                 key={id}
                 id={Number(id)}
@@ -69,7 +76,7 @@ class Categories extends Component {
             name="tier4"
             heading="Tier 4"
           >
-            {items.tier4.map(id => (
+            {items.tier4.filter(isVisible).map(id => (
               <Item
                 key={id}
                 id={Number(id)}
@@ -84,7 +91,7 @@ class Categories extends Component {
             name="faction"
             heading="Faction Items"
           >
-            {items.factionItems.map(id => (
+            {items.factionItems.filter(isVisible).map(id => (
               <Item
                 key={id}
                 id={Number(id)}
@@ -99,7 +106,7 @@ class Categories extends Component {
             name="fidgetingWriter"
             heading="Fidgeting Writer"
           >
-            {items.fidgetingWriter.map(id => (
+            {items.fidgetingWriter.filter(isVisible).map(id => (
               <Item
                 key={id}
                 id={Number(id)}
@@ -118,10 +125,12 @@ Categories.propTypes = {
   fetchConnectedQualities: PropTypes.func.isRequired,
   fetchPossessions: PropTypes.func.isRequired,
   preferences: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  visibleItems: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
-function mapState({ possessions, preferences }) {
-  return { possessions, preferences };
-}
+const mapStateToProps = state => ({
+  preferences: state.preferences,
+  visibleItems: getVisibleItems(state),
+});
 
-export default connect(mapState, { fetchPossessions, fetchConnectedQualities })(Categories);
+export default connect(mapStateToProps, { fetchPossessions, fetchConnectedQualities })(Categories);

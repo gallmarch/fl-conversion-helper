@@ -7,6 +7,9 @@ import CategoryToggle from './CategoryToggle';
 
 export function CategoryComponent(props) {
   const { children, expanded, heading, onToggleExpanded } = props;
+  if (!children.length) {
+    return null;
+  }
   return (
     <div>
       <div>
@@ -65,4 +68,6 @@ Category.propTypes = {
   setCategoryExpansion: PropTypes.func.isRequired,
 };
 
-export default connect(null, { setCategoryExpansion })(Category);
+const mapStateToProps = () => ({});
+
+export default connect(mapStateToProps, { setCategoryExpansion })(Category);
