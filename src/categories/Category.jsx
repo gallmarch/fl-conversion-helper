@@ -15,7 +15,11 @@ export function CategoryComponent(props) {
       <div>
         <h3
           className="heading heading--2"
-          style={{ display: 'flex', justifyContent: 'space-between' }}
+          style={{
+            alignItems: 'center',
+            display: 'flex',
+            justifyContent: 'space-between',
+          }}
         >
           {heading}
           <CategoryToggle expanded={expanded} onClick={onToggleExpanded} />

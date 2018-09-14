@@ -13,6 +13,7 @@ export default function CategoryToggle(props) {
       onClick={onClick}
       tabIndex="-1"
       role="button"
+      style={{ fontSize: '12px' }}
     >
       <i className="fa fa-stack-2x fa-circle" />
       <i className={classnames('fa fa-stack fa-inverse fa-stack-1x', expanded ? 'fa-minus' : 'fa-plus')} />
