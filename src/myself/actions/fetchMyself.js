@@ -4,7 +4,7 @@ import favourIDs from '../../factions/favours';
 import { MYSELF_RECEIVED } from '../types';
 import { API_URL_BASE } from '../../constants';
 
-export default function fetchConnectedQualities() {
+export default function fetchMyself() {
   return (dispatch) => {
     const url = `${API_URL_BASE}/api/character/myself`;
     return axios.get(url)

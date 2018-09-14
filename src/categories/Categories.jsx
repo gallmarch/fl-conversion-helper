@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { fetchPossessions } from '../possessions/actions';
-import { fetchConnectedQualities } from '../myself/actions';
+import { fetchMyself } from '../myself/actions';
 import * as items from '../items/constants';
 import Item from '../items/Item';
 import getVisibleItems from '../shared/getVisibleItems';
@@ -12,7 +12,7 @@ import Category from './Category';
 class Categories extends Component {
   componentDidMount() {
     this.props.fetchPossessions();
-    this.props.fetchConnectedQualities();
+    this.props.fetchMyself();
   }
 
   render() {
@@ -123,7 +123,7 @@ class Categories extends Component {
 }
 
 Categories.propTypes = {
-  fetchConnectedQualities: PropTypes.func.isRequired,
+  fetchMyself: PropTypes.func.isRequired,
   fetchPossessions: PropTypes.func.isRequired,
   filterString: PropTypes.string.isRequired,
   preferences: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
@@ -136,4 +136,4 @@ const mapStateToProps = state => ({
   visibleItems: getVisibleItems(state),
 });
 
-export default connect(mapStateToProps, { fetchPossessions, fetchConnectedQualities })(Categories);
+export default connect(mapStateToProps, { fetchPossessions, fetchMyself })(Categories);

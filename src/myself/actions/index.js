@@ -1,1 +1,1 @@
-export { default as fetchConnectedQualities } from './fetchConnectedQualities'; // eslint-disable-line
+export { default as fetchMyself } from './fetchMyself'; // eslint-disable-line
