@@ -1,7 +1,7 @@
 import createCachedSelector from 're-reselect';
 
-import { TIERS } from '../preferences/constants';
-import conversionCost from './conversionCost';
+import { TIERS } from '../../preferences/constants';
+import conversionCost from '../conversionCost';
 
 const { ALWAYS, SMALL } = TIERS;
 

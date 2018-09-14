@@ -1,89 +1,34 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { items as factionItems } from '../factions/items';
-import { TIERS } from '../preferences/constants';
 import { useQuality } from './actions';
-import BlankItem from './BlankItem';
-import DummiedItem from './DummiedItem';
-import FactionItem from './FactionItem';
-import UsableItem from './UsableItem';
-import conversionCost from './conversionCost';
-import { findMatch } from './util';
-
-import getIsConvertible from './isConvertible';
+import MatchingItem from './MatchingItem';
+import MissingItem from './MissingItem';
+import { findMatch } from './selectors';
 
 export const IMAGE_ROOT = '//images.fallenlondon.com/images/icons_small';
 
-class Item extends Component {
-  constructor(props) {
-    super(props);
-    this.isConvertible = this.isConvertible.bind(this);
-    this.findMatch = findMatch.bind(this);
+function Item({ match, id }) {
+  if (!match) {
+    return <MissingItem />;
   }
 
-  isConvertible({ id, quantity }) {
-    const { alwaysConvertible, enablementPreference } = this.props;
-    if (alwaysConvertible) {
-      console.info('alwaaaays convertible');
-      return true;
-    }
-    if (enablementPreference === TIERS.ALWAYS) {
-      return true;
-    }
-    return quantity >= conversionCost(id, enablementPreference === TIERS.SMALL);
-  }
-
-  render() {
-    const { filterString, id, isConvertible } = this.props;
-    const match = this.findMatch();
-
-    if (!match) {
-      // If the user is filtering, they don't want blank items
-      if (filterString.length) {
-        return null;
-      }
-      return <BlankItem />;
-    }
-
-    const { data: { name } } = match;
-
-    if (!name.toLowerCase().includes(filterString.toLowerCase())) {
-      return null;
-    }
-
-    if (Object.keys(factionItems).includes(id)) {
-      return <FactionItem id={id} {...match} />;
-    }
-
-    if (isConvertible) {
-      return <UsableItem {...match} />;
-    }
-
-    return <DummiedItem {...match} />;
-  }
+  return <MatchingItem id={id} data={match} />;
 }
 
 Item.propTypes = {
-  alwaysConvertible: PropTypes.bool,
-  enablementPreference: PropTypes.number.isRequired,
-  filterString: PropTypes.string.isRequired,
+  match: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   id: PropTypes.number.isRequired,
-  isConvertible: PropTypes.bool.isRequired,
 };
 
 Item.defaultProps = {
-  alwaysConvertible: false,
+  match: null,
 };
 
 // function mapState({ possessions: { filterString }, preferences }) {
-const mapStateToProps = (state, props) => {
-  const { possessions: { filterString } } = state;
-  return {
-    filterString,
-    isConvertible: getIsConvertible(state, props),
-  };
-};
+const mapStateToProps = (state, props) => ({
+  match: findMatch(state, props),
+});
 
 export default connect(mapStateToProps, { useQuality })(Item);

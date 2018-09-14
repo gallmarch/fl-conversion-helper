@@ -4,10 +4,7 @@ import { connect } from 'react-redux';
 
 import DummiedItem from './DummiedItem';
 import UsableItem from './UsableItem';
-import getFailureExplanation from './getFailureExplanation';
-import isUsable from './isUsableFaction';
-
-// class FactionItem extends Component {
+import { getFailureExplanation, isUsable } from './selectors';
 
 function FactionItem(props) {
   const {

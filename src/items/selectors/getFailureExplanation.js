@@ -1,8 +1,8 @@
 import createCachedSelector from 're-reselect';
-import { attributeLevelRequired, favoursRequired } from '../factions/requirements';
+import { attributeLevelRequired, favoursRequired } from '../../factions/requirements';
 
-import factionAttributes from '../factions/attributes';
-import getFaction from '../factions/getFaction';
+import factionAttributes from '../../factions/attributes';
+import getFaction from '../../factions/getFaction';
 
 const getAttributes = ({ attributes }) => attributes;
 const getId = (state, { id }) => id;
