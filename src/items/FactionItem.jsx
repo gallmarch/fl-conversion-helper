@@ -70,8 +70,6 @@ class FactionItem extends Component {
 
     const factionFavours = favours[getFaction(id)];
 
-    // console.info(`factionFavours: ${factionFavours}`);
-
     const data = {
       ...rawData,
       // Show 'X Favours' as the quantity

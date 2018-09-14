@@ -15,70 +15,94 @@ class Categories extends Component {
   }
 
   render() {
-    const { preferences: { enablements, visibilities } } = this.props;
+    const { preferences: { enablements, expansions, visibilities } } = this.props;
     return (
       <Fragment>
         {visibilities.tier1 && (
-          <Category heading="Tier 1">
+          <Category
+            heading="Tier 1"
+            expanded={expansions.tier1}
+            name="tier1"
+          >
             {items.tier1.map(id => (
               <Item
                 key={id}
-                id={id}
+                id={Number(id)}
                 enablementPreference={enablements.tiers}
               />
             ))}
           </Category>
         )}
         {visibilities.tier2 && (
-          <Category heading="Tier 2">
+          <Category
+            expanded={expansions.tier2}
+            heading="Tier 2"
+            name="tier2"
+          >
             {items.tier2.map(id => (
               <Item
                 key={id}
-                id={id}
+                id={Number(id)}
                 enablementPreference={enablements.tiers}
               />
             ))}
           </Category>
         )}
         {visibilities.tier3 && (
-          <Category heading="Tier 3">
+          <Category
+            expanded={expansions.tier3}
+            heading="Tier 3"
+            name="tier3"
+          >
             {items.tier3.map(id => (
               <Item
                 key={id}
-                id={id}
+                id={Number(id)}
                 enablementPreference={enablements.tiers}
               />
             ))}
           </Category>
         )}
         {visibilities.tier4 && (
-          <Category heading="Tier 4">
+          <Category
+            expanded={expansions.tier4}
+            name="tier4"
+            heading="Tier 4"
+          >
             {items.tier4.map(id => (
               <Item
                 key={id}
-                id={id}
+                id={Number(id)}
                 enablementPreference={enablements.tiers}
               />
             ))}
           </Category>
         )}
         {visibilities.faction && (
-          <Category heading="Faction Items">
+          <Category
+            expanded={expansions.faction}
+            name="faction"
+            heading="Faction Items"
+          >
             {items.factionItems.map(id => (
               <Item
                 key={id}
-                id={id}
+                id={Number(id)}
                 enablementPreference={enablements.tiers}
               />
             ))}
           </Category>
         )}
         {visibilities.fidgetingWriter && (
-          <Category heading="Fidgeting Writer">
+          <Category
+            expanded={expansions.fidgetingWriter}
+            name="fidgetingWriter"
+            heading="Fidgeting Writer"
+          >
             {items.fidgetingWriter.map(id => (
               <Item
                 key={id}
-                id={id}
+                id={Number(id)}
                 enablementPreference={enablements.tiers}
                 alwaysConvertible
               />

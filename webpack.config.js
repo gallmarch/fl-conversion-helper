@@ -41,7 +41,6 @@ module.exports = {
     'content-script.js': './src/main.jsx',
     'popup/popup.js': './src/popup/main.jsx',
     'background.js': './src/background.js',
-    'inject.js': './src/inject.js',
   },
   output: {
     path: './build/',
