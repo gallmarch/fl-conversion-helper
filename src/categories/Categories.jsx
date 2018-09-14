@@ -6,7 +6,7 @@ import { fetchPossessions } from '../possessions/actions';
 import { fetchConnectedQualities } from '../myself/actions';
 import * as items from '../items/constants';
 import Item from '../items/Item';
-import getVisibleItems from './getVisibleItems';
+import getVisibleItems from '../shared/getVisibleItems';
 import Category from './Category';
 
 class Categories extends Component {
@@ -17,11 +17,12 @@ class Categories extends Component {
 
   render() {
     const {
+      filterString,
       visibleItems,
       preferences: { enablements, expansions, visibilities },
     } = this.props;
 
-    const isVisible = id => visibleItems[id];
+    const isVisible = id => (!filterString.length) || visibleItems[id];
 
     return (
       <Fragment>
@@ -124,11 +125,13 @@ class Categories extends Component {
 Categories.propTypes = {
   fetchConnectedQualities: PropTypes.func.isRequired,
   fetchPossessions: PropTypes.func.isRequired,
+  filterString: PropTypes.string.isRequired,
   preferences: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   visibleItems: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 const mapStateToProps = state => ({
+  filterString: state.possessions.filterString,
   preferences: state.preferences,
   visibleItems: getVisibleItems(state),
 });

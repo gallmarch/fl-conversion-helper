@@ -2,6 +2,9 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import * as items from '../items/constants';
+
+import MenuItem from './MenuItem';
 import scrollTo from './scrollTo';
 
 // Taken from:
@@ -55,60 +58,48 @@ function MenuItems(props) {
   const { preferences: { visibilities } } = props;
   return (
     <Fragment>
-      {visibilities.tier1 && (<li className="nav__item nav__item--flch">
-        <a
-          role="button"
+      {visibilities.tier1 && (
+        <MenuItem
+          items={items.tier1}
+          name="Tier 1"
           onClick={() => handleClick('Tier 1')}
-          tabIndex="-1"
-        >
-          Tier 1
-        </a>
-      </li>)}
-      {visibilities.tier2 && (<li className="nav__item nav__item--flch">
-        <a
-          role="button"
-          tabIndex="-1"
+        />
+      )}
+      {visibilities.tier2 && (
+        <MenuItem
+          items={items.tier2}
+          name="Tier 2"
           onClick={() => handleClick('Tier 2')}
-        >
-          Tier 2
-        </a>
-      </li>)}
-      {visibilities.tier3 && (<li className="nav__item nav__item--flch">
-        <a
-          role="button"
-          tabIndex="-1"
+        />
+      )}
+      {visibilities.tier3 && (
+        <MenuItem
+          items={items.tier3}
+          name="Tier 3"
           onClick={() => handleClick('Tier 3')}
-        >
-          Tier 3
-        </a>
-      </li>)}
-      {visibilities.tier4 && (<li className="nav__item nav__item--flch">
-        <a
-          role="button"
-          tabIndex="-1"
+        />
+      )}
+      {visibilities.tier4 && (
+        <MenuItem
+          items={items.tier4}
+          name="Tier 4"
           onClick={() => handleClick('Tier 4')}
-        >
-          Tier 4
-        </a>
-      </li>)}
-      {visibilities.faction && (<li className="nav__item nav__item--flch">
-        <a
-          role="button"
-          tabIndex="-1"
+        />
+      )}
+      {visibilities.faction && (
+        <MenuItem
+          items={items.factionItems}
+          name="Faction Items"
           onClick={() => handleClick('Faction Items')}
-        >
-          Faction Items
-        </a>
-      </li>)}
-      {visibilities.fidgetingWriter && (<li className="nav__item nav__item--flch">
-        <a
-          role="button"
-          tabIndex="-1"
+        />
+      )}
+      {visibilities.fidgetingWriter && (
+        <MenuItem
+          items={items.fidgetingWriter}
+          name="Fidgeting Writer"
           onClick={() => handleClick('Fidgeting Writer')}
-        >
-          Fidgeting Writer
-        </a>
-      </li>)}
+        />
+      )}
     </Fragment>
   );
 }
