@@ -24,6 +24,9 @@ class Categories extends Component {
 
     const isVisible = id => (!filterString.length) || visibleItems[id];
 
+    console.info('enablements!');
+    console.info(enablements);
+
     return (
       <Fragment>
         {visibilities.tier1 && (

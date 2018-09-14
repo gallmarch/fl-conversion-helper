@@ -19,10 +19,6 @@ function MatchingItem({ filterString, match, id, isConvertible }) {
     return null;
   }
 
-  console.info(`${id}: ${name}`);
-  console.info(`is faction? ${!!factionItems[id]}`);
-  console.info(factionItems);
-
   // If this is a faction item, render a FactionItem
   if (factionItems[id]) {
     return <FactionItem id={id} data={data} element={element} />;
@@ -38,6 +34,7 @@ function MatchingItem({ filterString, match, id, isConvertible }) {
 }
 
 MatchingItem.propTypes = {
+  enablementPreference: PropTypes.number.isRequired, // eslint-disable-line
   filterString: PropTypes.string.isRequired,
   match: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   id: PropTypes.number.isRequired,

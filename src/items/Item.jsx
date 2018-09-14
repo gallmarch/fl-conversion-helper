@@ -9,15 +9,16 @@ import { findMatch } from './selectors';
 
 export const IMAGE_ROOT = '//images.fallenlondon.com/images/icons_small';
 
-function Item({ match, id }) {
+function Item({ enablementPreference, match, id }) {
   if (!match) {
     return <MissingItem />;
   }
 
-  return <MatchingItem id={id} match={match} />;
+  return <MatchingItem id={id} match={match} enablementPreference={enablementPreference} />;
 }
 
 Item.propTypes = {
+  enablementPreference: PropTypes.number.isRequired,
   match: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   id: PropTypes.number.isRequired,
 };
