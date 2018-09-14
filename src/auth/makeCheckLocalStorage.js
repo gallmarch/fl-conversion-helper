@@ -17,7 +17,7 @@ export default function makeCheckLocalStorage({ axios, store }) {
     }
 
     // Otherwise, ensure that the Authorization header is unset
-    unsetAuthHeader();
+    unsetAuthHeader({ axios });
     return logout()(store.dispatch);
   };
 }
