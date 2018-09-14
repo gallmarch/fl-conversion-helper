@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 
 import ToolTip from '../tooltips/ToolTip';
 import { IMAGE_ROOT } from './Item';
@@ -32,9 +33,16 @@ export default class UsableItem extends Component {
     const { data } = this.props;
     const { showToolTip } = this.state;
 
+    const {
+      image,
+      level,
+      name,
+      useEventId,
+    } = data;
+
     return (
       <li className="item items--emphasise">
-        <div className="icon icon--inventory icon--emphasize">
+        <div className={classnames('icon icon--inventory', useEventId && 'icon--emphasize')}>
           <a
             role="button"
             onClick={this.handleClick}
@@ -45,11 +53,11 @@ export default class UsableItem extends Component {
             tabIndex="-1"
           >
             <img
-              alt={data.Name}
-              src={`${IMAGE_ROOT}/${data.image}.png`}
+              alt={name}
+              src={`${IMAGE_ROOT}/${image}.png`}
             />
           </a>
-          <span className="js-item-value icon__value">{data.level}</span>
+          <span className="js-item-value icon__value">{level}</span>
         </div>
         {showToolTip && (<ToolTip data={data} parent={this.element} active={showToolTip} />)}
       </li>

@@ -17,12 +17,14 @@ export const IMAGE_ROOT = '//images.fallenlondon.com/images/icons_small';
 class Item extends Component {
   constructor(props) {
     super(props);
+    this.isConvertible = this.isConvertible.bind(this);
     this.findMatch = findMatch.bind(this);
   }
 
   isConvertible({ id, quantity }) {
     const { alwaysConvertible, enablementPreference } = this.props;
     if (alwaysConvertible) {
+      console.info('alwaaaays convertible');
       return true;
     }
     if (enablementPreference === TIERS.ALWAYS) {
@@ -56,6 +58,8 @@ class Item extends Component {
 
     // Do we have enough of this item to do a conversion?
     const { data: { level: quantity } } = match;
+
+    console.info(`${name} x ${quantity} is convertible? ${this.isConvertible({ id, quantity })}`);
 
     if (this.isConvertible({ id, quantity })) {
       return <UsableItem {...match} />;

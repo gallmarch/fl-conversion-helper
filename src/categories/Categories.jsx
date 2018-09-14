@@ -96,7 +96,7 @@ class Categories extends Component {
               <Item
                 key={id}
                 id={Number(id)}
-                enablementPreference={enablements.tiers}
+                enablementPreference={enablements.factions}
               />
             ))}
           </Category>
