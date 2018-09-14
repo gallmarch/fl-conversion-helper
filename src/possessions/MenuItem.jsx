@@ -26,7 +26,7 @@ function MenuItem(props) {
 }
 
 MenuItem.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.string).isRequired,
+  items: PropTypes.arrayOf(PropTypes.number).isRequired,
   name: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
   visibleItems: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
