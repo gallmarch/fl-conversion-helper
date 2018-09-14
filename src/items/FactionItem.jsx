@@ -41,7 +41,6 @@ function FactionItem(props) {
 }
 
 FactionItem.propTypes = {
-  attributes: PropTypes.object.isRequired, // eslint-disable-line
   data: PropTypes.object.isRequired, // eslint-disable-line
   element: PropTypes.object.isRequired, // eslint-disable-line
   failureExplanation: PropTypes.string,
