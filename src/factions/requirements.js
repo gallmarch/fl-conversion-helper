@@ -1,10 +1,7 @@
-import { attributeName } from '../attributes/names';
 import factionAttributes from './attributes';
-import { items } from './index';
 
 export {
   attributeLevelRequired,
-  createFailureMessage,
   favoursRequired,
   meetsAttributeRequirement,
 };
@@ -18,7 +15,7 @@ function attributeLevelRequired(renown) {
 
 // Given a faction and a Renown value, return the attribute and the level
 // required to do conversion
-function _attributeRequired(faction, renown) {
+function attributeRequired(faction, renown) {
   // Get the attribute whose value determines whether we can perform
   // a Favours-to-Renown conversion
   const attribute = factionAttributes[faction];
@@ -35,45 +32,6 @@ function _attributeRequired(faction, renown) {
   return { attribute, level };
 }
 
-// Create a failure message for a FactionItem.
-function createFailureMessage({ attributes, favours, id, renown }) {
-  // We need a temporary list to store reasons why we can't convert
-  const failureReasons = [];
-
-  // Get the faction for this item
-  const faction = items[id];
-  const factionFavours = favours[faction];
-  // Have we got enough Favours?
-  const hasEnoughFavours = factionFavours >= favoursRequired(renown[faction]);
-  // Have we got a sufficiently high attribute for our Renown with this faction?
-  const hasAttributeLevel = meetsAttributeRequirement({ attributes, faction, renown });
-
-  // Add a not-enough-Favours explanation
-  if (!hasEnoughFavours) {
-    const favoursNeeded = favoursRequired(renown[faction]);
-    const actualFavours = factionFavours === undefined ? 0 : factionFavours;
-    const insufficientFavoursMessage = `${favoursNeeded} Favours (you have ${actualFavours})`;
-    failureReasons.push(insufficientFavoursMessage);
-  }
-
-  // Add an attribute-too-low explanation
-  if (!hasAttributeLevel) {
-    // Get the attribute and required level for upconverting this faction at this Renown
-    const {
-      attribute: relevantAttribute,
-      level: necessaryLevel,
-    } = attributeRequired(faction, renown[faction]);
-    // Get the current attribute
-    const actualAttributeLevel = attributes[relevantAttribute];
-    // Build the string
-    const insufficientAttributeMessage = `${attributeName(relevantAttribute)} ${necessaryLevel} (you have ${actualAttributeLevel})`;
-    failureReasons.push(insufficientAttributeMessage);
-  }
-
-  // Return a nicely-formatted message
-  const message = `You need ${failureReasons.join(' and ')}.`;
-  return message;
-}
 
 // Given a Renown value, return the number of Favours necessary to
 // convert them to Renown

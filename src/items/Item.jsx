@@ -14,7 +14,7 @@ function Item({ match, id }) {
     return <MissingItem />;
   }
 
-  return <MatchingItem id={id} data={match} />;
+  return <MatchingItem id={id} match={match} />;
 }
 
 Item.propTypes = {

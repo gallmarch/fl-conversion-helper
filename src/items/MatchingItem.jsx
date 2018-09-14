@@ -10,29 +10,36 @@ import DummiedItem from './DummiedItem';
 import FactionItem from './FactionItem';
 import UsableItem from './UsableItem';
 
-function MatchingItem({ filterString, data, id, isConvertible }) {
+function MatchingItem({ filterString, match, id, isConvertible }) {
+  const { data, element } = match;
+  const { name } = data;
+
   // Render nothing if filtered out
   if (!name.toLowerCase().includes(filterString.toLowerCase())) {
     return null;
   }
 
+  console.info(`${id}: ${name}`);
+  console.info(`is faction? ${!!factionItems[id]}`);
+  console.info(factionItems);
+
   // If this is a faction item, render a FactionItem
-  if (Object.keys(factionItems).includes(id)) {
-    return <FactionItem id={id} {...data} />;
+  if (factionItems[id]) {
+    return <FactionItem id={id} data={data} element={element} />;
   }
 
   // If this is convertible, render a UsableItem
   if (isConvertible) {
-    return <UsableItem {...data} />;
+    return <UsableItem data={data} element={element} />;
   }
 
   // Not convertible; render a DummiedItem
-  return <DummiedItem {...data} />;
+  return <DummiedItem data={data} element={element} />;
 }
 
 MatchingItem.propTypes = {
   filterString: PropTypes.string.isRequired,
-  data: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  match: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   id: PropTypes.number.isRequired,
   isConvertible: PropTypes.bool.isRequired,
 };

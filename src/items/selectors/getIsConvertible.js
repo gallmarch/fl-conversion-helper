@@ -8,7 +8,7 @@ const { ALWAYS, SMALL } = TIERS;
 const getAlwaysConvertible = (state, { alwaysConvertible }) => alwaysConvertible;
 const getEnablementPreference = (state, { enablementPreference }) => enablementPreference;
 const getId = (state, { id }) => id;
-const getQuantity = (state, { data: { quantity } }) => quantity;
+const getQuantity = (state, { match: { data: { level: quantity } } }) => quantity;
 
 const cacheKey = getId;
 
