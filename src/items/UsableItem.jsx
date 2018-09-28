@@ -41,8 +41,8 @@ export default class UsableItem extends Component {
     } = data;
 
     return (
-      <li className="item items--emphasise">
-        <div className={classnames('icon icon--inventory', useEventId && 'icon--emphasize')}>
+      <li className="item">
+        <div className={classnames('icon icon--inventory', useEventId && 'icon--emphasize icon--usable')}>
           <a
             role="button"
             onClick={this.handleClick}
