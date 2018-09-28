@@ -8,12 +8,9 @@ export function setCategoryVisibility({ category, visible }) {
     // Dispatch an action (to update UI)
     dispatch({ type: CATEGORY_VISIBILITY_CHANGED, payload: { category, visible } });
 
-    console.info('hello!');
-
     // Update storage
     const storage = chrome.storage.local;
     storage.get(null, ({ preferences }) => {
-      console.info('updating preferences');
       storage.set({
         preferences: {
           ...preferences,

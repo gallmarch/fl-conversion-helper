@@ -41,9 +41,6 @@ export default class UsableItem extends Component {
       useEventId,
     } = data;
 
-    console.info('UsabilityContext.Consumer');
-    console.info(UsabilityContext.Consumer);
-
     return (
       <UsabilityContext.Consumer>
         {itemsAreUsable => (
