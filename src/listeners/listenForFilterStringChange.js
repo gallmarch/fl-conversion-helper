@@ -5,7 +5,7 @@ import { FILTER_STRING_CHANGED } from '../possessions/types';
 
 export default function listenForFilterStringChange({ store }) {
   const rootNode = document.querySelector('.content col-primary');
-  const queries = [{ element: '.input--item-search '}];
+  const queries = [{ element: '.input--item-search ' }];
   log('setting up filterstring listener');
   return new MutationSummary({
     rootNode,

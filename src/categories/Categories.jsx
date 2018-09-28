@@ -44,97 +44,99 @@ class Categories extends Component {
 
     return (
       <UsabilityContext.Provider value={itemsAreUsable}>
-        {visibilities.tier1 && (
-          <Category
-            heading="Tier 1"
-            expanded={expansions.tier1}
-            name="tier1"
-          >
-            {items.tier1.filter(isVisible).map(id => (
-              <Item
-                key={id}
-                id={Number(id)}
-                enablementPreference={enablements.tiers}
-              />
-            ))}
-          </Category>
-        )}
-        {visibilities.tier2 && (
-          <Category
-            expanded={expansions.tier2}
-            heading="Tier 2"
-            name="tier2"
-          >
-            {items.tier2.filter(isVisible).map(id => (
-              <Item
-                key={id}
-                id={Number(id)}
-                enablementPreference={enablements.tiers}
-              />
-            ))}
-          </Category>
-        )}
-        {visibilities.tier3 && (
-          <Category
-            expanded={expansions.tier3}
-            heading="Tier 3"
-            name="tier3"
-          >
-            {items.tier3.filter(isVisible).map(id => (
-              <Item
-                key={id}
-                id={Number(id)}
-                enablementPreference={enablements.tiers}
-              />
-            ))}
-          </Category>
-        )}
-        {visibilities.tier4 && (
-          <Category
-            expanded={expansions.tier4}
-            name="tier4"
-            heading="Tier 4"
-          >
-            {items.tier4.filter(isVisible).map(id => (
-              <Item
-                key={id}
-                id={Number(id)}
-                enablementPreference={enablements.tiers}
-              />
-            ))}
-          </Category>
-        )}
-        {visibilities.faction && (
-          <Category
-            expanded={expansions.faction}
-            name="faction"
-            heading="Faction Items"
-          >
-            {items.factionItems.filter(isVisible).map(id => (
-              <Item
-                key={id}
-                id={Number(id)}
-                enablementPreference={enablements.factions}
-              />
-            ))}
-          </Category>
-        )}
-        {visibilities.fidgetingWriter && (
-          <Category
-            expanded={expansions.fidgetingWriter}
-            name="fidgetingWriter"
-            heading="Fidgeting Writer"
-          >
-            {items.fidgetingWriter.filter(isVisible).map(id => (
-              <Item
-                key={id}
-                id={Number(id)}
-                enablementPreference={enablements.tiers}
-                alwaysConvertible
-              />
-            ))}
-          </Category>
-        )}
+        <Fragment>
+          {visibilities.tier1 && (
+            <Category
+              heading="Tier 1"
+              expanded={expansions.tier1}
+              name="tier1"
+            >
+              {items.tier1.filter(isVisible).map(id => (
+                <Item
+                  key={id}
+                  id={Number(id)}
+                  enablementPreference={enablements.tiers}
+                />
+              ))}
+            </Category>
+          )}
+          {visibilities.tier2 && (
+            <Category
+              expanded={expansions.tier2}
+              heading="Tier 2"
+              name="tier2"
+            >
+              {items.tier2.filter(isVisible).map(id => (
+                <Item
+                  key={id}
+                  id={Number(id)}
+                  enablementPreference={enablements.tiers}
+                />
+              ))}
+            </Category>
+          )}
+          {visibilities.tier3 && (
+            <Category
+              expanded={expansions.tier3}
+              heading="Tier 3"
+              name="tier3"
+            >
+              {items.tier3.filter(isVisible).map(id => (
+                <Item
+                  key={id}
+                  id={Number(id)}
+                  enablementPreference={enablements.tiers}
+                />
+              ))}
+            </Category>
+          )}
+          {visibilities.tier4 && (
+            <Category
+              expanded={expansions.tier4}
+              name="tier4"
+              heading="Tier 4"
+            >
+              {items.tier4.filter(isVisible).map(id => (
+                <Item
+                  key={id}
+                  id={Number(id)}
+                  enablementPreference={enablements.tiers}
+                />
+              ))}
+            </Category>
+          )}
+          {visibilities.faction && (
+            <Category
+              expanded={expansions.faction}
+              name="faction"
+              heading="Faction Items"
+            >
+              {items.factionItems.filter(isVisible).map(id => (
+                <Item
+                  key={id}
+                  id={Number(id)}
+                  enablementPreference={enablements.factions}
+                />
+              ))}
+            </Category>
+          )}
+          {visibilities.fidgetingWriter && (
+            <Category
+              expanded={expansions.fidgetingWriter}
+              name="fidgetingWriter"
+              heading="Fidgeting Writer"
+            >
+              {items.fidgetingWriter.filter(isVisible).map(id => (
+                <Item
+                  key={id}
+                  id={Number(id)}
+                  enablementPreference={enablements.tiers}
+                  alwaysConvertible
+                />
+              ))}
+            </Category>
+          )}
+        </Fragment>
       </UsabilityContext.Provider>
     );
   }
