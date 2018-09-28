@@ -10,8 +10,10 @@ import scrollTo from './scrollTo';
 
 
 function handleClick(name) {
-  const element = [...document.querySelectorAll('h3.heading--3')].find(_ => _.innerText.trim() === name);
+  const selector = 'h3.heading--2';
+  const element = [...document.querySelectorAll(selector)].find(_ => _.innerText.trim() === name);
   if (!element) {
+    console.error(`I expected to find an element by selector '${selector}' with innerText '${name}', but failed`);
     return;
   }
   const scrollOffset = calculateScrollOffset(element, 0, 'top');
