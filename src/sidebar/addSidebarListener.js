@@ -36,5 +36,5 @@ export function readAttributes() {
 
     // Dispatch an action
     dispatch({ type: ATTRIBUTES_UPDATED, payload: attributes });
-  }
+  };
 }
