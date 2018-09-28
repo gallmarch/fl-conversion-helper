@@ -1,16 +1,19 @@
-const CATEGORY_VISIBILITY_CHANGED = 'CATEGORY_VISIBILITY_CHANGED';
+export const CATEGORY_VISIBILITY_CHANGED = 'CATEGORY_VISIBILITY_CHANGED';
 
 // When we make a change in the popup, update the storage accordingly.
 // The content script is listening for storage changes, so it'll pick
 // up on this and change how it renders the categories accordingly.
-function setCategoryVisibility({ category, visible }) {
+export function setCategoryVisibility({ category, visible }) {
   return (dispatch) => {
     // Dispatch an action (to update UI)
     dispatch({ type: CATEGORY_VISIBILITY_CHANGED, payload: { category, visible } });
 
+    console.info('hello!');
+
     // Update storage
     const storage = chrome.storage.local;
     storage.get(null, ({ preferences }) => {
+      console.info('updating preferences');
       storage.set({
         preferences: {
           ...preferences,
@@ -24,7 +27,7 @@ function setCategoryVisibility({ category, visible }) {
   };
 }
 
-function setEnablementPreference({ name, value }) {
+export function setEnablementPreference({ name, value }) {
   return () => {
     // Update storage
     const storage = chrome.storage.local;
@@ -41,9 +44,3 @@ function setEnablementPreference({ name, value }) {
     });
   };
 }
-
-export {
-  CATEGORY_VISIBILITY_CHANGED,
-  setCategoryVisibility,
-  setEnablementPreference,
-};
