@@ -7,6 +7,7 @@ import { fetchMyself } from '../myself/actions';
 import * as items from '../items/constants';
 import Item from '../items/Item';
 import getVisibleItems from '../shared/getVisibleItems';
+import UsabilityContext from '../shared/UsabilityContext';
 import Category from './Category';
 
 class Categories extends Component {
@@ -39,9 +40,10 @@ class Categories extends Component {
     }
 
     const isVisible = id => (!filterString.length) || visibleItems[id];
+    const itemsAreUsable = !document.querySelector('.possessions__categories > .inventory-group-container .items--blocked');
 
     return (
-      <Fragment>
+      <UsabilityContext.Provider value={itemsAreUsable}>
         {visibilities.tier1 && (
           <Category
             heading="Tier 1"
@@ -133,7 +135,7 @@ class Categories extends Component {
             ))}
           </Category>
         )}
-      </Fragment>
+      </UsabilityContext.Provider>
     );
   }
 }

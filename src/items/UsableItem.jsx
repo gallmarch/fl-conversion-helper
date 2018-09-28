@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 import ToolTip from '../tooltips/ToolTip';
+import UsabilityContext from '../shared/UsabilityContext';
 import { IMAGE_ROOT } from './Item';
 
 export default class UsableItem extends Component {
@@ -40,27 +41,39 @@ export default class UsableItem extends Component {
       useEventId,
     } = data;
 
+    console.info('UsabilityContext.Consumer');
+    console.info(UsabilityContext.Consumer);
+
     return (
-      <li className="item">
-        <div className={classnames('icon icon--inventory', useEventId && 'icon--emphasize icon--usable')}>
-          <a
-            role="button"
-            onClick={this.handleClick}
-            onMouseEnter={this.handleMouseEnter}
-            onMouseLeave={this.handleMouseLeave}
-            onMouseMove={this.handleMouseMove}
-            ref={(element) => { this.element = element; }}
-            tabIndex="-1"
-          >
-            <img
-              alt={name}
-              src={`${IMAGE_ROOT}/${image}.png`}
-            />
-          </a>
-          <span className="js-item-value icon__value">{level}</span>
-        </div>
-        {showToolTip && (<ToolTip data={data} parent={this.element} active={showToolTip} />)}
-      </li>
+      <UsabilityContext.Consumer>
+        {itemsAreUsable => (
+          <li className={classnames('item', !itemsAreUsable && 'items--blocked')}>
+            <div
+              className={classnames(
+                'icon icon--inventory',
+                useEventId && 'icon--emphasize icon--usable',
+              )}
+            >
+              <a
+                role="button"
+                onClick={this.handleClick}
+                onMouseEnter={this.handleMouseEnter}
+                onMouseLeave={this.handleMouseLeave}
+                onMouseMove={this.handleMouseMove}
+                ref={(element) => { this.element = element; }}
+                tabIndex="-1"
+              >
+                <img
+                  alt={name}
+                  src={`${IMAGE_ROOT}/${image}.png`}
+                />
+              </a>
+              <span className="js-item-value icon__value">{level}</span>
+            </div>
+            {showToolTip && (<ToolTip data={data} parent={this.element} active={showToolTip} />)}
+          </li>
+        )}
+      </UsabilityContext.Consumer>
     );
   }
 }
