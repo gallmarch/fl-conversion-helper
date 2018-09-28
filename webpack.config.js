@@ -6,7 +6,7 @@ const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 const ZipPlugin = require('zip-webpack-plugin');
 
 // We need this for a few things
-const version = require(path.join(__dirname, 'package.json')).version;
+const version = require(path.join(__dirname, 'package.json')).version; // eslint-disable-line import/no-dynamic-require
 
 // Copy the manifest.json, inserting the current version as we go
 const copy = new CopyWebpackPlugin([
@@ -19,9 +19,7 @@ const copy = new CopyWebpackPlugin([
     context: './src/',
     from: 'manifest.json',
     to: 'manifest.json',
-    transform: (content) => {
-      return content.toString().replace('VERSION', `"${version}"`);
-    },
+    transform: content => content.toString().replace('VERSION', `"${version}"`),
   },
 ]);
 
@@ -51,7 +49,7 @@ module.exports = {
       {
         test: /\.scss$/,
         use: ExtractTextWebpackPlugin.extract({
-          use: ['css-loader', 'sass-loader']
+          use: ['css-loader', 'sass-loader'],
         }),
       },
       {
@@ -59,7 +57,7 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         query: {
-          presets: ['es2015', 'stage-0', 'react']
+          presets: ['es2015', 'stage-0', 'react'],
         },
       },
     ],
