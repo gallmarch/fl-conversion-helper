@@ -8,19 +8,11 @@ import reduxThunk from 'redux-thunk';
 import styles from './styles.scss';
 import reducer from './reducer';
 import { loadPreferences } from './preferences/utils';
-import { isLegacy, log } from './util';
 import { addAuthListener, makeCheckLocalStorage } from './auth';
 import { listenForFilterStringChange } from './listeners';
 import addPossessionsListener, { onBodyChange } from './possessions/addPossessionsListener';
 import addSidebarListener, { readAttributes } from './sidebar/addSidebarListener';
 import addStorageListener from './preferences/addStorageListener';
-
-log('Checking for version');
-if (isLegacy()) {
-  log('This is the legacy version');
-} else {
-  log('This is the new version');
-}
 
 // Create the store
 const store = applyMiddleware(reduxThunk)(createStore)(reducer);

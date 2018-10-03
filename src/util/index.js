@@ -1,9 +1,2 @@
-import isLegacy from './isLegacy';
-import log from './log';
-import validateDOMElement from './validateDOMElement';
-
-export {
-  isLegacy,
-  log,
-  validateDOMElement,
-};
+export { default as log } from './log';
+export { default as validateDOMElement } from './validateDOMElement';
