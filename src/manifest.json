@@ -6,15 +6,10 @@
     "default_popup": "popup/popup.html"
   },
   "permissions": [
-    "background",
     "webRequest",
     "storage",
-    "tabs",
     "*://*.fallenlondon.com/"
   ],
-  "background": {
-    "scripts": ["background.js"]
-  },
   "version": VERSION,
   "content_scripts": [
     {
