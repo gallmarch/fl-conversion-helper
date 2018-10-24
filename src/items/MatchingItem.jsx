@@ -10,7 +10,7 @@ import DummiedItem from './DummiedItem';
 import FactionItem from './FactionItem';
 import UsableItem from './UsableItem';
 
-function MatchingItem({ filterString, match, id, isConvertible }) {
+function MatchingItem({ alwaysConvertible, filterString, match, id, isConvertible }) {
   const { data, element } = match;
   const { name } = data;
 
@@ -25,7 +25,7 @@ function MatchingItem({ filterString, match, id, isConvertible }) {
   }
 
   // If this is convertible, render a UsableItem
-  if (isConvertible) {
+  if (alwaysConvertible || isConvertible) {
     return <UsableItem data={data} element={element} />;
   }
 
@@ -34,6 +34,7 @@ function MatchingItem({ filterString, match, id, isConvertible }) {
 }
 
 MatchingItem.propTypes = {
+  alwaysConvertible: PropTypes.bool.isRequired,
   enablementPreference: PropTypes.number.isRequired, // eslint-disable-line
   filterString: PropTypes.string.isRequired,
   match: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types

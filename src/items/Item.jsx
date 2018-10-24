@@ -8,21 +8,30 @@ import { findMatch } from './selectors';
 
 export const IMAGE_ROOT = '//images.fallenlondon.com/images/icons_small';
 
-function Item({ enablementPreference, match, id }) {
+function Item({ alwaysConvertible, enablementPreference, match, id }) {
   if (!match) {
     return <MissingItem />;
   }
 
-  return <MatchingItem id={id} match={match} enablementPreference={enablementPreference} />;
+  return (
+    <MatchingItem
+      alwaysConvertible={alwaysConvertible}
+      id={id}
+      match={match}
+      enablementPreference={enablementPreference}
+    />
+  );
 }
 
 Item.propTypes = {
+  alwaysConvertible: PropTypes.bool,
   enablementPreference: PropTypes.number.isRequired,
   match: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   id: PropTypes.number.isRequired,
 };
 
 Item.defaultProps = {
+  alwaysConvertible: false,
   match: null,
 };
 
