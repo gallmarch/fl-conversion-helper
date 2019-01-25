@@ -14,6 +14,7 @@ class Categories extends Component {
     super(props);
     this.isWaitingForData = this.isWaitingForData.bind(this);
   }
+
   componentDidMount() {
     this.props.fetchMyself();
   }
@@ -38,7 +39,8 @@ class Categories extends Component {
     }
 
     const isVisible = id => (!filterString.length) || visibleItems[id];
-    const itemsAreUsable = !document.querySelector('.possessions__categories > .inventory-group-container .items--blocked');
+    const selector = '.possessions__categories > .inventory-group-container .items--blocked';
+    const itemsAreUsable = !document.querySelector(selector);
 
     return (
       <UsabilityContext.Provider value={itemsAreUsable}>
