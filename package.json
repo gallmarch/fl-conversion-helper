@@ -52,6 +52,7 @@
     "test": "jest"
   },
   "devDependencies": {
+    "babel-eslint": "^10.0.1",
     "babel-jest": "^22.2.2",
     "babel-preset-env": "^1.6.1",
     "eslint-config-airbnb": "^15.1.0",

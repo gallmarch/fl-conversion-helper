@@ -1,5 +1,6 @@
 module.exports = {
   "extends": "airbnb",
+  "parser": "babel-eslint",
   "plugins": ["jest"],
   "rules": {
     "no-console": "off",
@@ -10,6 +11,7 @@ module.exports = {
   },
   "env": {
     "browser": true,
+    "es6": true,
     "jest/globals": true,
     "webextensions": true,
   },
