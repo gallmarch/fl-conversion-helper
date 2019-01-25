@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import getVisibleItems from '../shared/getVisibleItems';
 import scrollToComponentByName from './scrollToComponentByName';
 
-class MenuItem extends Component {
+export class MenuItem extends Component {
   handleClick = () => {
     const { name } = this.props;
     scrollToComponentByName(name);
