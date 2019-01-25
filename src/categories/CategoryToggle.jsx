@@ -5,26 +5,22 @@ import PropTypes from 'prop-types';
 // CategoryToggle is the purely presentational component
 // that switches between a '+' (when the containing Category
 // is contracted) and '-' (expanded).
-export default function CategoryToggle(props) {
+export function CategoryToggle(props) {
   const { onClick, expanded } = props;
   return (
-    <a
-      className="fa fa-stack inverse"
-      onClick={onClick}
+    <button
+      className="button--link button--link-inverse"
+      type="button"
       tabIndex="-1"
-      role="button"
-      style={{ fontSize: '12px' }}
+      onClick={onClick}
+      style={{ fontSize: '14px' }}
     >
-      <i className="fa fa-stack-2x fa-circle" />
-      <i className={classnames('fa fa-stack fa-inverse fa-stack-1x', expanded ? 'fa-minus' : 'fa-plus')} />
-    </a>
+      <span className="fa fa-stack">
+        <i className="fa fa-stack-2x fa-circle" />
+        <i className={classnames('fa fa-stack fa-inverse fa-stack-1x', expanded ? 'fa-minus' : 'fa-plus')} />
+      </span>
+    </button>
   );
-  /*
-  if (expanded) {
-    return <span className="contract">-</span>;
-  }
-  return <span className="expand">+</span>;
-  */
 }
 
 CategoryToggle.propTypes = {
@@ -35,3 +31,5 @@ CategoryToggle.propTypes = {
 CategoryToggle.defaultProps = {
   expanded: false,
 };
+
+export default CategoryToggle;
