@@ -14,13 +14,13 @@ function MenuItem(props) {
 
   return (
     <li className="nav__item nav__item--flch">
-      <a
-        role="button"
+      <button
+        className="button--link nav__button button--link-inverse menu-item--inverse"
         onClick={onClick}
         tabIndex="-1"
       >
         {name}
-      </a>
+      </button>
     </li>
   );
 }
