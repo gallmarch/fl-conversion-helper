@@ -1,11 +1,10 @@
-import { attributeName } from './names';
+import { attributeName } from '../names';
 import {
   DANGEROUS,
   PERSUASIVE,
   SHADOWY,
   WATCHFUL,
-} from './index';
-
+} from '../index';
 
 describe('attributes/names', () => {
   describe('#attributeName', () => {
