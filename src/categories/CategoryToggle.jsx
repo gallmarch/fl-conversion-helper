@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 // CategoryToggle is the purely presentational component
 // that switches between a '+' (when the containing Category
 // is contracted) and '-' (expanded).
-export default function CategoryToggle(props) {
+export function CategoryToggle(props) {
   const { onClick, expanded } = props;
   return (
     <button
@@ -31,3 +31,5 @@ CategoryToggle.propTypes = {
 CategoryToggle.defaultProps = {
   expanded: false,
 };
+
+export default CategoryToggle;
