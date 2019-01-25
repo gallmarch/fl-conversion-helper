@@ -9,7 +9,7 @@ import getVisibleItems from '../shared/getVisibleItems';
 import UsabilityContext from '../shared/UsabilityContext';
 import Category from './Category';
 
-class Categories extends Component {
+export class Categories extends Component {
   constructor(props) {
     super(props);
     this.isWaitingForData = this.isWaitingForData.bind(this);
