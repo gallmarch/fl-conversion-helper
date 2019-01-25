@@ -6,7 +6,7 @@ import { API_URL_BASE } from '../../constants';
 export default function fetchPossessions() {
   return (dispatch) => {
     dispatch({ type: FETCHING_POSSESSIONS });
-    return axios.get(`${API_URL_BASE}/api/character/possessions`)
+    return axios.get(`${API_URL_BASE}/api/character/myself`)
       .then(({ data }) => {
         const possessions = data.possessions.reduce((acc, el) => [...acc, ...el.possessions], []);
 
