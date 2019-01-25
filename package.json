@@ -10,7 +10,9 @@
     "setupFiles": [
       "./.jest/MutationObserver.js"
     ],
-    "setupTestFrameworkScriptFile": "./setupTests.js",
+    "setupFilesAfterEnv": [
+      "./setupTests.js"
+    ],
     "testURL": "http://localhost"
   },
   "license": "MIT",
