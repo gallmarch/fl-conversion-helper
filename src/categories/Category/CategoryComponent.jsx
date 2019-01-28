@@ -11,7 +11,7 @@ export default function CategoryComponent(props) {
     <div>
       <div>
         <h3
-          className="heading heading--2"
+          className="heading heading--2 quality-group__name"
           style={{
             alignItems: 'center',
             display: 'flex',
