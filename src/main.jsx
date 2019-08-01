@@ -1,15 +1,14 @@
 // eslint-disable-next-line no-unused-vars
-import $ from 'jquery';
 import axios from 'axios';
 import { createStore, applyMiddleware } from 'redux';
 import reduxThunk from 'redux-thunk';
 
-// eslint-disable-next-line no-unused-vars
-import styles from './styles.scss';
+// noinspection ES6UnusedImports
+import styles from './styles.scss'; // eslint-disable-line no-unused-vars
 import reducer from './reducer';
 import { loadPreferences } from './preferences/utils';
 import { addAuthListener, makeCheckLocalStorage } from './auth';
-import { listenForFilterStringChange } from './listeners';
+import { listenForBackgroundMessages, listenForFilterStringChange } from './listeners';
 import addPossessionsListener, { onBodyChange } from './possessions/addPossessionsListener';
 import addSidebarListener, { readAttributes } from './sidebar/addSidebarListener';
 import addStorageListener from './preferences/addStorageListener';
@@ -36,4 +35,5 @@ addPossessionsListener({ store });
 addSidebarListener({ store });
 addStorageListener({ store });
 
+listenForBackgroundMessages({ store });
 listenForFilterStringChange({ store });

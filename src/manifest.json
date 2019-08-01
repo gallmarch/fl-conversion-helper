@@ -10,11 +10,15 @@
     "storage",
     "*://*.fallenlondon.com/"
   ],
-  "version": VERSION,
+  "version": "$VERSION",
+  "background": {
+    "scripts": ["background.js"]
+  },
   "content_scripts": [
     {
       "matches": [
         "http://fallenlondon.storynexus.com/Gap/Load*",
+        "https://fallenlondon.com/*",
         "https://*.fallenlondon.com/*",
         "http://localhost:3000/*"
       ],

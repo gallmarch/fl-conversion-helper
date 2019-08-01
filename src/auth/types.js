@@ -1,2 +1,3 @@
+export const AUTHORIZATION_HEADER_CHANGED = 'auth/AUTHORIZATION_HEADER_CHANGED';
 export const LOGGED_IN = 'auth/LOGGED_IN';
 export const LOGGED_OUT = 'auth/LOGGED_OUT';
