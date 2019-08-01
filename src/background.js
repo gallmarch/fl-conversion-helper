@@ -6,12 +6,12 @@ import favourIDs from './factions/favours';
 import { POSSESSIONS_FETCHED } from './possessions/types';
 import { AUTHORIZATION_HEADER_CHANGED } from './auth/types';
 
-console.info('I am the background script');
-console.info(chrome.webRequest);
-
 let authorizationHeader;
 
 chrome.runtime.onMessage.addListener((message, sender) => {
+  if (message && message.type) {
+    console.info(`Received ${message.type}`);
+  }
   switch (message.type) {
     case AUTHORIZATION_HEADER_CHANGED:
       return setAuthorizationHeader(message.payload);
@@ -24,7 +24,6 @@ chrome.runtime.onMessage.addListener((message, sender) => {
 
 function fetchMyself(sender) {
   const dispatch = makeDispatch(sender);
-  console.info('Fetching myself!');
   const url = `${API_URL_BASE}/api/character/myself`;
   return axios.get(url, { headers: { Authorization: authorizationHeader } })
     .then(({ data }) => {
@@ -65,6 +64,5 @@ function makeDispatch(sender) {
 }
 
 function setAuthorizationHeader(header) {
-  console.info(`Received auth header: ${header}`);
   authorizationHeader = header;
 }
