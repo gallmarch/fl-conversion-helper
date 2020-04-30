@@ -24,7 +24,7 @@
     "css-loader": "^3.1.0",
     "eslint": "^4.12",
     "extract-text-webpack-plugin": "^2.1.0",
-    "jquery": "^3.4",
+    "jquery": "^3.5",
     "mutation-summary": "^0.1.1",
     "node-sass": "^4.5.0",
     "prop-types": "^15.5.10",
