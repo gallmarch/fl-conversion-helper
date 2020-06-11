@@ -6,9 +6,7 @@
     "default_popup": "popup/popup.html"
   },
   "permissions": [
-    "webRequest",
-    "storage",
-    "*://*.fallenlondon.com/"
+    "storage"
   ],
   "version": "$VERSION",
   "background": {
@@ -17,10 +15,8 @@
   "content_scripts": [
     {
       "matches": [
-        "http://fallenlondon.storynexus.com/Gap/Load*",
         "https://fallenlondon.com/*",
-        "https://*.fallenlondon.com/*",
-        "http://localhost:3000/*"
+        "https://*.fallenlondon.com/*"
       ],
       "css": [
         "styles.css"
