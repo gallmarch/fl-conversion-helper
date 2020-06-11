@@ -4,7 +4,7 @@ import insertCategories from './insertCategories';
 import insertMenuItems from '../menu-items/insertMenuItems';
 
 export const FLCH_CONTENT_CONTAINER_CLASS_NAME = 'flch-content-container';
-export const POSSESSIONS_TAB_CANARY_CLASS_NAME = 'possessions__lodgings-and-equipped';
+export const POSSESSIONS_TAB_CANARY_CLASS_NAME = 'possessions';
 export const FLCH_SIDEBAR_CONTAINER_CLASS_NAME = 'flch-sidebar-container';
 
 export default function addPossessionsListener({ store }) {
