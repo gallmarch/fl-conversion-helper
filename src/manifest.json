@@ -6,7 +6,8 @@
     "default_popup": "popup/popup.html"
   },
   "permissions": [
-    "storage"
+    "storage",
+    "*://*.fallenlondon.com/"
   ],
   "version": "$VERSION",
   "background": {
