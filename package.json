@@ -1,6 +1,6 @@
 {
   "name": "fl-conversion-helper",
-  "version": "3.0.5",
+  "version": "3.0.6",
   "description": "Add new categories of convertible items to the inventory",
   "author": "sdobuadhachain@gmail.com",
   "jest": {
