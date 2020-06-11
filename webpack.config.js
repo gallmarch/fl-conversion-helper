@@ -10,17 +10,25 @@ const version = require(path.join(__dirname, 'package.json')).version; // eslint
 
 // Copy the manifest.json, inserting the current version as we go
 const copy = new CopyWebpackPlugin([
+  // Copy popup menu HTML across
   {
     context: './src/',
     from: 'popup/popup.html',
     to: 'popup/popup.html',
   },
+  // Copy manifest.json; replace version number
   {
     context: './src/',
     from: 'manifest.json',
     to: 'manifest.json',
     transform: content => content.toString().replace('$VERSION', `${version}`),
   },
+  // Copy app icons
+  {
+    context: './src/',
+    from : 'img',
+    to: 'img',
+  }
 ]);
 
 // Define constants at build time
