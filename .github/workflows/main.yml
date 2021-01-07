@@ -8,8 +8,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-        yarn install
-        yarn test --coverage --verbose
+          yarn install
+          yarn test --coverage --verbose
       - uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
