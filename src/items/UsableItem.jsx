@@ -62,7 +62,7 @@ export default class UsableItem extends Component {
               >
                 <img
                   alt={name}
-                  src={`${IMAGE_ROOT}/${image}.png`}
+                  src={`${IMAGE_ROOT}/${image}small.png`}
                 />
               </a>
               <span className="js-item-value icon__value">{level}</span>

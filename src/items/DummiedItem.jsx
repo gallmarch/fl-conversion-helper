@@ -38,7 +38,7 @@ export default class DummiedItem extends Component {
             onMouseLeave={this.handleMouseLeave}
             onMouseMove={this.handleMouseMove}
             ref={(element) => { this.element = element; }}
-            src={`${IMAGE_ROOT}/${image}.png`}
+            src={`${IMAGE_ROOT}/${image}small.png`}
           />
           <span className="js-item-value icon__value">{level}</span>
         </div>
