@@ -6,7 +6,7 @@ import MatchingItem from './MatchingItem';
 import MissingItem from './MissingItem';
 import { findMatch } from './selectors';
 
-export const IMAGE_ROOT = '//images.fallenlondon.com/images/icons_small';
+export const IMAGE_ROOT = '//images.fallenlondon.com/icons';
 
 function Item({ alwaysConvertible, enablementPreference, match, id }) {
   if (!match) {
