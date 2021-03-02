@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import BaseToolTip from 'react-portal-tooltip';
 
-const IMAGE_ROOT = '//images.fallenlondon.com/images/icons_small';
+const IMAGE_ROOT = '//images.fallenlondon.com/icons';
 
 export default function ToolTip({
   active,
@@ -32,7 +32,7 @@ export default function ToolTip({
         <div className="icon tooltip__icon">
           <img
             alt={name}
-            src={`${IMAGE_ROOT}/${image}.png`}
+            src={`${IMAGE_ROOT}/${image}small.png`}
           />
         </div>
         <div className="tooltip__desc">
